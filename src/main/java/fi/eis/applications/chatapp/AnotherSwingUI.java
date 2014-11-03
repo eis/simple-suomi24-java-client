@@ -40,12 +40,12 @@ public class AnotherSwingUI extends JPanel
             textControlsPane.setLayout(gridbag);
 
             JTextField[] textFields = {inputField};
-            addLabelTextRows(textFields, gridbag, textControlsPane);
+            addLabelTextRows(textFields, textControlsPane);
 
             c.gridwidth = GridBagConstraints.REMAINDER; //last
             c.anchor = GridBagConstraints.WEST;
             c.weightx = 1.0;
-            //textControlsPane.add(actionLabel, c);
+
             textControlsPane.setBorder(
                     BorderFactory.createCompoundBorder(
                             BorderFactory.createTitledBorder("Input"),
@@ -82,7 +82,6 @@ public class AnotherSwingUI extends JPanel
         }
 
         private void addLabelTextRows(JTextField[] textFields,
-                                      GridBagLayout gridbag,
                                       Container container) {
             GridBagConstraints c = new GridBagConstraints();
             c.anchor = GridBagConstraints.EAST;
