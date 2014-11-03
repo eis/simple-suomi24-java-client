@@ -1,12 +1,10 @@
 package fi.eis.applications.chatapp;
 
 import javax.swing.*;
-import javax.swing.text.*;
 
 import java.awt.*;              //for layout managers and more
 import java.awt.event.*;        //for action events
 
-import java.net.URL;
 import java.io.IOException;
 
 /**
@@ -20,14 +18,19 @@ public class AnotherSwingUI extends JPanel
         implements ActionListener {
 
         private String newline = "\n";
+        private JTextField inputField;
+
+        public JTextField getInputField() {
+            return inputField;
+        }
 
         public AnotherSwingUI() {
             setLayout(new BorderLayout());
             setPreferredSize(new Dimension(500,500));
 
             //Create a regular text field.
-            JTextField textField = new JTextField(10);
-            textField.addActionListener(this);
+            inputField = new JTextField(10);
+            inputField.addActionListener(this);
 
             //Lay out the text controls and the labels.
             JPanel textControlsPane = new JPanel();
@@ -36,7 +39,7 @@ public class AnotherSwingUI extends JPanel
 
             textControlsPane.setLayout(gridbag);
 
-            JTextField[] textFields = {textField};
+            JTextField[] textFields = {inputField};
             addLabelTextRows(textFields, gridbag, textControlsPane);
 
             c.gridwidth = GridBagConstraints.REMAINDER; //last
@@ -60,22 +63,22 @@ public class AnotherSwingUI extends JPanel
             editorScrollPane.setMinimumSize(new Dimension(10, 10));
 
 
-            JPanel rightPane = new JPanel(new GridLayout(1,0));
-            rightPane.add(editorScrollPane);
-            rightPane.setBorder(BorderFactory.createCompoundBorder(
-                    BorderFactory.createTitledBorder("Chat"),
-                    BorderFactory.createEmptyBorder(5,5,5,5)));
+            JPanel chatPane = new JPanel(new GridLayout(1,0));
+            chatPane.add(editorScrollPane);
+            chatPane.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createTitledBorder("Messages"),
+                    BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 
 
             //Put everything together.
             JPanel leftPane = new JPanel(new BorderLayout());
-            leftPane.add(rightPane,//areaScrollPane,
+            leftPane.add(chatPane,
                     BorderLayout.CENTER);
             leftPane.add(textControlsPane,
                     BorderLayout.PAGE_END);
 
             add(leftPane, BorderLayout.CENTER);
-            //add(rightPane, BorderLayout.LINE_END);
+
         }
 
         private void addLabelTextRows(JTextField[] textFields,
@@ -143,18 +146,21 @@ public class AnotherSwingUI extends JPanel
          * this method should be invoked from the
          * event dispatch thread.
          */
-        private static void createAndShowGUI() {
+        public static void createAndShowGUI() {
             //Create and set up the window.
-            JFrame frame = new JFrame("TextSamplerDemo");
+            JFrame frame = new JFrame("Chat");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             //Add content to the window.
-            frame.add(new AnotherSwingUI());
+            AnotherSwingUI panel = new AnotherSwingUI();
+            frame.add(panel);
 
             // pack makes size correspond to content
             frame.pack();
             // Center the window
             frame.setLocationRelativeTo(null);
+            // default focus
+            panel.getInputField().requestFocusInWindow();
             // Show
             frame.setVisible(true);
         }

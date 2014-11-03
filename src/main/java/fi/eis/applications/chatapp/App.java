@@ -1,18 +1,23 @@
 package fi.eis.applications.chatapp;
 
-/**
- * Hello world!
- *
- */
-public class App 
+import javax.swing.*;
+
+public class App
 {
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+        // Schedule a job for the event dispatching thread:
+        // creating and showing this application's GUI.
+
+        SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new MinimalSwingApplication().buildAndDisplayGui();
+                // Turn off metal's use of bold fonts
+                UIManager.put("swing.boldMetal", Boolean.FALSE);
+                // Let's go!
+                new AnotherSwingUI().createAndShowGUI();
             }
         });
+
     }
 }
