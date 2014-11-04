@@ -10,15 +10,14 @@ import java.awt.event.*;
  * Date: 3.11.2014
  * Time: 22:53
  */
-public class AnotherSwingUI extends JFrame
-        implements ActionListener {
+public class ChatUI extends JFrame {
 
     private JTextField inputField;
     private JPanel userListPanel;
     private JPanel messagesPanel;
     private JPanel inputPanel;
 
-    public AnotherSwingUI() {
+    public ChatUI() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setPreferredSize(new Dimension(500, 500));
 
@@ -49,7 +48,7 @@ public class AnotherSwingUI extends JFrame
      */
     protected static ImageIcon createImageIcon(String path,
                                                String description) {
-        java.net.URL imgURL = AnotherSwingUI.class.getResource(path);
+        java.net.URL imgURL = ChatUI.class.getResource(path);
         if (imgURL != null) {
             return new ImageIcon(imgURL, description);
         } else {
@@ -65,7 +64,7 @@ public class AnotherSwingUI extends JFrame
      */
     public static void createAndShowGUI() {
         //Create and set up the window.
-        AnotherSwingUI frame = new AnotherSwingUI();
+        ChatUI frame = new ChatUI();
 
         // pack makes size correspond to content
         frame.pack();
@@ -106,25 +105,12 @@ public class AnotherSwingUI extends JFrame
         return menuBar;
     }
 
-    public static void main(String[] args) {
-        //Schedule a job for the event dispatching thread:
-        //creating and showing this application's GUI.
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                //Turn off metal's use of bold fonts
-                UIManager.put("swing.boldMetal", Boolean.FALSE);
-                createAndShowGUI();
-            }
-        });
-    }
-
-    public JTextField getInputField() {
+    private JTextField getInputField() {
         return inputField;
     }
 
     private JPanel createInputPanel() {
         inputField = new JTextField(10);
-        inputField.addActionListener(this);
 
         JPanel inputPanel = new JPanel(new GridBagLayout());
 
@@ -194,22 +180,6 @@ public class AnotherSwingUI extends JFrame
             c.weightx = 1.0;
             container.add(textFields[i], c);
         }
-    }
-
-    public void actionPerformed(ActionEvent e) {
-            /*
-            String prefix = "You typed \"";
-            if (textFieldString.equals(e.getActionCommand())) {
-                JTextField source = (JTextField)e.getSource();
-                actionLabel.setText(prefix + source.getText() + "\"");
-            } else if (passwordFieldString.equals(e.getActionCommand())) {
-                JPasswordField source = (JPasswordField)e.getSource();
-                actionLabel.setText(prefix + new String(source.getPassword())
-                        + "\"");
-            } else if (buttonString.equals(e.getActionCommand())) {
-                Toolkit.getDefaultToolkit().beep();
-            }
-            */
     }
 
     private JEditorPane createEditorPane() {

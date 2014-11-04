@@ -14,8 +14,9 @@ public class App
             public void run() {
                 // Turn off metal's use of bold fonts
                 UIManager.put("swing.boldMetal", Boolean.FALSE);
+
                 // Let's go!
-                new AnotherSwingUI().createAndShowGUI();
+                ChatUI.createAndShowGUI();
             }
         });
 
