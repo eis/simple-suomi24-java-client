@@ -17,18 +17,21 @@ public class LoginUI extends JFrame {
     private LoginHandler successfulLoginHandler;
     private JButton loginButton;
 
-    public static LoginUI createAndShowGUI() {
+    public static LoginUI createGUI() {
         LoginUI frame = new LoginUI();
 
         frame.add(frame.createLoginPanel());
-        // pack makes size correspond to content
-        frame.pack();
-        // Center the window
-        frame.setLocationRelativeTo(null);
-        // Show
-        frame.setVisible(true);
 
         return frame;
+    }
+
+    public void display() {
+        // pack makes size correspond to content
+        pack();
+        // Center the window
+        setLocationRelativeTo(null);
+        // Show
+        setVisible(true);
     }
 
     public void addSuccessfulLoginHandler(LoginHandler successfulLoginHandler) {

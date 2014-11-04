@@ -16,7 +16,7 @@ public class App
                 // Turn off metal's use of bold fonts
                 UIManager.put("swing.boldMetal", Boolean.FALSE);
 
-                final LoginUI loginUI = LoginUI.createAndShowGUI();
+                final LoginUI loginUI = LoginUI.createGUI();
 
                 loginUI.addSuccessfulLoginHandler(new LoginHandler() {
                     @Override
@@ -27,6 +27,7 @@ public class App
                     }
                 });
 
+                loginUI.display();
             }
         });
 
