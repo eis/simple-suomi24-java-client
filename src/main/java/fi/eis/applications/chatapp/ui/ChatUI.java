@@ -1,4 +1,4 @@
-package fi.eis.applications.chatapp;
+package fi.eis.applications.chatapp.ui;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +17,16 @@ public class ChatUI extends JFrame {
     private JPanel messagesPanel;
     private JPanel inputPanel;
 
-    public ChatUI() {
+    private String roomId;
+    private String sessionId;
+
+    private ChatUI()  {
+        // no-op
+    }
+    private ChatUI(String roomId, String sessionId) {
+        this.roomId = roomId;
+        this.sessionId = sessionId;
+
         JPanel panel = new JPanel(new BorderLayout());
         panel.setPreferredSize(new Dimension(500, 500));
 
@@ -61,10 +70,12 @@ public class ChatUI extends JFrame {
      * Create the GUI and show it.  For thread safety,
      * this method should be invoked from the
      * event dispatch thread.
+     * @param selectedRoomId
+     * @param sessionId
      */
-    public static void createAndShowGUI() {
+    public static void createAndShowGUI(String selectedRoomId, String sessionId) {
         //Create and set up the window.
-        ChatUI frame = new ChatUI();
+        ChatUI frame = new ChatUI(selectedRoomId, sessionId);
 
         // pack makes size correspond to content
         frame.pack();

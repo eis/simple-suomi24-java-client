@@ -1,7 +1,14 @@
 package fi.eis.applications.chatapp;
 
+import fi.eis.applications.chatapp.actions.EnterChatHandler;
+import fi.eis.applications.chatapp.actions.LoginHandler;
+import fi.eis.applications.chatapp.actions.RoomFetchHandler;
+import fi.eis.applications.chatapp.ui.ChatUI;
+import fi.eis.applications.chatapp.ui.LoginUI;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class App
 {
@@ -16,16 +23,22 @@ public class App
                 // Turn off metal's use of bold fonts
                 UIManager.put("swing.boldMetal", Boolean.FALSE);
 
-                final LoginUI loginUI = LoginUI.createGUI();
+                final LoginUI loginUI = LoginUI.createGUI(
+                        new LoginHandler() {
+                          @Override
+                          public String tryLogin(String text, char[] password) {
+                              System.out.println("Login for " + text);
+                              return "dummy session value";
+                          }
+                      }, new EnterChatHandler() {
+                            @Override
+                            public void enterChat(String selectedRoomId, String sessionId) {
+                                // Let's go!
+                                ChatUI.createAndShowGUI(selectedRoomId, sessionId);
+                            }
+                      }, new RoomFetchHandler() {
+                      });
 
-                loginUI.addSuccessfulLoginHandler(new LoginHandler() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        loginUI.dispose();
-                        // Let's go!
-                        ChatUI.createAndShowGUI();
-                    }
-                });
 
                 loginUI.display();
             }
