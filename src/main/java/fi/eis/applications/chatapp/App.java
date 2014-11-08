@@ -7,8 +7,6 @@ import fi.eis.applications.chatapp.ui.ChatUI;
 import fi.eis.applications.chatapp.ui.LoginUI;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class App
 {
@@ -32,13 +30,16 @@ public class App
                           }
                       }, new EnterChatHandler() {
                             @Override
-                            public void enterChat(String selectedRoomId, String sessionId) {
+                            public void enterChat(final String selectedRoomId, final String sessionId) {
                                 // Let's go!
-                                ChatUI.createAndShowGUI(selectedRoomId, sessionId);
+                                SwingUtilities.invokeLater(new Runnable() {
+                                    public void run() {
+                                        ChatUI.createAndShowGUI(selectedRoomId, sessionId);
+                                    }
+                                });
                             }
                       }, new RoomFetchHandler() {
                       });
-
 
                 loginUI.display();
             }

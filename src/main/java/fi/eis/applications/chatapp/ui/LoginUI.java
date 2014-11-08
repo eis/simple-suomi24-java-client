@@ -35,6 +35,7 @@ public class LoginUI extends JFrame {
         this.loginHandler = loginHandler;
         this.enterChatHandler = enterChatHandler;
         this.roomFetchHandler = roomFetchHandler;
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     public static LoginUI createGUI(LoginHandler loginHandler, EnterChatHandler enterChatHandler,

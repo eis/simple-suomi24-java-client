@@ -47,7 +47,7 @@ public class ChatUI extends JFrame {
                 BorderLayout.PAGE_END);
 
         // JFrame operations
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setJMenuBar(menuBar);
         add(panel);
     }
