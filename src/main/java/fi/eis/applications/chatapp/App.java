@@ -1,9 +1,9 @@
 package fi.eis.applications.chatapp;
 
-import fi.eis.applications.chatapp.actions.EnterChatHandler;
 import fi.eis.applications.chatapp.actions.LoginHandler;
 import fi.eis.applications.chatapp.actions.RoomFetchHandler;
-import fi.eis.applications.chatapp.ui.ChatUI;
+import fi.eis.applications.chatapp.actions.impl.DefaultEnterChatHandler;
+import fi.eis.applications.chatapp.actions.impl.Suomi24LoginHandler;
 import fi.eis.applications.chatapp.ui.LoginUI;
 
 import javax.swing.*;
@@ -13,6 +13,7 @@ public class App
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
+
         // Schedule a job for the event dispatching thread:
         // creating and showing this application's GUI.
 
@@ -21,25 +22,13 @@ public class App
                 // Turn off metal's use of bold fonts
                 UIManager.put("swing.boldMetal", Boolean.FALSE);
 
+                LoginHandler loginHandler = new Suomi24LoginHandler();
+                loginHandler.setDebug(false);
                 final LoginUI loginUI = LoginUI.createGUI(
-                        new LoginHandler() {
-                          @Override
-                          public String tryLogin(String text, char[] password) {
-                              System.out.println("Login for " + text);
-                              return "dummy session value";
-                          }
-                      }, new EnterChatHandler() {
-                            @Override
-                            public void enterChat(final String selectedRoomId, final String sessionId) {
-                                // Let's go!
-                                SwingUtilities.invokeLater(new Runnable() {
-                                    public void run() {
-                                        ChatUI.createAndShowGUI(selectedRoomId, sessionId);
-                                    }
-                                });
-                            }
-                      }, new RoomFetchHandler() {
-                      });
+                        loginHandler,
+                        new DefaultEnterChatHandler(),
+                        new RoomFetchHandler() {}
+                    );
 
                 loginUI.display();
             }

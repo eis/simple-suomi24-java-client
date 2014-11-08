@@ -1,6 +1,14 @@
+# Maven
 target/
-.settings
+
+# Eclipse
+.settings/
 .classpath
 .project
+
+# IntelliJ IDEA files
 .idea
 chatapp.iml
+
+# Some random others
+*.txt

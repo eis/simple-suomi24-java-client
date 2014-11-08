@@ -7,5 +7,6 @@ package fi.eis.applications.chatapp.actions;
  */
 public interface LoginHandler {
 
+    void setDebug(boolean value);
     String tryLogin(String userName, char[] password) throws LoginFailedException;
 }

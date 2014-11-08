@@ -21,7 +21,7 @@ public class LoginUI extends JFrame {
     private EnterChatHandler enterChatHandler;
     private RoomFetchHandler roomFetchHandler;
 
-    private String sessionId;
+    private String sessionCookie;
     private String selectedRoomId;
 
     private JButton enterChatButton;
@@ -74,7 +74,7 @@ public class LoginUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                enterChatHandler.enterChat(selectedRoomId, sessionId);
+                enterChatHandler.enterChat(selectedRoomId, sessionCookie);
             }
         });
         panel.add(enterChatButton);
@@ -126,9 +126,6 @@ public class LoginUI extends JFrame {
 
 
     private JPanel createLoginHeader() {
-        //GridLayout gridLayout = new GridLayout(0, 5);
-        //gridLayout.setHgap(2);
-        //gridLayout.setVgap(2);
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panel.add(new JLabel("Username: ", JLabel.CENTER));
         final JTextField userNameTextField = new JTextField(15);
@@ -146,19 +143,23 @@ public class LoginUI extends JFrame {
                 boolean userWantsToLogIn = enterChatButton.isEnabled();
                 try {
                     if (userWantsToLogIn) {
-                        sessionId = loginHandler.tryLogin(userNameTextField.getText(), passwordField.getPassword());
-                        // cannot change credentials while logged in!
+                        // trying to log in
+                        sessionCookie = loginHandler.tryLogin(userNameTextField.getText(), passwordField.getPassword());
+                        // disabling login controls while logged in
                         userNameTextField.setEnabled(false);
                         passwordLabel.setVisible(false);
                         passwordField.setVisible(false);
                         loginButton.setText("Logout");
                     } else {
-                        // user can change these when logged out
+                        // user wants to log out, resetting session cookie
+                        sessionCookie = null;
+                        // enabling login controls
                         userNameTextField.setEnabled(true);
                         passwordLabel.setVisible(true);
                         passwordField.setVisible(true);
                         loginButton.setText("Login");
                     }
+                    System.out.println("LoginUI Session cookie: " + sessionCookie);
                 } catch (LoginFailedException e1) {
                     // TODO implement something better
                     throw new RuntimeException(e1);
@@ -169,7 +170,6 @@ public class LoginUI extends JFrame {
         panel.setBorder(BorderFactory.createEmptyBorder(3,3,3,3));
 
         JPanel containerPanel = new JPanel(new BorderLayout());
-        //containerPanel.setPreferredSize(new Dimension(350, 30));
         containerPanel.add(panel, BorderLayout.EAST);
 
         return containerPanel;
