@@ -3,12 +3,30 @@ package fi.eis.applications.chatapp.ui;
 import fi.eis.applications.chatapp.actions.EnterChatHandler;
 import fi.eis.applications.chatapp.actions.LoginFailedException;
 import fi.eis.applications.chatapp.actions.LoginHandler;
-import fi.eis.applications.chatapp.actions.RoomFetchHandler;
+import fi.eis.applications.chatapp.actions.RoomsProvider;
+import fi.eis.applications.chatapp.types.ChatRoom;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTextField;
+import javax.swing.ListCellRenderer;
+import javax.swing.ListSelectionModel;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 /**
  * User: eis
@@ -19,7 +37,7 @@ public class LoginUI extends JFrame {
 
     private LoginHandler loginHandler;
     private EnterChatHandler enterChatHandler;
-    private RoomFetchHandler roomFetchHandler;
+    private RoomsProvider roomFetchHandler;
 
     private String sessionCookie;
     private String selectedRoomId;
@@ -31,7 +49,7 @@ public class LoginUI extends JFrame {
     }
 
     private LoginUI(LoginHandler loginHandler, EnterChatHandler enterChatHandler,
-                    RoomFetchHandler roomFetchHandler) {
+                    RoomsProvider roomFetchHandler) {
         this.loginHandler = loginHandler;
         this.enterChatHandler = enterChatHandler;
         this.roomFetchHandler = roomFetchHandler;
@@ -39,7 +57,7 @@ public class LoginUI extends JFrame {
     }
 
     public static LoginUI createGUI(LoginHandler loginHandler, EnterChatHandler enterChatHandler,
-                                    RoomFetchHandler roomFetchHandler) {
+                                    RoomsProvider roomFetchHandler) {
         LoginUI frame = new LoginUI(loginHandler, enterChatHandler,
                 roomFetchHandler);
 
@@ -81,15 +99,34 @@ public class LoginUI extends JFrame {
         return panel;
     }
 
-    private static Component createRoomSelector() {
+    private class ChatRoomCellRenderer extends JLabel implements ListCellRenderer<ChatRoom> {
+
+        // default renderer should not be created within the method for performance reasons
+        // source: http://www.java2s.com/Tutorial/Java/0240__Swing/AddyourownListCellRenderer.htm
+        protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
+
+        @Override
+        public Component getListCellRendererComponent(JList<? extends ChatRoom> list, ChatRoom value, int index, boolean isSelected, boolean cellHasFocus) {
+            // we prefer standard behaviour for colors etc
+            JLabel renderer = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index,
+                    isSelected, cellHasFocus);
+            // only thing we want to change is the display text
+            renderer.setText(value.getRoomName());
+            return renderer;
+        }
+    }
+
+    private Component createRoomSelector() {
         JScrollPane roomListScrollPane;
         {
-            DefaultListModel listModel = new DefaultListModel();
-            listModel.addElement("Seurahuone");
-            listModel.addElement("Hautausmaa");
-            listModel.addElement("Helsinki");
+            DefaultListModel<ChatRoom> listModel = new DefaultListModel<>();
+            List<ChatRoom> rooms = this.roomFetchHandler.getRooms();
+
+            for(ChatRoom chatRoom: rooms)
+                listModel.addElement(chatRoom);
 
             JList list = new JList(listModel);
+            list.setCellRenderer(new ChatRoomCellRenderer());
             list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             list.setSelectedIndex(0);
             roomListScrollPane = new JScrollPane(list);
@@ -167,7 +204,7 @@ public class LoginUI extends JFrame {
             }
         });
         panel.add(loginButton);
-        panel.setBorder(BorderFactory.createEmptyBorder(3,3,3,3));
+        panel.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
 
         JPanel containerPanel = new JPanel(new BorderLayout());
         containerPanel.add(panel, BorderLayout.EAST);
