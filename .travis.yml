@@ -14,8 +14,8 @@ script:
   - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
   - git clone -b gh-pages --single-branch git@github.com:eis/simple-suomi24-java-client.git chatapp-push.docs
   - cd chatapp-push.docs
-  - git config --local user.email "eis+travis-pusher@iki.fi"
-  - git config --local user.name "eis-travis-pusher"
+  - git config user.email "eis+travis-pusher@iki.fi"
+  - git config user.name "eis-travis-pusher"
   - rm *.html
   - rm -rf cobertura
   - rm -rf css
