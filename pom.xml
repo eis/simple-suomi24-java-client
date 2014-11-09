@@ -77,4 +77,35 @@
       </plugin>
     </plugins>
   </build>
+  <reporting>
+    <plugins>
+      <!-- as exampled in http://www.mkyong.com/qa/maven-cobertura-code-coverage-example/ -->
+      <!-- Normally, we take off the dependency report, saves time. -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>2.7</version>
+        <configuration>
+          <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+        </configuration>
+      </plugin>
+
+      <!-- integrate maven-cobertura-plugin to project site -->
+      <!--
+        note a known problem with UTF-8, https://github.com/cobertura/cobertura/issues/111, which is
+        currently only fixed in cobertura trunk -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>cobertura-maven-plugin</artifactId>
+        <version>2.6</version>
+        <configuration>
+          <formats>
+            <format>html</format>
+            <format>xml</format>
+          </formats>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </reporting>
 </project>

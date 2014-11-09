@@ -108,12 +108,12 @@ public class XMLBasedRoomsProvider implements RoomsProvider {
             return chatRooms;
 
 
-        }catch (SAXParseException err) {
+        } catch (SAXParseException err) {
             System.out.println ("** Parsing error" + ", line "
                     + err.getLineNumber () + ", uri " + err.getSystemId ());
             System.out.println(" " + err.getMessage ());
             throw new IllegalStateException(err);
-        }catch (SAXException e) {
+        } catch (SAXException e) {
             throw new IllegalStateException(e);
         } catch (ParserConfigurationException e) {
             throw new IllegalStateException(e);

@@ -14,9 +14,10 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 /**
- * User: eis
  * Creation Date: 9.11.2014
  * Creation Time: 14:15
+ *
+ * @author eis
  */
 public class DefaultRoomsProviderTest {
 
