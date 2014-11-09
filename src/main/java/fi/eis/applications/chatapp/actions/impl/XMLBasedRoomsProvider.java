@@ -19,16 +19,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * User: eis
  * Creation Date: 8.11.2014
  * Creation Time: 18:49
+ *
+ * Class retrieves the room list from an XML file.
+ *
+ * Two constructors are offered: one with default "rooms.xml" and another with
+ * user-specified file name (that can contain a path with it).
+ *
+ * @author eis
  */
-public class DefaultRoomsProvider implements RoomsProvider {
-    private static final String ROOM_CONFIG_FILE = "rooms.xml";
+public class XMLBasedRoomsProvider implements RoomsProvider {
+    private final String ROOM_CONFIG_FILE;
+
+    public XMLBasedRoomsProvider() {
+        this.ROOM_CONFIG_FILE = "rooms.xml";
+    }
+    public XMLBasedRoomsProvider(final String fileName) {
+        this.ROOM_CONFIG_FILE = fileName;
+    }
+
     @Override
     public List<ChatRoom> getRooms() {
         return readRoomsFromXML();
     }
+
     private List<ChatRoom> readRoomsFromXML() {
         List<ChatRoom> chatRooms = new ArrayList<>();
         try {
