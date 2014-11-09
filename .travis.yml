@@ -5,7 +5,7 @@ jdk:
 #  - oraclejdk8
 #  - openjdk7
 
-install: mvn clean site -DbuildNumber=${TRAVIS_BUILD_NUMBER} -DskipTests=true
+install: mvn clean site -DbuildNumber=${TRAVIS_BUILD_NUMBER}
 
 script:
   - echo -n $id_rsa_{00..30} >> ~/.ssh/id_rsa_base64
