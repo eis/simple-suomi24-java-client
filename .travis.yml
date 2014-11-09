@@ -17,7 +17,7 @@ script:
   - git config user.email "eis+travis-pusher@iki.fi"
   - git config user.name "eis-travis-pusher"
   - git config push.default matching
-  - rm *.html
+  - rm -f *.html
   - rm -rf cobertura
   - rm -rf css
   - rm -rf images
