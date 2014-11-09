@@ -7,7 +7,7 @@ jdk:
 
 install: mvn clean site -DbuildNumber=${TRAVIS_BUILD_NUMBER} -DskipTests=true
 
-script:
+after-success:
   - echo -n $id_rsa_{00..30} >> ~/.ssh/id_rsa_base64
   - base64 --decode --ignore-garbage ~/.ssh/id_rsa_base64 > ~/.ssh/id_rsa
   - chmod 600 ~/.ssh/id_rsa
@@ -16,12 +16,14 @@ script:
   - cd chatapp-push.docs
   - git config user.email "eis+travis-pusher@iki.fi"
   - git config user.name "eis-travis-pusher"
+  - git config push.default matching
   - rm *.html
   - rm -rf cobertura
   - rm -rf css
   - rm -rf images
-  - cp -R ../target/site .
+  - cp -R ../target/site/* .
   - git add -u .
+  - git add .
   - git commit -m "Documentation, build ${TRAVIS_BUILD_NUMBER}"
   - git push
 
