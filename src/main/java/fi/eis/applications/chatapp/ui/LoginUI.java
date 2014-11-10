@@ -36,6 +36,8 @@ import java.util.List;
  */
 public class LoginUI extends JFrame {
 
+    private static final String LOGINWINDOW_TITLE = "";
+
     private LoginHandler loginHandler;
     private EnterChatHandler enterChatHandler;
     private RoomsProvider roomFetchHandler;
@@ -55,6 +57,7 @@ public class LoginUI extends JFrame {
         this.enterChatHandler = enterChatHandler;
         this.roomFetchHandler = roomFetchHandler;
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setTitle(LOGINWINDOW_TITLE);
     }
 
     public static LoginUI createGUI(LoginHandler loginHandler, EnterChatHandler enterChatHandler,
@@ -178,8 +181,7 @@ public class LoginUI extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                enterChatButton.setEnabled(!enterChatButton.isEnabled());
-                boolean userWantsToLogIn = enterChatButton.isEnabled();
+                boolean userWantsToLogIn = !enterChatButton.isEnabled();
                 try {
                     if (userWantsToLogIn) {
                         // trying to log in
@@ -189,6 +191,7 @@ public class LoginUI extends JFrame {
                         passwordLabel.setVisible(false);
                         passwordField.setVisible(false);
                         loginButton.setText("Logout");
+                        enterChatButton.setEnabled(true);
                     } else {
                         // user wants to log out, resetting session cookie
                         sessionCookie = null;
@@ -197,11 +200,16 @@ public class LoginUI extends JFrame {
                         passwordLabel.setVisible(true);
                         passwordField.setVisible(true);
                         loginButton.setText("Login");
+                        enterChatButton.setEnabled(false);
                     }
                     System.out.println("LoginUI Session cookie: " + sessionCookie);
-                } catch (LoginFailedException e1) {
-                    // TODO implement something better
-                    throw new RuntimeException(e1);
+                    LoginUI.this.setTitle(LOGINWINDOW_TITLE);
+                } catch (LoginFailedException ex) {
+                    LoginUI.this.setTitle(
+                            (LOGINWINDOW_TITLE.length() > 0)
+                                ? String.format("%s - %s", LOGINWINDOW_TITLE, ex.getMessage())
+                                : ex.getMessage()
+                        );
                 }
             }
         });

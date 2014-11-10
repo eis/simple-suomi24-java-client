@@ -21,6 +21,7 @@ public class Suomi24LoginHandler implements LoginHandler {
 
     private static final String httpsURL = "https://oma.suomi24.fi/index.php?q=/user/login";
     private static final String HEADER_SET_COOKIE = "Set-Cookie";
+    private static final String S24_COOKIE_NAME = "S24auth";
 
     private boolean printDebug = false;
 
@@ -59,6 +60,7 @@ public class Suomi24LoginHandler implements LoginHandler {
 
             // these have to be iterated: getHeaderField() only gives the first, and we want all cookies
             final Map<String,List<String>> headerFields = con.getHeaderFields();
+            boolean loginSuccess = false;
             String cookieValue = null;
 
             for (Map.Entry<String, List<String>> entry: headerFields.entrySet()) {
@@ -67,9 +69,16 @@ public class Suomi24LoginHandler implements LoginHandler {
                 printDebug("%s: %s%n", headerName, headerValue);
                 if (HEADER_SET_COOKIE.equalsIgnoreCase(headerName)) {
                     cookieValue = headerValue;
+                    if (headerValue.contains(S24_COOKIE_NAME)) {
+                        loginSuccess = true;
+                    }
                 }
             }
             printDebug("Resp Cookie:" + cookieValue);
+
+            if (!loginSuccess) {
+                throw new LoginFailedException("login failed");
+            }
 
             return cookieValue;
         } catch (IOException e) {
