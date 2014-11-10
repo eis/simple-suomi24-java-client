@@ -26,6 +26,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -121,6 +122,7 @@ public class LoginUI extends JFrame {
         {
             DefaultListModel<ChatRoom> listModel = new DefaultListModel<>();
             List<ChatRoom> rooms = this.roomFetchHandler.getRooms();
+            Collections.sort(rooms, ChatRoom.ROOM_NAME_COMPARATOR);
 
             for(ChatRoom chatRoom: rooms)
                 listModel.addElement(chatRoom);

@@ -1,5 +1,7 @@
 package fi.eis.applications.chatapp.types;
 
+import java.util.Comparator;
+
 /**
  * User: eis
  * Creation Date: 8.11.2014
@@ -8,6 +10,13 @@ package fi.eis.applications.chatapp.types;
 public class ChatRoom {
     private final int roomId;
     private final String roomName;
+
+    public static final Comparator<? super ChatRoom> ROOM_NAME_COMPARATOR = new Comparator<ChatRoom>() {
+        @Override
+        public int compare(ChatRoom room1, ChatRoom room2) {
+            return room1.getRoomName().compareTo(room2.getRoomName());
+        }
+    };
 
     public ChatRoom(int roomId, String roomName) {
         this.roomId = roomId;
