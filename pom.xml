@@ -103,6 +103,7 @@
             <format>html</format>
             <format>xml</format>
           </formats>
+          <check/>
         </configuration>
       </plugin>
 
