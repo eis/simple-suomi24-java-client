@@ -27,7 +27,7 @@ Nice to have
  - remember window sizes
  - remember login credentials
  - retrieve room users in login UI
- - translate ui to finnish
+ - translate ui to finnish and allow user to switch between english and finnish ui
  - work properly with non-admin users
  - keep chat log
  - relevant metadata about project added to pom.xml
