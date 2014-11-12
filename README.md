@@ -28,6 +28,7 @@ Nice to have
  - remember login credentials
  - retrieve room users in login UI
  - translate ui to finnish
+ - work properly with non-admin users
  - keep chat log
  - encrypt + decrypt password
  - installer
