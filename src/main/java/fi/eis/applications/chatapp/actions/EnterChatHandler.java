@@ -6,5 +6,5 @@ package fi.eis.applications.chatapp.actions;
  * Creatuin Time: 22:42
  */
 public interface EnterChatHandler {
-    void enterChat(String selectedRoomId, String sessionId);
+    void enterChat(int selectedRoomId, String sessionId);
 }

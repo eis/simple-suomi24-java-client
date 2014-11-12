@@ -12,11 +12,11 @@ import javax.swing.*;
  */
 public class DefaultEnterChatHandler implements EnterChatHandler {
     @Override
-    public void enterChat(final String selectedRoomId, final String sessionId) {
+    public void enterChat(final int selectedRoomId, final String sessionId) {
         // Let's go!
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                ChatUI.createAndShowGUI(selectedRoomId, sessionId);
+                ChatUI.createAndShowGUI(new ChattingConnection(selectedRoomId, sessionId) );
             }
         });
     }

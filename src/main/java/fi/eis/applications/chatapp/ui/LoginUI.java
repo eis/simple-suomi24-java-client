@@ -43,8 +43,8 @@ public class LoginUI extends JFrame {
     private RoomsProvider roomFetchHandler;
 
     private String sessionCookie;
-    private String selectedRoomId;
-
+    private JList<ChatRoom> chatRoomList;
+    
     private JButton enterChatButton;
 
     private LoginUI() {
@@ -90,17 +90,23 @@ public class LoginUI extends JFrame {
 
     private JPanel createLoginFooter() {
         JPanel panel = new JPanel(new BorderLayout());
-        enterChatButton = new JButton("Chat!");
-        enterChatButton.setEnabled(false);
-        enterChatButton.addActionListener(new ActionListener() {
+        this.enterChatButton = new JButton("Chat!");
+        this.enterChatButton.setEnabled(false);
+        this.enterChatButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                enterChatHandler.enterChat(selectedRoomId, sessionCookie);
+                LoginUI.this.enterChatHandler.enterChat(
+                        LoginUI.this.getSelectedRoomId(),
+                        LoginUI.this.sessionCookie);
             }
         });
-        panel.add(enterChatButton);
+        panel.add(this.enterChatButton);
         return panel;
+    }
+
+    protected int getSelectedRoomId() {
+        return this.chatRoomList.getSelectedValue().getRoomId();
     }
 
     private class ChatRoomCellRenderer extends JLabel implements ListCellRenderer<ChatRoom> {
@@ -130,11 +136,11 @@ public class LoginUI extends JFrame {
             for(ChatRoom chatRoom: rooms)
                 listModel.addElement(chatRoom);
 
-            JList list = new JList(listModel);
-            list.setCellRenderer(new ChatRoomCellRenderer());
-            list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-            list.setSelectedIndex(0);
-            roomListScrollPane = new JScrollPane(list);
+            this.chatRoomList = new JList<ChatRoom>(listModel);
+            chatRoomList.setCellRenderer(new ChatRoomCellRenderer());
+            chatRoomList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            chatRoomList.setSelectedIndex(0);
+            roomListScrollPane = new JScrollPane(chatRoomList);
         }
 
         JScrollPane roomMemberListScrollPane;

@@ -1,6 +1,10 @@
 package fi.eis.applications.chatapp.ui;
 
 import javax.swing.*;
+
+import fi.eis.applications.chatapp.actions.impl.ChattingConnection;
+import fi.eis.applications.chatapp.actions.impl.MessageUpdater;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -17,33 +21,34 @@ public class ChatUI extends JFrame {
     private JPanel messagesPanel;
     private JPanel inputPanel;
 
-    private String roomId;
-    private String sessionId;
+    private ChattingConnection conn;
 
     private ChatUI()  {
         // no-op
     }
-    private ChatUI(String roomId, String sessionId) {
-        this.roomId = roomId;
-        this.sessionId = sessionId;
+    private ChatUI(ChattingConnection conn) {
+        this.conn = conn;
 
         JPanel panel = new JPanel(new BorderLayout());
         panel.setPreferredSize(new Dimension(500, 500));
 
-        userListPanel = createUserListPanel();
+        this.userListPanel = createUserListPanel();
 
-        messagesPanel = createMessagesPanel();
+        this.messagesPanel = createMessagesPanel();
 
-        inputPanel = createInputPanel();
+        this.inputPanel = createInputPanel();
 
         JMenuBar menuBar = createMenu();
 
+        conn.setUpdater(new MessageUpdater(this.messagesPanel));
+
+        
         // Put everything on a panel.
-        panel.add(messagesPanel,
+        panel.add(this.messagesPanel,
                 BorderLayout.CENTER);
-        panel.add(userListPanel,
+        panel.add(this.userListPanel,
                 BorderLayout.EAST);
-        panel.add(inputPanel,
+        panel.add(this.inputPanel,
                 BorderLayout.PAGE_END);
 
         // JFrame operations
@@ -73,9 +78,9 @@ public class ChatUI extends JFrame {
      * @param selectedRoomId
      * @param sessionId
      */
-    public static void createAndShowGUI(String selectedRoomId, String sessionId) {
+    public static void createAndShowGUI(ChattingConnection conn) {
         //Create and set up the window.
-        ChatUI frame = new ChatUI(selectedRoomId, sessionId);
+        ChatUI frame = new ChatUI(conn);
 
         // pack makes size correspond to content
         frame.pack();
@@ -83,6 +88,8 @@ public class ChatUI extends JFrame {
         frame.setLocationRelativeTo(null);
         // Set focus
         frame.focusOnInput();
+        
+        conn.connect();
 
         // Show
         frame.setVisible(true);
@@ -123,25 +130,25 @@ public class ChatUI extends JFrame {
     private JPanel createInputPanel() {
         inputField = new JTextField(10);
 
-        JPanel inputPanel = new JPanel(new GridBagLayout());
+        JPanel tempInputPanel = new JPanel(new GridBagLayout());
 
         GridBagConstraints c = new GridBagConstraints();
 
         JTextField[] textFields = {inputField};
-        addLabelTextRows(textFields, inputPanel);
+        addLabelTextRows(textFields, tempInputPanel);
 
         c.gridwidth = GridBagConstraints.REMAINDER; //last
         c.anchor = GridBagConstraints.WEST;
         c.weightx = 1.0;
 
-        inputPanel.setBorder(
+        tempInputPanel.setBorder(
                 BorderFactory.createCompoundBorder(
                         BorderFactory.createTitledBorder("Input"),
                         BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-        return inputPanel;
+        return tempInputPanel;
     }
 
-    private JPanel createUserListPanel() {
+    private static JPanel createUserListPanel() {
         JEditorPane userListPane = createEditorPane();
         JScrollPane userListScrollPane = new JScrollPane(userListPane);
         userListScrollPane.setVerticalScrollBarPolicy(
@@ -160,7 +167,7 @@ public class ChatUI extends JFrame {
         return userListPanel;
     }
 
-    private JPanel createMessagesPanel() {
+    private static JPanel createMessagesPanel() {
         JEditorPane editorPane = createEditorPane();
         JScrollPane editorScrollPane = new JScrollPane(editorPane);
         editorScrollPane.setVerticalScrollBarPolicy(
@@ -179,7 +186,7 @@ public class ChatUI extends JFrame {
         return chatPane;
     }
 
-    private void addLabelTextRows(JTextField[] textFields,
+    private static void addLabelTextRows(JTextField[] textFields,
                                   Container container) {
         GridBagConstraints c = new GridBagConstraints();
         c.anchor = GridBagConstraints.EAST;
@@ -193,7 +200,7 @@ public class ChatUI extends JFrame {
         }
     }
 
-    private JEditorPane createEditorPane() {
+    private static JEditorPane createEditorPane() {
         JEditorPane editorPane = new JEditorPane();
         editorPane.setEditable(false);
         /*
