@@ -30,6 +30,10 @@ Nice to have
  - translate ui to finnish
  - work properly with non-admin users
  - keep chat log
+ - relevant metadata about project added to pom.xml
+ - integration tests
+ - unit test coverage of 80% for business methods
+ - mutation test report
  - encrypt + decrypt password
  - installer
  - .exe
