@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.13183279742765272" branch-rate="0.16666666666666666" lines-covered="41" lines-valid="311" branches-covered="6" branches-valid="36" complexity="1.7142857142857142" version="2.0.3" timestamp="1415781259725">
+<coverage line-rate="0.13183279742765272" branch-rate="0.16666666666666666" lines-covered="41" lines-valid="311" branches-covered="6" branches-valid="36" complexity="1.7142857142857142" version="2.0.3" timestamp="1415781343897">
 	<sources>
 		<source>--source</source>
 		<source>/home/travis/build/eis/simple-suomi24-java-client/target/generated-sources/annotations</source>
