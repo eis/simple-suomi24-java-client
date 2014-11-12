@@ -24,7 +24,7 @@ Must have
 Nice to have
 
  - save and retrieve settings to/from .ini, .xml or similar
- - remember window sizes
+ - remember window sizes and positions
  - remember login credentials
  - retrieve room users in login UI
  - translate ui to finnish and allow user to switch between english and finnish ui
