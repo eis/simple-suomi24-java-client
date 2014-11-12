@@ -6,6 +6,7 @@ import org.w3c.dom.*;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.FactoryConfigurationError;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
@@ -31,6 +32,7 @@ import java.util.List;
  */
 public class XMLBasedRoomsProvider implements RoomsProvider {
     private final String ROOM_CONFIG_FILE;
+    private static final boolean debug = false;
 
     public XMLBasedRoomsProvider() {
         this.ROOM_CONFIG_FILE = "rooms.xml";
@@ -66,13 +68,13 @@ public class XMLBasedRoomsProvider implements RoomsProvider {
 
             // normalize text representation
             doc.getDocumentElement ().normalize ();
-            System.out.println ("Root element of the doc is " +
+            printDebug("Root element of the doc is " +
                     doc.getDocumentElement().getNodeName());
 
 
             NodeList listOfRooms = doc.getElementsByTagName("room");
             int totalRooms = listOfRooms.getLength();
-            System.out.println("Total no of items: " + totalRooms);
+            printDebug("Total no of items: " + totalRooms);
 
             for(int s=0; s<listOfRooms.getLength() ; s++){
 
@@ -109,16 +111,18 @@ public class XMLBasedRoomsProvider implements RoomsProvider {
 
 
         } catch (SAXParseException err) {
-            System.out.println ("** Parsing error" + ", line "
+            System.err.println ("** Parsing error" + ", line "
                     + err.getLineNumber () + ", uri " + err.getSystemId ());
-            System.out.println(" " + err.getMessage ());
+            System.err.println(" " + err.getMessage ());
             throw new IllegalStateException(err);
-        } catch (SAXException e) {
+        } catch (SAXException | ParserConfigurationException | IOException | FactoryConfigurationError | ClassCastException e) {
             throw new IllegalStateException(e);
-        } catch (ParserConfigurationException e) {
-            throw new IllegalStateException(e);
-        } catch (IOException e) {
-            throw new IllegalStateException(e);
+        }
+    }
+
+    private void printDebug(String message) {
+        if (debug) {
+            System.out.println(message);
         }
     }
 }
