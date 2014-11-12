@@ -31,6 +31,7 @@ Nice to have
  - work properly with non-admin users
  - keep chat log
  - relevant metadata about project added to pom.xml
+ - separation of Travis script into a separate file
  - integration tests
  - unit test coverage of 80% for business methods
  - mutation test report
