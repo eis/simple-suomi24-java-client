@@ -23,7 +23,7 @@ Must have
 
 Nice to have
 
- - save and retrieve settings to/from .ini
+ - save and retrieve settings to/from .ini, .xml or similar
  - remember window sizes
  - remember login credentials
  - retrieve room users in login UI
