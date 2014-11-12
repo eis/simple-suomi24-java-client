@@ -50,16 +50,16 @@ public class XMLBasedRoomsProvider implements RoomsProvider {
         List<ChatRoom> chatRooms = new ArrayList<>();
         try {
 
-            final File configurationFile = new File(ROOM_CONFIG_FILE);
+            final File configurationFile = new File(this.ROOM_CONFIG_FILE);
 
             if (!configurationFile.exists()) {
                 throw new IllegalStateException(String.format("Configuration file '%s' missing from path '%s'",
-                        ROOM_CONFIG_FILE, new File(".").getAbsolutePath()));
+                        this.ROOM_CONFIG_FILE, new File(".").getAbsolutePath()));
             }
 
             if (!configurationFile.canRead()) {
                 throw new IllegalStateException(String.format("Configuration file '%s' cannot be read from path",
-                        ROOM_CONFIG_FILE, new File(".").getAbsolutePath()));
+                        this.ROOM_CONFIG_FILE, new File(".").getAbsolutePath()));
             }
 
             DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -90,15 +90,14 @@ public class XMLBasedRoomsProvider implements RoomsProvider {
                     Element firstNameElement = (Element)firstNameList.item(0);
 
                     NodeList textFNList = firstNameElement.getChildNodes();
-                    String roomId = ((Node)textFNList.item(0)).getNodeValue().trim();
+                    String roomId = textFNList.item(0).getNodeValue().trim();
 
                     //-------
                     NodeList lastNameList = roomElement.getElementsByTagName("roomName");
                     Element lastNameElement = (Element)lastNameList.item(0);
 
                     NodeList textLNList = lastNameElement.getChildNodes();
-                    String roomName =
-                            ((Node)textLNList.item(0)).getNodeValue().trim();
+                    String roomName = textLNList.item(0).getNodeValue().trim();
 
                     chatRooms.add(new ChatRoom(Integer.parseInt(roomId), roomName));
 
@@ -120,7 +119,7 @@ public class XMLBasedRoomsProvider implements RoomsProvider {
         }
     }
 
-    private void printDebug(String message) {
+    private static void printDebug(String message) {
         if (debug) {
             System.out.println(message);
         }
