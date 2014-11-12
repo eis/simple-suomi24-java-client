@@ -33,4 +33,4 @@ Nice to have
  - encrypt + decrypt password
  - installer
  - .exe
- 
+ - update mechanism
