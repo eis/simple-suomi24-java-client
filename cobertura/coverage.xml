@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.13924050632911392" branch-rate="0.14285714285714285" lines-covered="44" lines-valid="316" branches-covered="6" branches-valid="42" complexity="1.7" version="2.0.3" timestamp="1415814616426">
+<coverage line-rate="0.13924050632911392" branch-rate="0.14285714285714285" lines-covered="44" lines-valid="316" branches-covered="6" branches-valid="42" complexity="1.7" version="2.0.3" timestamp="1415817945983">
 	<sources>
 		<source>--source</source>
 		<source>/home/travis/build/eis/simple-suomi24-java-client/target/generated-sources/annotations</source>
@@ -395,7 +395,7 @@
 						</method>
 						<method name="printDebug" signature="(Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="127" hits="2" branch="false"/>
+								<line number="126" hits="2" branch="false"/>
 							</lines>
 						</method>
 						<method name="readRoomsFromXML" signature="()Ljava/util/List;" line-rate="0.9705882352941176" branch-rate="0.75">
@@ -442,14 +442,14 @@
 								<line number="97" hits="79" branch="false"/>
 								<line number="99" hits="79" branch="false"/>
 								<line number="100" hits="79" branch="false"/>
-								<line number="103" hits="79" branch="false"/>
-								<line number="110" hits="1" branch="false"/>
+								<line number="102" hits="79" branch="false"/>
+								<line number="109" hits="1" branch="false"/>
+								<line number="112" hits="1" branch="false"/>
 								<line number="113" hits="1" branch="false"/>
-								<line number="114" hits="1" branch="false"/>
+								<line number="115" hits="1" branch="false"/>
 								<line number="116" hits="1" branch="false"/>
-								<line number="117" hits="1" branch="false"/>
+								<line number="117" hits="4" branch="false"/>
 								<line number="118" hits="4" branch="false"/>
-								<line number="119" hits="4" branch="false"/>
 							</lines>
 						</method>
 					</methods>
@@ -503,15 +503,15 @@
 						<line number="97" hits="79" branch="false"/>
 						<line number="99" hits="79" branch="false"/>
 						<line number="100" hits="79" branch="false"/>
-						<line number="103" hits="79" branch="false"/>
-						<line number="110" hits="1" branch="false"/>
+						<line number="102" hits="79" branch="false"/>
+						<line number="109" hits="1" branch="false"/>
+						<line number="112" hits="1" branch="false"/>
 						<line number="113" hits="1" branch="false"/>
-						<line number="114" hits="1" branch="false"/>
+						<line number="115" hits="1" branch="false"/>
 						<line number="116" hits="1" branch="false"/>
-						<line number="117" hits="1" branch="false"/>
+						<line number="117" hits="4" branch="false"/>
 						<line number="118" hits="4" branch="false"/>
-						<line number="119" hits="4" branch="false"/>
-						<line number="127" hits="2" branch="false"/>
+						<line number="126" hits="2" branch="false"/>
 					</lines>
 				</class>
 			</classes>
