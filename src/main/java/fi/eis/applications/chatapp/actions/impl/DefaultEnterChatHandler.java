@@ -16,7 +16,7 @@ public class DefaultEnterChatHandler implements EnterChatHandler {
         // Let's go!
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                ChatUI.createAndShowGUI(new ChattingConnection(selectedRoomId, sessionId) );
+                ChatUI.createAndShowGUI(new ChattingConnection(selectedRoomId, sessionId, new DefaultHTTPConnectionImpl()) );
             }
         });
     }
