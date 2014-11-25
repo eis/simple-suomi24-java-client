@@ -1,10 +1,10 @@
 package fi.eis.applications.chatapp;
 
-import fi.eis.applications.chatapp.actions.LoginHandler;
-import fi.eis.applications.chatapp.actions.impl.DefaultEnterChatHandler;
-import fi.eis.applications.chatapp.actions.impl.XMLBasedRoomsProvider;
-import fi.eis.applications.chatapp.actions.impl.Suomi24LoginHandler;
-import fi.eis.applications.chatapp.ui.LoginUI;
+import fi.eis.applications.chatapp.login.actions.LoginHandler;
+import fi.eis.applications.chatapp.login.actions.impl.DefaultEnterChatHandler;
+import fi.eis.applications.chatapp.login.actions.impl.Suomi24LoginHandler;
+import fi.eis.applications.chatapp.login.actions.impl.XMLBasedRoomsProvider;
+import fi.eis.applications.chatapp.login.ui.LoginUI;
 
 import javax.swing.*;
 
