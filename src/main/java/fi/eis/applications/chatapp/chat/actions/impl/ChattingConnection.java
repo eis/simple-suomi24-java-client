@@ -11,8 +11,9 @@ public class ChattingConnection {
     private final int selectedRoomId;
     private final String sessionId;
     private final HTTPConnectionHandler httpHandler;
+    private final boolean debug = false;
 
-    protected static class ConnectionParameters {
+    public static class ConnectionParameters {
         private String whoParam;
 
         @Override
@@ -42,7 +43,7 @@ public class ChattingConnection {
         }
     }
 
-    public static ConnectionParameters getConnectionParameters(String whoParam, String nickParam, String userIdParam) {
+    protected static ConnectionParameters buildConnectionParameters(String whoParam, String nickParam, String userIdParam) {
         return new ConnectionParameters(whoParam, nickParam, userIdParam);
     }
 
@@ -53,6 +54,9 @@ public class ChattingConnection {
     }
     final static Pattern firstPattern = Pattern.compile(".*name=\"nick\" value=\"(.+?)\".*name=\"name\" value=\"(.+?)\".*name=\"who\" value=\"([a-f0-9]+?)\".*", Pattern.DOTALL);
     protected ConnectionParameters params = null;
+    public ConnectionParameters getConnectionParameters() {
+        return this.params;
+    }
 
     public void connect() {
         final String whoParam;
@@ -61,20 +65,26 @@ public class ChattingConnection {
 
         String url = String.format("http://chat.suomi24.fi/login.cgi?cid=%d", selectedRoomId);
         String HTML = httpHandler.getHTMLFromURLWithCookie(url, sessionId);
-        System.out.println("Got HTML " + HTML);
+        debugPrint("Got HTML " + HTML);
         Matcher matcher  = firstPattern.matcher(HTML);
 
         if (matcher.matches()) {
             nickParam = matcher.group(1);
             userId = matcher.group(2);
             whoParam = matcher.group(3);
-            params = getConnectionParameters(whoParam, nickParam, userId);
+            params = buildConnectionParameters(whoParam, nickParam, userId);
         } else {
             throw new IllegalStateException(
                     String.format("Didn't get HTML containing the proper values (using url %s, cookie %s)",
                             url, sessionId));
         }
-        System.out.println("Got params " + params);
+        debugPrint("Got params " + params);
+    }
+
+    private void debugPrint(String string) {
+        if (debug) {
+            System.out.println(string);
+        }
     }
 
     public void setUpdater(MessageUpdater messageUpdater) {

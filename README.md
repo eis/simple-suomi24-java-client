@@ -33,7 +33,7 @@ Nice to have
  - translate ui to finnish and allow user to switch between english and finnish ui
  - work properly with non-admin users
  - separation of Travis script into a separate file
- - integration tests
+ x integration tests
  - unit test coverage of 80% for business methods
  - mutation test report
  - encrypt + decrypt password
