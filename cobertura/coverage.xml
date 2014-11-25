@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.1989795918367347" branch-rate="0.2857142857142857" lines-covered="78" lines-valid="392" branches-covered="16" branches-valid="56" complexity="1.7571428571428571" version="2.0.3" timestamp="1416903878840">
+<coverage line-rate="0.1989795918367347" branch-rate="0.2857142857142857" lines-covered="78" lines-valid="392" branches-covered="16" branches-valid="56" complexity="1.7571428571428571" version="2.0.3" timestamp="1416908191965">
 	<sources>
 		<source>--source</source>
 		<source>/home/travis/build/eis/simple-suomi24-java-client/target/generated-sources/annotations</source>
@@ -62,57 +62,9 @@
 				</class>
 			</classes>
 		</package>
-		<package name="fi.eis.applications.chatapp.actions" line-rate="0.0" branch-rate="1.0" complexity="1.0">
+		<package name="fi.eis.applications.chatapp.chat.actions" line-rate="1.0" branch-rate="1.0" complexity="1.0">
 			<classes>
-				<class name="fi.eis.applications.chatapp.actions.EnterChatHandler" filename="fi/eis/applications/chatapp/actions/EnterChatHandler.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
-					<methods>
-					</methods>
-					<lines>
-					</lines>
-				</class>
-				<class name="fi.eis.applications.chatapp.actions.HTTPConnectionHandler" filename="fi/eis/applications/chatapp/actions/HTTPConnectionHandler.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
-					<methods>
-					</methods>
-					<lines>
-					</lines>
-				</class>
-				<class name="fi.eis.applications.chatapp.actions.LoginFailedException" filename="fi/eis/applications/chatapp/actions/LoginFailedException.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
-					<methods>
-						<method name="&lt;init&gt;" signature="(Ljava/lang/String;)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="16" hits="0" branch="false"/>
-								<line number="17" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="&lt;init&gt;" signature="(Ljava/lang/String;Ljava/lang/Throwable;)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="13" hits="0" branch="false"/>
-								<line number="14" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="&lt;init&gt;" signature="(Ljava/lang/Throwable;)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="10" hits="0" branch="false"/>
-								<line number="11" hits="0" branch="false"/>
-							</lines>
-						</method>
-					</methods>
-					<lines>
-						<line number="10" hits="0" branch="false"/>
-						<line number="11" hits="0" branch="false"/>
-						<line number="13" hits="0" branch="false"/>
-						<line number="14" hits="0" branch="false"/>
-						<line number="16" hits="0" branch="false"/>
-						<line number="17" hits="0" branch="false"/>
-					</lines>
-				</class>
-				<class name="fi.eis.applications.chatapp.actions.LoginHandler" filename="fi/eis/applications/chatapp/actions/LoginHandler.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
-					<methods>
-					</methods>
-					<lines>
-					</lines>
-				</class>
-				<class name="fi.eis.applications.chatapp.actions.RoomsProvider" filename="fi/eis/applications/chatapp/actions/RoomsProvider.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
+				<class name="fi.eis.applications.chatapp.chat.actions.HTTPConnectionHandler" filename="fi/eis/applications/chatapp/chat/actions/HTTPConnectionHandler.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
 					<methods>
 					</methods>
 					<lines>
@@ -120,9 +72,9 @@
 				</class>
 			</classes>
 		</package>
-		<package name="fi.eis.applications.chatapp.actions.impl" line-rate="0.4044943820224719" branch-rate="0.38095238095238093" complexity="2.586206896551724">
+		<package name="fi.eis.applications.chatapp.chat.actions.impl" line-rate="0.4594594594594595" branch-rate="0.7142857142857143" complexity="2.0588235294117645">
 			<classes>
-				<class name="fi.eis.applications.chatapp.actions.impl.AbstractHTTPConnection" filename="fi/eis/applications/chatapp/actions/impl/AbstractHTTPConnection.java" line-rate="0.6842105263157895" branch-rate="0.75" complexity="4.666666666666667">
+				<class name="fi.eis.applications.chatapp.chat.actions.impl.AbstractHTTPConnection" filename="fi/eis/applications/chatapp/chat/actions/impl/AbstractHTTPConnection.java" line-rate="0.6842105263157895" branch-rate="0.75" complexity="4.666666666666667">
 					<methods>
 						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
@@ -208,14 +160,14 @@
 						<line number="48" hits="1" branch="false"/>
 					</lines>
 				</class>
-				<class name="fi.eis.applications.chatapp.actions.impl.ChattingConnection" filename="fi/eis/applications/chatapp/actions/impl/ChattingConnection.java" line-rate="0.6190476190476191" branch-rate="0.5" complexity="1.2222222222222223">
+				<class name="fi.eis.applications.chatapp.chat.actions.impl.ChattingConnection" filename="fi/eis/applications/chatapp/chat/actions/impl/ChattingConnection.java" line-rate="0.6190476190476191" branch-rate="0.5" complexity="1.2222222222222223">
 					<methods>
 						<method name="&lt;clinit&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
 								<line number="54" hits="1" branch="false"/>
 							</lines>
 						</method>
-						<method name="&lt;init&gt;" signature="(ILjava/lang/String;Lfi/eis/applications/chatapp/actions/HTTPConnectionHandler;)V" line-rate="1.0" branch-rate="1.0">
+						<method name="&lt;init&gt;" signature="(ILjava/lang/String;Lfi/eis/applications/chatapp/chat/actions/HTTPConnectionHandler;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
 								<line number="49" hits="1" branch="false"/>
 								<line number="50" hits="1" branch="false"/>
@@ -245,12 +197,12 @@
 								<line number="78" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="getConnectionParameters" signature="(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lfi/eis/applications/chatapp/actions/impl/ChattingConnection$ConnectionParameters;" line-rate="0.0" branch-rate="1.0">
+						<method name="getConnectionParameters" signature="(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lfi/eis/applications/chatapp/chat/actions/impl/ChattingConnection$ConnectionParameters;" line-rate="0.0" branch-rate="1.0">
 							<lines>
 								<line number="46" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="setUpdater" signature="(Lfi/eis/applications/chatapp/actions/impl/MessageUpdater;)V" line-rate="0.0" branch-rate="1.0">
+						<method name="setUpdater" signature="(Lfi/eis/applications/chatapp/chat/actions/impl/MessageUpdater;)V" line-rate="0.0" branch-rate="1.0">
 							<lines>
 								<line number="83" hits="0" branch="false"/>
 							</lines>
@@ -284,13 +236,13 @@
 						<line number="83" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="fi.eis.applications.chatapp.actions.impl.ChattingConnection$1" filename="fi/eis/applications/chatapp/actions/impl/ChattingConnection.java" line-rate="1.0" branch-rate="1.0" complexity="1.2222222222222223">
+				<class name="fi.eis.applications.chatapp.chat.actions.impl.ChattingConnection$1" filename="fi/eis/applications/chatapp/chat/actions/impl/ChattingConnection.java" line-rate="1.0" branch-rate="1.0" complexity="1.2222222222222223">
 					<methods>
 					</methods>
 					<lines>
 					</lines>
 				</class>
-				<class name="fi.eis.applications.chatapp.actions.impl.ChattingConnection$ConnectionParameters" filename="fi/eis/applications/chatapp/actions/impl/ChattingConnection.java" line-rate="0.0" branch-rate="1.0" complexity="1.2222222222222223">
+				<class name="fi.eis.applications.chatapp.chat.actions.impl.ChattingConnection$ConnectionParameters" filename="fi/eis/applications/chatapp/chat/actions/impl/ChattingConnection.java" line-rate="0.0" branch-rate="1.0" complexity="1.2222222222222223">
 					<methods>
 						<method name="&lt;init&gt;" signature="(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" line-rate="0.0" branch-rate="1.0">
 							<lines>
@@ -301,7 +253,7 @@
 								<line number="33" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="&lt;init&gt;" signature="(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lfi/eis/applications/chatapp/actions/impl/ChattingConnection$1;)V" line-rate="0.0" branch-rate="1.0">
+						<method name="&lt;init&gt;" signature="(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lfi/eis/applications/chatapp/chat/actions/impl/ChattingConnection$1;)V" line-rate="0.0" branch-rate="1.0">
 							<lines>
 								<line number="15" hits="0" branch="false"/>
 							</lines>
@@ -340,133 +292,93 @@
 						<line number="41" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="fi.eis.applications.chatapp.actions.impl.DefaultEnterChatHandler" filename="fi/eis/applications/chatapp/actions/impl/DefaultEnterChatHandler.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
-					<methods>
-						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="13" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="enterChat" signature="(ILjava/lang/String;)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="17" hits="0" branch="false"/>
-								<line number="22" hits="0" branch="false"/>
-							</lines>
-						</method>
-					</methods>
-					<lines>
-						<line number="13" hits="0" branch="false"/>
-						<line number="17" hits="0" branch="false"/>
-						<line number="22" hits="0" branch="false"/>
-					</lines>
-				</class>
-				<class name="fi.eis.applications.chatapp.actions.impl.DefaultEnterChatHandler$1" filename="fi/eis/applications/chatapp/actions/impl/DefaultEnterChatHandler.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
-					<methods>
-						<method name="&lt;init&gt;" signature="(Lfi/eis/applications/chatapp/actions/impl/DefaultEnterChatHandler;ILjava/lang/String;)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="17" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="run" signature="()V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="19" hits="0" branch="false"/>
-								<line number="20" hits="0" branch="false"/>
-							</lines>
-						</method>
-					</methods>
-					<lines>
-						<line number="17" hits="0" branch="false"/>
-						<line number="19" hits="0" branch="false"/>
-						<line number="20" hits="0" branch="false"/>
-					</lines>
-				</class>
-				<class name="fi.eis.applications.chatapp.actions.impl.DefaultHTTPConnectionImpl" filename="fi/eis/applications/chatapp/actions/impl/DefaultHTTPConnectionImpl.java" line-rate="0.36363636363636365" branch-rate="0.75" complexity="2.25">
+				<class name="fi.eis.applications.chatapp.chat.actions.impl.DefaultHTTPConnectionImpl" filename="fi/eis/applications/chatapp/chat/actions/impl/DefaultHTTPConnectionImpl.java" line-rate="0.36363636363636365" branch-rate="0.75" complexity="2.25">
 					<methods>
 						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="14" hits="1" branch="false"/>
+								<line number="15" hits="1" branch="false"/>
 							</lines>
 						</method>
 						<method name="formatAsJavaNetAcceptableCookieString" signature="(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;" line-rate="1.0" branch-rate="0.75">
 							<lines>
-								<line number="48" hits="1" branch="false"/>
 								<line number="49" hits="1" branch="false"/>
-								<line number="51" hits="13" branch="true" condition-coverage="100% (2/2)">
+								<line number="50" hits="1" branch="false"/>
+								<line number="52" hits="13" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="52" hits="12" branch="true" condition-coverage="50% (1/2)">
+								<line number="53" hits="12" branch="true" condition-coverage="50% (1/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="50%"/>
 									</conditions>
 								</line>
-								<line number="53" hits="12" branch="false"/>
-								<line number="56" hits="1" branch="false"/>
+								<line number="54" hits="12" branch="false"/>
 								<line number="57" hits="1" branch="false"/>
+								<line number="58" hits="1" branch="false"/>
 							</lines>
 						</method>
 						<method name="getHTMLFromURL" signature="(Ljava/lang/String;)Ljava/lang/String;" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="20" hits="0" branch="false"/>
-								<line number="22" hits="0" branch="false"/>
+								<line number="21" hits="0" branch="false"/>
+								<line number="23" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="getHTMLFromURLWithCookie" signature="(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="41" hits="0" branch="false"/>
 								<line number="42" hits="0" branch="false"/>
 								<line number="43" hits="0" branch="false"/>
 								<line number="44" hits="0" branch="false"/>
+								<line number="45" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="getHttpURLConnection" signature="(Ljava/lang/String;)Ljava/net/HttpURLConnection;" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="27" hits="0" branch="false"/>
 								<line number="28" hits="0" branch="false"/>
 								<line number="29" hits="0" branch="false"/>
 								<line number="30" hits="0" branch="false"/>
-								<line number="32" hits="0" branch="false"/>
+								<line number="31" hits="0" branch="false"/>
 								<line number="33" hits="0" branch="false"/>
 								<line number="34" hits="0" branch="false"/>
 								<line number="35" hits="0" branch="false"/>
+								<line number="36" hits="0" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="14" hits="1" branch="false"/>
-						<line number="20" hits="0" branch="false"/>
-						<line number="22" hits="0" branch="false"/>
-						<line number="27" hits="0" branch="false"/>
+						<line number="15" hits="1" branch="false"/>
+						<line number="21" hits="0" branch="false"/>
+						<line number="23" hits="0" branch="false"/>
 						<line number="28" hits="0" branch="false"/>
 						<line number="29" hits="0" branch="false"/>
 						<line number="30" hits="0" branch="false"/>
-						<line number="32" hits="0" branch="false"/>
+						<line number="31" hits="0" branch="false"/>
 						<line number="33" hits="0" branch="false"/>
 						<line number="34" hits="0" branch="false"/>
 						<line number="35" hits="0" branch="false"/>
-						<line number="41" hits="0" branch="false"/>
+						<line number="36" hits="0" branch="false"/>
 						<line number="42" hits="0" branch="false"/>
 						<line number="43" hits="0" branch="false"/>
 						<line number="44" hits="0" branch="false"/>
-						<line number="48" hits="1" branch="false"/>
+						<line number="45" hits="0" branch="false"/>
 						<line number="49" hits="1" branch="false"/>
-						<line number="51" hits="13" branch="true" condition-coverage="100% (2/2)">
+						<line number="50" hits="1" branch="false"/>
+						<line number="52" hits="13" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="52" hits="12" branch="true" condition-coverage="50% (1/2)">
+						<line number="53" hits="12" branch="true" condition-coverage="50% (1/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="50%"/>
 							</conditions>
 						</line>
-						<line number="53" hits="12" branch="false"/>
-						<line number="56" hits="1" branch="false"/>
+						<line number="54" hits="12" branch="false"/>
 						<line number="57" hits="1" branch="false"/>
+						<line number="58" hits="1" branch="false"/>
 					</lines>
 				</class>
-				<class name="fi.eis.applications.chatapp.actions.impl.MessageUpdater" filename="fi/eis/applications/chatapp/actions/impl/MessageUpdater.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
+				<class name="fi.eis.applications.chatapp.chat.actions.impl.MessageUpdater" filename="fi/eis/applications/chatapp/chat/actions/impl/MessageUpdater.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
 					<methods>
 						<method name="&lt;init&gt;" signature="(Ljavax/swing/JPanel;)V" line-rate="0.0" branch-rate="1.0">
 							<lines>
@@ -480,7 +392,375 @@
 						<line number="9" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="fi.eis.applications.chatapp.actions.impl.Suomi24LoginHandler" filename="fi/eis/applications/chatapp/actions/impl/Suomi24LoginHandler.java" line-rate="0.0" branch-rate="0.0" complexity="4.2">
+			</classes>
+		</package>
+		<package name="fi.eis.applications.chatapp.chat.ui" line-rate="0.0" branch-rate="0.0" complexity="1.2307692307692308">
+			<classes>
+				<class name="fi.eis.applications.chatapp.chat.ui.ChatUI" filename="fi/eis/applications/chatapp/chat/ui/ChatUI.java" line-rate="0.0" branch-rate="0.0" complexity="1.2307692307692308">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="26" hits="0" branch="false"/>
+								<line number="28" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="&lt;init&gt;" signature="(Lfi/eis/applications/chatapp/chat/actions/impl/ChattingConnection;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="29" hits="0" branch="false"/>
+								<line number="30" hits="0" branch="false"/>
+								<line number="32" hits="0" branch="false"/>
+								<line number="33" hits="0" branch="false"/>
+								<line number="35" hits="0" branch="false"/>
+								<line number="37" hits="0" branch="false"/>
+								<line number="39" hits="0" branch="false"/>
+								<line number="41" hits="0" branch="false"/>
+								<line number="43" hits="0" branch="false"/>
+								<line number="47" hits="0" branch="false"/>
+								<line number="49" hits="0" branch="false"/>
+								<line number="51" hits="0" branch="false"/>
+								<line number="55" hits="0" branch="false"/>
+								<line number="56" hits="0" branch="false"/>
+								<line number="57" hits="0" branch="false"/>
+								<line number="58" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="access$000" signature="(Lfi/eis/applications/chatapp/chat/ui/ChatUI;)Ljavax/swing/JPanel;" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="17" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="addLabelTextRows" signature="([Ljavax/swing/JTextField;Ljava/awt/Container;)V" line-rate="0.0" branch-rate="0.0">
+							<lines>
+								<line number="191" hits="0" branch="false"/>
+								<line number="192" hits="0" branch="false"/>
+								<line number="193" hits="0" branch="false"/>
+								<line number="195" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="196" hits="0" branch="false"/>
+								<line number="197" hits="0" branch="false"/>
+								<line number="198" hits="0" branch="false"/>
+								<line number="199" hits="0" branch="false"/>
+								<line number="201" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="createAndShowGUI" signature="(Lfi/eis/applications/chatapp/chat/actions/impl/ChattingConnection;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="83" hits="0" branch="false"/>
+								<line number="86" hits="0" branch="false"/>
+								<line number="88" hits="0" branch="false"/>
+								<line number="90" hits="0" branch="false"/>
+								<line number="92" hits="0" branch="false"/>
+								<line number="95" hits="0" branch="false"/>
+								<line number="96" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="createEditorPane" signature="()Ljavax/swing/JEditorPane;" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="204" hits="0" branch="false"/>
+								<line number="205" hits="0" branch="false"/>
+								<line number="220" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="createImageIcon" signature="(Ljava/lang/String;Ljava/lang/String;)Ljavax/swing/ImageIcon;" line-rate="0.0" branch-rate="0.0">
+							<lines>
+								<line number="65" hits="0" branch="false"/>
+								<line number="66" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="67" hits="0" branch="false"/>
+								<line number="69" hits="0" branch="false"/>
+								<line number="70" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="createInputPanel" signature="()Ljavax/swing/JPanel;" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="131" hits="0" branch="false"/>
+								<line number="133" hits="0" branch="false"/>
+								<line number="135" hits="0" branch="false"/>
+								<line number="137" hits="0" branch="false"/>
+								<line number="138" hits="0" branch="false"/>
+								<line number="140" hits="0" branch="false"/>
+								<line number="141" hits="0" branch="false"/>
+								<line number="142" hits="0" branch="false"/>
+								<line number="144" hits="0" branch="false"/>
+								<line number="148" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="createMenu" signature="()Ljavax/swing/JMenuBar;" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="104" hits="0" branch="false"/>
+								<line number="107" hits="0" branch="false"/>
+								<line number="108" hits="0" branch="false"/>
+								<line number="110" hits="0" branch="false"/>
+								<line number="112" hits="0" branch="false"/>
+								<line number="113" hits="0" branch="false"/>
+								<line number="120" hits="0" branch="false"/>
+								<line number="121" hits="0" branch="false"/>
+								<line number="123" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="createMessagesPanel" signature="()Ljavax/swing/JPanel;" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="171" hits="0" branch="false"/>
+								<line number="172" hits="0" branch="false"/>
+								<line number="173" hits="0" branch="false"/>
+								<line number="175" hits="0" branch="false"/>
+								<line number="178" hits="0" branch="false"/>
+								<line number="181" hits="0" branch="false"/>
+								<line number="182" hits="0" branch="false"/>
+								<line number="183" hits="0" branch="false"/>
+								<line number="186" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="createUserListPanel" signature="()Ljavax/swing/JPanel;" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="152" hits="0" branch="false"/>
+								<line number="153" hits="0" branch="false"/>
+								<line number="154" hits="0" branch="false"/>
+								<line number="156" hits="0" branch="false"/>
+								<line number="159" hits="0" branch="false"/>
+								<line number="162" hits="0" branch="false"/>
+								<line number="163" hits="0" branch="false"/>
+								<line number="164" hits="0" branch="false"/>
+								<line number="167" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="focusOnInput" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="99" hits="0" branch="false"/>
+								<line number="100" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="getInputField" signature="()Ljavax/swing/JTextField;" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="127" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="17" hits="0" branch="false"/>
+						<line number="26" hits="0" branch="false"/>
+						<line number="28" hits="0" branch="false"/>
+						<line number="29" hits="0" branch="false"/>
+						<line number="30" hits="0" branch="false"/>
+						<line number="32" hits="0" branch="false"/>
+						<line number="33" hits="0" branch="false"/>
+						<line number="35" hits="0" branch="false"/>
+						<line number="37" hits="0" branch="false"/>
+						<line number="39" hits="0" branch="false"/>
+						<line number="41" hits="0" branch="false"/>
+						<line number="43" hits="0" branch="false"/>
+						<line number="47" hits="0" branch="false"/>
+						<line number="49" hits="0" branch="false"/>
+						<line number="51" hits="0" branch="false"/>
+						<line number="55" hits="0" branch="false"/>
+						<line number="56" hits="0" branch="false"/>
+						<line number="57" hits="0" branch="false"/>
+						<line number="58" hits="0" branch="false"/>
+						<line number="65" hits="0" branch="false"/>
+						<line number="66" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="67" hits="0" branch="false"/>
+						<line number="69" hits="0" branch="false"/>
+						<line number="70" hits="0" branch="false"/>
+						<line number="83" hits="0" branch="false"/>
+						<line number="86" hits="0" branch="false"/>
+						<line number="88" hits="0" branch="false"/>
+						<line number="90" hits="0" branch="false"/>
+						<line number="92" hits="0" branch="false"/>
+						<line number="95" hits="0" branch="false"/>
+						<line number="96" hits="0" branch="false"/>
+						<line number="99" hits="0" branch="false"/>
+						<line number="100" hits="0" branch="false"/>
+						<line number="104" hits="0" branch="false"/>
+						<line number="107" hits="0" branch="false"/>
+						<line number="108" hits="0" branch="false"/>
+						<line number="110" hits="0" branch="false"/>
+						<line number="112" hits="0" branch="false"/>
+						<line number="113" hits="0" branch="false"/>
+						<line number="120" hits="0" branch="false"/>
+						<line number="121" hits="0" branch="false"/>
+						<line number="123" hits="0" branch="false"/>
+						<line number="127" hits="0" branch="false"/>
+						<line number="131" hits="0" branch="false"/>
+						<line number="133" hits="0" branch="false"/>
+						<line number="135" hits="0" branch="false"/>
+						<line number="137" hits="0" branch="false"/>
+						<line number="138" hits="0" branch="false"/>
+						<line number="140" hits="0" branch="false"/>
+						<line number="141" hits="0" branch="false"/>
+						<line number="142" hits="0" branch="false"/>
+						<line number="144" hits="0" branch="false"/>
+						<line number="148" hits="0" branch="false"/>
+						<line number="152" hits="0" branch="false"/>
+						<line number="153" hits="0" branch="false"/>
+						<line number="154" hits="0" branch="false"/>
+						<line number="156" hits="0" branch="false"/>
+						<line number="159" hits="0" branch="false"/>
+						<line number="162" hits="0" branch="false"/>
+						<line number="163" hits="0" branch="false"/>
+						<line number="164" hits="0" branch="false"/>
+						<line number="167" hits="0" branch="false"/>
+						<line number="171" hits="0" branch="false"/>
+						<line number="172" hits="0" branch="false"/>
+						<line number="173" hits="0" branch="false"/>
+						<line number="175" hits="0" branch="false"/>
+						<line number="178" hits="0" branch="false"/>
+						<line number="181" hits="0" branch="false"/>
+						<line number="182" hits="0" branch="false"/>
+						<line number="183" hits="0" branch="false"/>
+						<line number="186" hits="0" branch="false"/>
+						<line number="191" hits="0" branch="false"/>
+						<line number="192" hits="0" branch="false"/>
+						<line number="193" hits="0" branch="false"/>
+						<line number="195" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="196" hits="0" branch="false"/>
+						<line number="197" hits="0" branch="false"/>
+						<line number="198" hits="0" branch="false"/>
+						<line number="199" hits="0" branch="false"/>
+						<line number="201" hits="0" branch="false"/>
+						<line number="204" hits="0" branch="false"/>
+						<line number="205" hits="0" branch="false"/>
+						<line number="220" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="fi.eis.applications.chatapp.chat.ui.ChatUI$1" filename="fi/eis/applications/chatapp/chat/ui/ChatUI.java" line-rate="0.0" branch-rate="0.0" complexity="1.2307692307692308">
+					<methods>
+						<method name="&lt;init&gt;" signature="(Lfi/eis/applications/chatapp/chat/ui/ChatUI;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="113" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="itemStateChanged" signature="(Ljava/awt/event/ItemEvent;)V" line-rate="0.0" branch-rate="0.0">
+							<lines>
+								<line number="116" hits="0" branch="true" condition-coverage="0% (0/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="0%"/>
+									</conditions>
+								</line>
+								<line number="117" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="113" hits="0" branch="false"/>
+						<line number="116" hits="0" branch="true" condition-coverage="0% (0/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="0%"/>
+							</conditions>
+						</line>
+						<line number="117" hits="0" branch="false"/>
+					</lines>
+				</class>
+			</classes>
+		</package>
+		<package name="fi.eis.applications.chatapp.login.actions" line-rate="0.0" branch-rate="1.0" complexity="1.0">
+			<classes>
+				<class name="fi.eis.applications.chatapp.login.actions.EnterChatHandler" filename="fi/eis/applications/chatapp/login/actions/EnterChatHandler.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+					</methods>
+					<lines>
+					</lines>
+				</class>
+				<class name="fi.eis.applications.chatapp.login.actions.LoginFailedException" filename="fi/eis/applications/chatapp/login/actions/LoginFailedException.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="(Ljava/lang/String;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="16" hits="0" branch="false"/>
+								<line number="17" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="&lt;init&gt;" signature="(Ljava/lang/String;Ljava/lang/Throwable;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="13" hits="0" branch="false"/>
+								<line number="14" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="&lt;init&gt;" signature="(Ljava/lang/Throwable;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="10" hits="0" branch="false"/>
+								<line number="11" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="10" hits="0" branch="false"/>
+						<line number="11" hits="0" branch="false"/>
+						<line number="13" hits="0" branch="false"/>
+						<line number="14" hits="0" branch="false"/>
+						<line number="16" hits="0" branch="false"/>
+						<line number="17" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="fi.eis.applications.chatapp.login.actions.LoginHandler" filename="fi/eis/applications/chatapp/login/actions/LoginHandler.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+					</methods>
+					<lines>
+					</lines>
+				</class>
+				<class name="fi.eis.applications.chatapp.login.actions.RoomsProvider" filename="fi/eis/applications/chatapp/login/actions/RoomsProvider.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+					</methods>
+					<lines>
+					</lines>
+				</class>
+			</classes>
+		</package>
+		<package name="fi.eis.applications.chatapp.login.actions.impl" line-rate="0.36538461538461536" branch-rate="0.21428571428571427" complexity="3.3333333333333335">
+			<classes>
+				<class name="fi.eis.applications.chatapp.login.actions.impl.DefaultEnterChatHandler" filename="fi/eis/applications/chatapp/login/actions/impl/DefaultEnterChatHandler.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="15" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="enterChat" signature="(ILjava/lang/String;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="19" hits="0" branch="false"/>
+								<line number="24" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="15" hits="0" branch="false"/>
+						<line number="19" hits="0" branch="false"/>
+						<line number="24" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="fi.eis.applications.chatapp.login.actions.impl.DefaultEnterChatHandler$1" filename="fi/eis/applications/chatapp/login/actions/impl/DefaultEnterChatHandler.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="(Lfi/eis/applications/chatapp/login/actions/impl/DefaultEnterChatHandler;ILjava/lang/String;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="19" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="run" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="21" hits="0" branch="false"/>
+								<line number="22" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="19" hits="0" branch="false"/>
+						<line number="21" hits="0" branch="false"/>
+						<line number="22" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="fi.eis.applications.chatapp.login.actions.impl.Suomi24LoginHandler" filename="fi/eis/applications/chatapp/login/actions/impl/Suomi24LoginHandler.java" line-rate="0.0" branch-rate="0.0" complexity="4.2">
 					<methods>
 						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
 							<lines>
@@ -696,153 +976,153 @@
 						<line number="115" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="fi.eis.applications.chatapp.actions.impl.XMLBasedRoomsProvider" filename="fi/eis/applications/chatapp/actions/impl/XMLBasedRoomsProvider.java" line-rate="0.9047619047619048" branch-rate="0.75" complexity="3.4">
+				<class name="fi.eis.applications.chatapp.login.actions.impl.XMLBasedRoomsProvider" filename="fi/eis/applications/chatapp/login/actions/impl/XMLBasedRoomsProvider.java" line-rate="0.9047619047619048" branch-rate="0.75" complexity="3.4">
 					<methods>
 						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
 							<lines>
+								<line number="36" hits="0" branch="false"/>
 								<line number="37" hits="0" branch="false"/>
 								<line number="38" hits="0" branch="false"/>
-								<line number="39" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="&lt;init&gt;" signature="(Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
+								<line number="39" hits="7" branch="false"/>
 								<line number="40" hits="7" branch="false"/>
 								<line number="41" hits="7" branch="false"/>
-								<line number="42" hits="7" branch="false"/>
 							</lines>
 						</method>
 						<method name="getRooms" signature="()Ljava/util/List;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="46" hits="7" branch="false"/>
+								<line number="45" hits="7" branch="false"/>
 							</lines>
 						</method>
 						<method name="printDebug" signature="(Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="126" hits="2" branch="false"/>
+								<line number="125" hits="2" branch="false"/>
 							</lines>
 						</method>
 						<method name="readRoomsFromXML" signature="()Ljava/util/List;" line-rate="0.9705882352941176" branch-rate="0.75">
 							<lines>
-								<line number="50" hits="7" branch="false"/>
-								<line number="53" hits="7" branch="false"/>
-								<line number="55" hits="7" branch="true" condition-coverage="100% (2/2)">
+								<line number="49" hits="7" branch="false"/>
+								<line number="52" hits="7" branch="false"/>
+								<line number="54" hits="7" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="56" hits="1" branch="false"/>
-								<line number="60" hits="6" branch="true" condition-coverage="50% (1/2)">
+								<line number="55" hits="1" branch="false"/>
+								<line number="59" hits="6" branch="true" condition-coverage="50% (1/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="50%"/>
 									</conditions>
 								</line>
-								<line number="61" hits="0" branch="false"/>
-								<line number="65" hits="6" branch="false"/>
-								<line number="66" hits="4" branch="false"/>
-								<line number="67" hits="3" branch="false"/>
+								<line number="60" hits="0" branch="false"/>
+								<line number="64" hits="6" branch="false"/>
+								<line number="65" hits="4" branch="false"/>
+								<line number="66" hits="3" branch="false"/>
+								<line number="69" hits="1" branch="false"/>
 								<line number="70" hits="1" branch="false"/>
-								<line number="71" hits="1" branch="false"/>
+								<line number="74" hits="1" branch="false"/>
 								<line number="75" hits="1" branch="false"/>
 								<line number="76" hits="1" branch="false"/>
-								<line number="77" hits="1" branch="false"/>
-								<line number="79" hits="80" branch="true" condition-coverage="100% (2/2)">
+								<line number="78" hits="80" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="82" hits="79" branch="false"/>
-								<line number="83" hits="79" branch="true" condition-coverage="50% (1/2)">
+								<line number="81" hits="79" branch="false"/>
+								<line number="82" hits="79" branch="true" condition-coverage="50% (1/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="50%"/>
 									</conditions>
 								</line>
-								<line number="86" hits="79" branch="false"/>
+								<line number="85" hits="79" branch="false"/>
+								<line number="88" hits="79" branch="false"/>
 								<line number="89" hits="79" branch="false"/>
-								<line number="90" hits="79" branch="false"/>
+								<line number="91" hits="79" branch="false"/>
 								<line number="92" hits="79" branch="false"/>
-								<line number="93" hits="79" branch="false"/>
+								<line number="95" hits="79" branch="false"/>
 								<line number="96" hits="79" branch="false"/>
-								<line number="97" hits="79" branch="false"/>
+								<line number="98" hits="79" branch="false"/>
 								<line number="99" hits="79" branch="false"/>
-								<line number="100" hits="79" branch="false"/>
-								<line number="102" hits="79" branch="false"/>
-								<line number="109" hits="1" branch="false"/>
+								<line number="101" hits="79" branch="false"/>
+								<line number="108" hits="1" branch="false"/>
+								<line number="111" hits="1" branch="false"/>
 								<line number="112" hits="1" branch="false"/>
-								<line number="113" hits="1" branch="false"/>
+								<line number="114" hits="1" branch="false"/>
 								<line number="115" hits="1" branch="false"/>
-								<line number="116" hits="1" branch="false"/>
+								<line number="116" hits="4" branch="false"/>
 								<line number="117" hits="4" branch="false"/>
-								<line number="118" hits="4" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
+						<line number="36" hits="0" branch="false"/>
 						<line number="37" hits="0" branch="false"/>
 						<line number="38" hits="0" branch="false"/>
-						<line number="39" hits="0" branch="false"/>
+						<line number="39" hits="7" branch="false"/>
 						<line number="40" hits="7" branch="false"/>
 						<line number="41" hits="7" branch="false"/>
-						<line number="42" hits="7" branch="false"/>
-						<line number="46" hits="7" branch="false"/>
-						<line number="50" hits="7" branch="false"/>
-						<line number="53" hits="7" branch="false"/>
-						<line number="55" hits="7" branch="true" condition-coverage="100% (2/2)">
+						<line number="45" hits="7" branch="false"/>
+						<line number="49" hits="7" branch="false"/>
+						<line number="52" hits="7" branch="false"/>
+						<line number="54" hits="7" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="56" hits="1" branch="false"/>
-						<line number="60" hits="6" branch="true" condition-coverage="50% (1/2)">
+						<line number="55" hits="1" branch="false"/>
+						<line number="59" hits="6" branch="true" condition-coverage="50% (1/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="50%"/>
 							</conditions>
 						</line>
-						<line number="61" hits="0" branch="false"/>
-						<line number="65" hits="6" branch="false"/>
-						<line number="66" hits="4" branch="false"/>
-						<line number="67" hits="3" branch="false"/>
+						<line number="60" hits="0" branch="false"/>
+						<line number="64" hits="6" branch="false"/>
+						<line number="65" hits="4" branch="false"/>
+						<line number="66" hits="3" branch="false"/>
+						<line number="69" hits="1" branch="false"/>
 						<line number="70" hits="1" branch="false"/>
-						<line number="71" hits="1" branch="false"/>
+						<line number="74" hits="1" branch="false"/>
 						<line number="75" hits="1" branch="false"/>
 						<line number="76" hits="1" branch="false"/>
-						<line number="77" hits="1" branch="false"/>
-						<line number="79" hits="80" branch="true" condition-coverage="100% (2/2)">
+						<line number="78" hits="80" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="82" hits="79" branch="false"/>
-						<line number="83" hits="79" branch="true" condition-coverage="50% (1/2)">
+						<line number="81" hits="79" branch="false"/>
+						<line number="82" hits="79" branch="true" condition-coverage="50% (1/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="50%"/>
 							</conditions>
 						</line>
-						<line number="86" hits="79" branch="false"/>
+						<line number="85" hits="79" branch="false"/>
+						<line number="88" hits="79" branch="false"/>
 						<line number="89" hits="79" branch="false"/>
-						<line number="90" hits="79" branch="false"/>
+						<line number="91" hits="79" branch="false"/>
 						<line number="92" hits="79" branch="false"/>
-						<line number="93" hits="79" branch="false"/>
+						<line number="95" hits="79" branch="false"/>
 						<line number="96" hits="79" branch="false"/>
-						<line number="97" hits="79" branch="false"/>
+						<line number="98" hits="79" branch="false"/>
 						<line number="99" hits="79" branch="false"/>
-						<line number="100" hits="79" branch="false"/>
-						<line number="102" hits="79" branch="false"/>
-						<line number="109" hits="1" branch="false"/>
+						<line number="101" hits="79" branch="false"/>
+						<line number="108" hits="1" branch="false"/>
+						<line number="111" hits="1" branch="false"/>
 						<line number="112" hits="1" branch="false"/>
-						<line number="113" hits="1" branch="false"/>
+						<line number="114" hits="1" branch="false"/>
 						<line number="115" hits="1" branch="false"/>
-						<line number="116" hits="1" branch="false"/>
+						<line number="116" hits="4" branch="false"/>
 						<line number="117" hits="4" branch="false"/>
-						<line number="118" hits="4" branch="false"/>
-						<line number="126" hits="2" branch="false"/>
+						<line number="125" hits="2" branch="false"/>
 					</lines>
 				</class>
 			</classes>
 		</package>
-		<package name="fi.eis.applications.chatapp.types" line-rate="0.6" branch-rate="1.0" complexity="1.0">
+		<package name="fi.eis.applications.chatapp.login.types" line-rate="0.6" branch-rate="1.0" complexity="1.0">
 			<classes>
-				<class name="fi.eis.applications.chatapp.types.ChatRoom" filename="fi/eis/applications/chatapp/types/ChatRoom.java" line-rate="0.625" branch-rate="1.0" complexity="1.0">
+				<class name="fi.eis.applications.chatapp.login.types.ChatRoom" filename="fi/eis/applications/chatapp/login/types/ChatRoom.java" line-rate="0.625" branch-rate="1.0" complexity="1.0">
 					<methods>
 						<method name="&lt;clinit&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
@@ -884,13 +1164,13 @@
 						<line number="37" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="fi.eis.applications.chatapp.types.ChatRoom$1" filename="fi/eis/applications/chatapp/types/ChatRoom.java" line-rate="0.5" branch-rate="1.0" complexity="1.0">
+				<class name="fi.eis.applications.chatapp.login.types.ChatRoom$1" filename="fi/eis/applications/chatapp/login/types/ChatRoom.java" line-rate="0.5" branch-rate="1.0" complexity="1.0">
 					<methods>
 						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
 							</lines>
 						</method>
-						<method name="compare" signature="(Lfi/eis/applications/chatapp/types/ChatRoom;Lfi/eis/applications/chatapp/types/ChatRoom;)I" line-rate="0.0" branch-rate="1.0">
+						<method name="compare" signature="(Lfi/eis/applications/chatapp/login/types/ChatRoom;Lfi/eis/applications/chatapp/login/types/ChatRoom;)I" line-rate="0.0" branch-rate="1.0">
 							<lines>
 								<line number="17" hits="0" branch="false"/>
 							</lines>
@@ -908,277 +1188,9 @@
 				</class>
 			</classes>
 		</package>
-		<package name="fi.eis.applications.chatapp.ui" line-rate="0.0" branch-rate="0.0" complexity="1.28">
+		<package name="fi.eis.applications.chatapp.login.ui" line-rate="0.0" branch-rate="0.0" complexity="1.3333333333333333">
 			<classes>
-				<class name="fi.eis.applications.chatapp.ui.ChatUI" filename="fi/eis/applications/chatapp/ui/ChatUI.java" line-rate="0.0" branch-rate="0.0" complexity="1.2307692307692308">
-					<methods>
-						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="26" hits="0" branch="false"/>
-								<line number="28" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="&lt;init&gt;" signature="(Lfi/eis/applications/chatapp/actions/impl/ChattingConnection;)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="29" hits="0" branch="false"/>
-								<line number="30" hits="0" branch="false"/>
-								<line number="32" hits="0" branch="false"/>
-								<line number="33" hits="0" branch="false"/>
-								<line number="35" hits="0" branch="false"/>
-								<line number="37" hits="0" branch="false"/>
-								<line number="39" hits="0" branch="false"/>
-								<line number="41" hits="0" branch="false"/>
-								<line number="43" hits="0" branch="false"/>
-								<line number="47" hits="0" branch="false"/>
-								<line number="49" hits="0" branch="false"/>
-								<line number="51" hits="0" branch="false"/>
-								<line number="55" hits="0" branch="false"/>
-								<line number="56" hits="0" branch="false"/>
-								<line number="57" hits="0" branch="false"/>
-								<line number="58" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="access$000" signature="(Lfi/eis/applications/chatapp/ui/ChatUI;)Ljavax/swing/JPanel;" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="17" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="addLabelTextRows" signature="([Ljavax/swing/JTextField;Ljava/awt/Container;)V" line-rate="0.0" branch-rate="0.0">
-							<lines>
-								<line number="191" hits="0" branch="false"/>
-								<line number="192" hits="0" branch="false"/>
-								<line number="193" hits="0" branch="false"/>
-								<line number="195" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="196" hits="0" branch="false"/>
-								<line number="197" hits="0" branch="false"/>
-								<line number="198" hits="0" branch="false"/>
-								<line number="199" hits="0" branch="false"/>
-								<line number="201" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="createAndShowGUI" signature="(Lfi/eis/applications/chatapp/actions/impl/ChattingConnection;)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="83" hits="0" branch="false"/>
-								<line number="86" hits="0" branch="false"/>
-								<line number="88" hits="0" branch="false"/>
-								<line number="90" hits="0" branch="false"/>
-								<line number="92" hits="0" branch="false"/>
-								<line number="95" hits="0" branch="false"/>
-								<line number="96" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="createEditorPane" signature="()Ljavax/swing/JEditorPane;" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="204" hits="0" branch="false"/>
-								<line number="205" hits="0" branch="false"/>
-								<line number="220" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="createImageIcon" signature="(Ljava/lang/String;Ljava/lang/String;)Ljavax/swing/ImageIcon;" line-rate="0.0" branch-rate="0.0">
-							<lines>
-								<line number="65" hits="0" branch="false"/>
-								<line number="66" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="67" hits="0" branch="false"/>
-								<line number="69" hits="0" branch="false"/>
-								<line number="70" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="createInputPanel" signature="()Ljavax/swing/JPanel;" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="131" hits="0" branch="false"/>
-								<line number="133" hits="0" branch="false"/>
-								<line number="135" hits="0" branch="false"/>
-								<line number="137" hits="0" branch="false"/>
-								<line number="138" hits="0" branch="false"/>
-								<line number="140" hits="0" branch="false"/>
-								<line number="141" hits="0" branch="false"/>
-								<line number="142" hits="0" branch="false"/>
-								<line number="144" hits="0" branch="false"/>
-								<line number="148" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="createMenu" signature="()Ljavax/swing/JMenuBar;" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="104" hits="0" branch="false"/>
-								<line number="107" hits="0" branch="false"/>
-								<line number="108" hits="0" branch="false"/>
-								<line number="110" hits="0" branch="false"/>
-								<line number="112" hits="0" branch="false"/>
-								<line number="113" hits="0" branch="false"/>
-								<line number="120" hits="0" branch="false"/>
-								<line number="121" hits="0" branch="false"/>
-								<line number="123" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="createMessagesPanel" signature="()Ljavax/swing/JPanel;" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="171" hits="0" branch="false"/>
-								<line number="172" hits="0" branch="false"/>
-								<line number="173" hits="0" branch="false"/>
-								<line number="175" hits="0" branch="false"/>
-								<line number="178" hits="0" branch="false"/>
-								<line number="181" hits="0" branch="false"/>
-								<line number="182" hits="0" branch="false"/>
-								<line number="183" hits="0" branch="false"/>
-								<line number="186" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="createUserListPanel" signature="()Ljavax/swing/JPanel;" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="152" hits="0" branch="false"/>
-								<line number="153" hits="0" branch="false"/>
-								<line number="154" hits="0" branch="false"/>
-								<line number="156" hits="0" branch="false"/>
-								<line number="159" hits="0" branch="false"/>
-								<line number="162" hits="0" branch="false"/>
-								<line number="163" hits="0" branch="false"/>
-								<line number="164" hits="0" branch="false"/>
-								<line number="167" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="focusOnInput" signature="()V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="99" hits="0" branch="false"/>
-								<line number="100" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="getInputField" signature="()Ljavax/swing/JTextField;" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="127" hits="0" branch="false"/>
-							</lines>
-						</method>
-					</methods>
-					<lines>
-						<line number="17" hits="0" branch="false"/>
-						<line number="26" hits="0" branch="false"/>
-						<line number="28" hits="0" branch="false"/>
-						<line number="29" hits="0" branch="false"/>
-						<line number="30" hits="0" branch="false"/>
-						<line number="32" hits="0" branch="false"/>
-						<line number="33" hits="0" branch="false"/>
-						<line number="35" hits="0" branch="false"/>
-						<line number="37" hits="0" branch="false"/>
-						<line number="39" hits="0" branch="false"/>
-						<line number="41" hits="0" branch="false"/>
-						<line number="43" hits="0" branch="false"/>
-						<line number="47" hits="0" branch="false"/>
-						<line number="49" hits="0" branch="false"/>
-						<line number="51" hits="0" branch="false"/>
-						<line number="55" hits="0" branch="false"/>
-						<line number="56" hits="0" branch="false"/>
-						<line number="57" hits="0" branch="false"/>
-						<line number="58" hits="0" branch="false"/>
-						<line number="65" hits="0" branch="false"/>
-						<line number="66" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="67" hits="0" branch="false"/>
-						<line number="69" hits="0" branch="false"/>
-						<line number="70" hits="0" branch="false"/>
-						<line number="83" hits="0" branch="false"/>
-						<line number="86" hits="0" branch="false"/>
-						<line number="88" hits="0" branch="false"/>
-						<line number="90" hits="0" branch="false"/>
-						<line number="92" hits="0" branch="false"/>
-						<line number="95" hits="0" branch="false"/>
-						<line number="96" hits="0" branch="false"/>
-						<line number="99" hits="0" branch="false"/>
-						<line number="100" hits="0" branch="false"/>
-						<line number="104" hits="0" branch="false"/>
-						<line number="107" hits="0" branch="false"/>
-						<line number="108" hits="0" branch="false"/>
-						<line number="110" hits="0" branch="false"/>
-						<line number="112" hits="0" branch="false"/>
-						<line number="113" hits="0" branch="false"/>
-						<line number="120" hits="0" branch="false"/>
-						<line number="121" hits="0" branch="false"/>
-						<line number="123" hits="0" branch="false"/>
-						<line number="127" hits="0" branch="false"/>
-						<line number="131" hits="0" branch="false"/>
-						<line number="133" hits="0" branch="false"/>
-						<line number="135" hits="0" branch="false"/>
-						<line number="137" hits="0" branch="false"/>
-						<line number="138" hits="0" branch="false"/>
-						<line number="140" hits="0" branch="false"/>
-						<line number="141" hits="0" branch="false"/>
-						<line number="142" hits="0" branch="false"/>
-						<line number="144" hits="0" branch="false"/>
-						<line number="148" hits="0" branch="false"/>
-						<line number="152" hits="0" branch="false"/>
-						<line number="153" hits="0" branch="false"/>
-						<line number="154" hits="0" branch="false"/>
-						<line number="156" hits="0" branch="false"/>
-						<line number="159" hits="0" branch="false"/>
-						<line number="162" hits="0" branch="false"/>
-						<line number="163" hits="0" branch="false"/>
-						<line number="164" hits="0" branch="false"/>
-						<line number="167" hits="0" branch="false"/>
-						<line number="171" hits="0" branch="false"/>
-						<line number="172" hits="0" branch="false"/>
-						<line number="173" hits="0" branch="false"/>
-						<line number="175" hits="0" branch="false"/>
-						<line number="178" hits="0" branch="false"/>
-						<line number="181" hits="0" branch="false"/>
-						<line number="182" hits="0" branch="false"/>
-						<line number="183" hits="0" branch="false"/>
-						<line number="186" hits="0" branch="false"/>
-						<line number="191" hits="0" branch="false"/>
-						<line number="192" hits="0" branch="false"/>
-						<line number="193" hits="0" branch="false"/>
-						<line number="195" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="196" hits="0" branch="false"/>
-						<line number="197" hits="0" branch="false"/>
-						<line number="198" hits="0" branch="false"/>
-						<line number="199" hits="0" branch="false"/>
-						<line number="201" hits="0" branch="false"/>
-						<line number="204" hits="0" branch="false"/>
-						<line number="205" hits="0" branch="false"/>
-						<line number="220" hits="0" branch="false"/>
-					</lines>
-				</class>
-				<class name="fi.eis.applications.chatapp.ui.ChatUI$1" filename="fi/eis/applications/chatapp/ui/ChatUI.java" line-rate="0.0" branch-rate="0.0" complexity="1.2307692307692308">
-					<methods>
-						<method name="&lt;init&gt;" signature="(Lfi/eis/applications/chatapp/ui/ChatUI;)V" line-rate="0.0" branch-rate="1.0">
-							<lines>
-								<line number="113" hits="0" branch="false"/>
-							</lines>
-						</method>
-						<method name="itemStateChanged" signature="(Ljava/awt/event/ItemEvent;)V" line-rate="0.0" branch-rate="0.0">
-							<lines>
-								<line number="116" hits="0" branch="true" condition-coverage="0% (0/2)">
-									<conditions>
-										<condition number="0" type="jump" coverage="0%"/>
-									</conditions>
-								</line>
-								<line number="117" hits="0" branch="false"/>
-							</lines>
-						</method>
-					</methods>
-					<lines>
-						<line number="113" hits="0" branch="false"/>
-						<line number="116" hits="0" branch="true" condition-coverage="0% (0/2)">
-							<conditions>
-								<condition number="0" type="jump" coverage="0%"/>
-							</conditions>
-						</line>
-						<line number="117" hits="0" branch="false"/>
-					</lines>
-				</class>
-				<class name="fi.eis.applications.chatapp.ui.LoginUI" filename="fi/eis/applications/chatapp/ui/LoginUI.java" line-rate="0.0" branch-rate="0.0" complexity="1.3333333333333333">
+				<class name="fi.eis.applications.chatapp.login.ui.LoginUI" filename="fi/eis/applications/chatapp/login/ui/LoginUI.java" line-rate="0.0" branch-rate="0.0" complexity="1.3333333333333333">
 					<methods>
 						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
 							<lines>
@@ -1186,7 +1198,7 @@
 								<line number="52" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="&lt;init&gt;" signature="(Lfi/eis/applications/chatapp/actions/LoginHandler;Lfi/eis/applications/chatapp/actions/EnterChatHandler;Lfi/eis/applications/chatapp/actions/RoomsProvider;)V" line-rate="0.0" branch-rate="1.0">
+						<method name="&lt;init&gt;" signature="(Lfi/eis/applications/chatapp/login/actions/LoginHandler;Lfi/eis/applications/chatapp/login/actions/EnterChatHandler;Lfi/eis/applications/chatapp/login/actions/RoomsProvider;)V" line-rate="0.0" branch-rate="1.0">
 							<lines>
 								<line number="55" hits="0" branch="false"/>
 								<line number="56" hits="0" branch="false"/>
@@ -1197,28 +1209,28 @@
 								<line number="61" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="access$000" signature="(Lfi/eis/applications/chatapp/ui/LoginUI;)Ljava/lang/String;" line-rate="1.0" branch-rate="1.0">
+						<method name="access$000" signature="(Lfi/eis/applications/chatapp/login/ui/LoginUI;)Ljava/lang/String;" line-rate="1.0" branch-rate="1.0">
 							<lines>
 							</lines>
 						</method>
-						<method name="access$002" signature="(Lfi/eis/applications/chatapp/ui/LoginUI;Ljava/lang/String;)Ljava/lang/String;" line-rate="1.0" branch-rate="1.0">
+						<method name="access$002" signature="(Lfi/eis/applications/chatapp/login/ui/LoginUI;Ljava/lang/String;)Ljava/lang/String;" line-rate="1.0" branch-rate="1.0">
 							<lines>
 							</lines>
 						</method>
-						<method name="access$100" signature="(Lfi/eis/applications/chatapp/ui/LoginUI;)Lfi/eis/applications/chatapp/actions/EnterChatHandler;" line-rate="1.0" branch-rate="1.0">
+						<method name="access$100" signature="(Lfi/eis/applications/chatapp/login/ui/LoginUI;)Lfi/eis/applications/chatapp/login/actions/EnterChatHandler;" line-rate="1.0" branch-rate="1.0">
 							<lines>
 							</lines>
 						</method>
-						<method name="access$300" signature="(Lfi/eis/applications/chatapp/ui/LoginUI;)Ljavax/swing/JButton;" line-rate="1.0" branch-rate="1.0">
+						<method name="access$300" signature="(Lfi/eis/applications/chatapp/login/ui/LoginUI;)Ljavax/swing/JButton;" line-rate="1.0" branch-rate="1.0">
 							<lines>
 							</lines>
 						</method>
-						<method name="access$400" signature="(Lfi/eis/applications/chatapp/ui/LoginUI;)Lfi/eis/applications/chatapp/actions/LoginHandler;" line-rate="0.0" branch-rate="1.0">
+						<method name="access$400" signature="(Lfi/eis/applications/chatapp/login/ui/LoginUI;)Lfi/eis/applications/chatapp/login/actions/LoginHandler;" line-rate="0.0" branch-rate="1.0">
 							<lines>
 								<line number="37" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="createGUI" signature="(Lfi/eis/applications/chatapp/actions/LoginHandler;Lfi/eis/applications/chatapp/actions/EnterChatHandler;Lfi/eis/applications/chatapp/actions/RoomsProvider;)Lfi/eis/applications/chatapp/ui/LoginUI;" line-rate="0.0" branch-rate="1.0">
+						<method name="createGUI" signature="(Lfi/eis/applications/chatapp/login/actions/LoginHandler;Lfi/eis/applications/chatapp/login/actions/EnterChatHandler;Lfi/eis/applications/chatapp/login/actions/RoomsProvider;)Lfi/eis/applications/chatapp/login/ui/LoginUI;" line-rate="0.0" branch-rate="1.0">
 							<lines>
 								<line number="65" hits="0" branch="false"/>
 								<line number="68" hits="0" branch="false"/>
@@ -1390,9 +1402,9 @@
 						<line number="228" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="fi.eis.applications.chatapp.ui.LoginUI$1" filename="fi/eis/applications/chatapp/ui/LoginUI.java" line-rate="0.0" branch-rate="1.0" complexity="1.3333333333333333">
+				<class name="fi.eis.applications.chatapp.login.ui.LoginUI$1" filename="fi/eis/applications/chatapp/login/ui/LoginUI.java" line-rate="0.0" branch-rate="1.0" complexity="1.3333333333333333">
 					<methods>
-						<method name="&lt;init&gt;" signature="(Lfi/eis/applications/chatapp/ui/LoginUI;)V" line-rate="0.0" branch-rate="1.0">
+						<method name="&lt;init&gt;" signature="(Lfi/eis/applications/chatapp/login/ui/LoginUI;)V" line-rate="0.0" branch-rate="1.0">
 							<lines>
 								<line number="95" hits="0" branch="false"/>
 							</lines>
@@ -1412,9 +1424,9 @@
 						<line number="102" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="fi.eis.applications.chatapp.ui.LoginUI$2" filename="fi/eis/applications/chatapp/ui/LoginUI.java" line-rate="0.0" branch-rate="0.0" complexity="1.3333333333333333">
+				<class name="fi.eis.applications.chatapp.login.ui.LoginUI$2" filename="fi/eis/applications/chatapp/login/ui/LoginUI.java" line-rate="0.0" branch-rate="0.0" complexity="1.3333333333333333">
 					<methods>
-						<method name="&lt;init&gt;" signature="(Lfi/eis/applications/chatapp/ui/LoginUI;Ljavax/swing/JTextField;Ljavax/swing/JPasswordField;Ljavax/swing/JLabel;Ljavax/swing/JButton;)V" line-rate="0.0" branch-rate="1.0">
+						<method name="&lt;init&gt;" signature="(Lfi/eis/applications/chatapp/login/ui/LoginUI;Ljavax/swing/JTextField;Ljavax/swing/JPasswordField;Ljavax/swing/JLabel;Ljavax/swing/JButton;)V" line-rate="0.0" branch-rate="1.0">
 							<lines>
 								<line number="186" hits="0" branch="false"/>
 							</lines>
@@ -1492,19 +1504,19 @@
 						<line number="220" hits="0" branch="false"/>
 					</lines>
 				</class>
-				<class name="fi.eis.applications.chatapp.ui.LoginUI$ChatRoomCellRenderer" filename="fi/eis/applications/chatapp/ui/LoginUI.java" line-rate="0.0" branch-rate="1.0" complexity="1.3333333333333333">
+				<class name="fi.eis.applications.chatapp.login.ui.LoginUI$ChatRoomCellRenderer" filename="fi/eis/applications/chatapp/login/ui/LoginUI.java" line-rate="0.0" branch-rate="1.0" complexity="1.3333333333333333">
 					<methods>
-						<method name="&lt;init&gt;" signature="(Lfi/eis/applications/chatapp/ui/LoginUI;)V" line-rate="0.0" branch-rate="1.0">
+						<method name="&lt;init&gt;" signature="(Lfi/eis/applications/chatapp/login/ui/LoginUI;)V" line-rate="0.0" branch-rate="1.0">
 							<lines>
 								<line number="116" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="&lt;init&gt;" signature="(Lfi/eis/applications/chatapp/ui/LoginUI;Lfi/eis/applications/chatapp/ui/LoginUI$1;)V" line-rate="0.0" branch-rate="1.0">
+						<method name="&lt;init&gt;" signature="(Lfi/eis/applications/chatapp/login/ui/LoginUI;Lfi/eis/applications/chatapp/login/ui/LoginUI$1;)V" line-rate="0.0" branch-rate="1.0">
 							<lines>
 								<line number="112" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="getListCellRendererComponent" signature="(Ljavax/swing/JList;Lfi/eis/applications/chatapp/types/ChatRoom;IZZ)Ljava/awt/Component;" line-rate="0.0" branch-rate="1.0">
+						<method name="getListCellRendererComponent" signature="(Ljavax/swing/JList;Lfi/eis/applications/chatapp/login/types/ChatRoom;IZZ)Ljava/awt/Component;" line-rate="0.0" branch-rate="1.0">
 							<lines>
 								<line number="121" hits="0" branch="false"/>
 								<line number="124" hits="0" branch="false"/>
