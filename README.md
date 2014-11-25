@@ -27,10 +27,11 @@ Nice to have
  - remember window sizes and positions
  - remember login credentials
  - retrieve room users in login UI
- - translate ui to finnish and allow user to switch between english and finnish ui
- - work properly with non-admin users
  - keep chat log
  - relevant metadata about project added to pom.xml
+ - DI system as software internal dependency mechanism
+ - translate ui to finnish and allow user to switch between english and finnish ui
+ - work properly with non-admin users
  - separation of Travis script into a separate file
  - integration tests
  - unit test coverage of 80% for business methods
@@ -39,3 +40,4 @@ Nice to have
  - installer
  - .exe
  - update mechanism
+ - support for nick search
