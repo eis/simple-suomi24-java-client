@@ -5,12 +5,18 @@ import fi.eis.applications.chatapp.login.actions.impl.DefaultEnterChatHandler;
 import fi.eis.applications.chatapp.login.actions.impl.Suomi24LoginHandler;
 import fi.eis.applications.chatapp.login.actions.impl.XMLBasedRoomsProvider;
 import fi.eis.applications.chatapp.login.ui.LoginUI;
+import org.jboss.weld.environment.se.events.ContainerInitialized;
 
+import javax.enterprise.event.Observes;
+import javax.inject.Inject;
 import javax.swing.*;
 
 public class App
 {
-    public static void main( String[] args )
+    @Inject
+    LoginHandler loginHandler;
+
+    public void main(@Observes ContainerInitialized event )
     {
         System.out.println( "Hello World!" );
 
@@ -22,7 +28,7 @@ public class App
                 // Turn off metal's use of bold fonts
                 UIManager.put("swing.boldMetal", Boolean.FALSE);
 
-                LoginHandler loginHandler = new Suomi24LoginHandler();
+                //LoginHandler loginHandler = new Suomi24LoginHandler();
                 loginHandler.setDebug(false);
                 final LoginUI loginUI = LoginUI.createGUI(
                         loginHandler,
