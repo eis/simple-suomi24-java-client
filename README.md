@@ -16,20 +16,20 @@ TODO
 
 Must have
 
- - login to chat
- - able to view the messages while in chat
- - send messages to chat
- - generate and update user list
+ - [login to chat](https://github.com/eis/simple-suomi24-java-client/issues/1)
+ - [able to view the messages while in chat](https://github.com/eis/simple-suomi24-java-client/issues/2)
+ - [send messages to chat](https://github.com/eis/simple-suomi24-java-client/issues/3)
+ - [generate and update user list](https://github.com/eis/simple-suomi24-java-client/issues/4)
 
 Nice to have
 
- - save and retrieve settings to/from .ini, .xml or similar
- - remember window sizes and positions
- - remember login credentials
- - retrieve room users in login UI
- - keep chat log
- - relevant metadata about project added to pom.xml
- - DI system as software internal dependency mechanism
+ - [save and retrieve settings to/from .ini, .xml or similar](https://github.com/eis/simple-suomi24-java-client/issues/5)
+ - [remember window sizes and positions](https://github.com/eis/simple-suomi24-java-client/issues/6)
+ - [remember login credentials](https://github.com/eis/simple-suomi24-java-client/issues/7)
+ - [retrieve room users in login UI](https://github.com/eis/simple-suomi24-java-client/issues/8)
+ - [keep chat log](https://github.com/eis/simple-suomi24-java-client/issues/9)
+ - [relevant metadata about project added to pom.xml](https://github.com/eis/simple-suomi24-java-client/issues/10)
+ - [DI system as software internal dependency mechanism](https://github.com/eis/simple-suomi24-java-client/issues/11)
  - translate ui to finnish and allow user to switch between english and finnish ui
  - work properly with non-admin users
  - separation of Travis script into a separate file
