@@ -29,7 +29,7 @@ Nice to have
  - [retrieve room users in login UI](https://github.com/eis/simple-suomi24-java-client/issues/8)
  - [keep chat log](https://github.com/eis/simple-suomi24-java-client/issues/9)
  - [relevant metadata about project added to pom.xml](https://github.com/eis/simple-suomi24-java-client/issues/10)
- - [DI system as software internal dependency mechanism](https://github.com/eis/simple-suomi24-java-client/issues/11)
+ - ~~[DI system as software internal dependency mechanism](https://github.com/eis/simple-suomi24-java-client/issues/11)~~
  - translate ui to finnish and allow user to switch between english and finnish ui
  - work properly with non-admin users
  - separation of Travis script into a separate file
@@ -41,3 +41,4 @@ Nice to have
  - .exe
  - update mechanism
  - support for nick search
+ - login in a background thread
