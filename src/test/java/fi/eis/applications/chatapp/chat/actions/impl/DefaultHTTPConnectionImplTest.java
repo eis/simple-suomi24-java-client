@@ -6,8 +6,6 @@ import org.junit.Test;
 
 import fi.eis.applications.chatapp.chat.actions.impl.DefaultHTTPConnectionImpl;
 
-import java.net.URLEncoder;
-
 /**
  * Creation Date: 23.11.2014
  * Creation Time: 22:40
@@ -43,7 +41,7 @@ public class DefaultHTTPConnectionImplTest {
                 "cacheControlSessionHash=cccccccccccccccccccccccccccccccccccccccc; " +
                 "cacheControlAuthenticated=0");
         DefaultHTTPConnectionImpl impl = new DefaultHTTPConnectionImpl();
-        String result = impl.formatAsJavaNetAcceptableCookieString(cookieTestValue, "ISO-8859-1");
+        String result = impl.formatAsJavaNetAcceptableCookieString(cookieTestValue);
         Assert.assertThat(result, is(expected));
     }
 }

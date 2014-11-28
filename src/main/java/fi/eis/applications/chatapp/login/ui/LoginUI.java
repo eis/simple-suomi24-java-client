@@ -1,6 +1,8 @@
 package fi.eis.applications.chatapp.login.ui;
 
-import fi.eis.applications.chatapp.login.actions.EnterChatHandler;
+import fi.eis.applications.chatapp.chat.actions.ChattingConnection;
+import fi.eis.applications.chatapp.chat.actions.ChattingConnectionFactory;
+import fi.eis.applications.chatapp.controller.ChatEnterHandler;
 import fi.eis.applications.chatapp.login.actions.LoginFailedException;
 import fi.eis.applications.chatapp.login.actions.LoginHandler;
 import fi.eis.applications.chatapp.login.actions.RoomsProvider;
@@ -39,8 +41,9 @@ public class LoginUI extends JFrame {
     private static final String LOGINWINDOW_TITLE = "";
 
     private LoginHandler loginHandler;
-    private EnterChatHandler enterChatHandler;
+    private ChatEnterHandler chatEnterHandler;
     private RoomsProvider roomFetchHandler;
+    private ChattingConnectionFactory chatConnectionFactory;
 
     private String sessionCookie;
     private JList<ChatRoom> chatRoomList;
@@ -51,19 +54,20 @@ public class LoginUI extends JFrame {
 
     }
 
-    private LoginUI(LoginHandler loginHandler, EnterChatHandler enterChatHandler,
-                    RoomsProvider roomFetchHandler) {
+    private LoginUI(LoginHandler loginHandler, ChatEnterHandler ChatEnterHandler,
+                    RoomsProvider roomFetchHandler, ChattingConnectionFactory chatConnectionFactory) {
         this.loginHandler = loginHandler;
-        this.enterChatHandler = enterChatHandler;
+        this.chatEnterHandler = ChatEnterHandler;
         this.roomFetchHandler = roomFetchHandler;
+        this.chatConnectionFactory = chatConnectionFactory;
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setTitle(LOGINWINDOW_TITLE);
     }
 
-    public static LoginUI createGUI(LoginHandler loginHandler, EnterChatHandler enterChatHandler,
-                                    RoomsProvider roomFetchHandler) {
-        LoginUI frame = new LoginUI(loginHandler, enterChatHandler,
-                roomFetchHandler);
+    public static LoginUI createGUI(LoginHandler loginHandler, ChatEnterHandler ChatEnterHandler,
+                                    RoomsProvider roomFetchHandler, ChattingConnectionFactory connectionFactory) {
+        LoginUI frame = new LoginUI(loginHandler, ChatEnterHandler,
+                roomFetchHandler, connectionFactory);
 
         frame.add(frame.createLoginPanel());
 
@@ -96,9 +100,11 @@ public class LoginUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                LoginUI.this.enterChatHandler.enterChat(
+                ChattingConnection connection = chatConnectionFactory.get(
                         LoginUI.this.getSelectedRoomId(),
-                        LoginUI.this.sessionCookie);
+                        LoginUI.this.sessionCookie
+                        );
+                LoginUI.this.chatEnterHandler.enterChat(connection);
             }
         });
         panel.add(this.enterChatButton);

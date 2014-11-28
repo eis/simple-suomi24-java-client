@@ -1,9 +1,9 @@
 package fi.eis.applications.chatapp;
 
+import fi.eis.applications.chatapp.chat.actions.ChattingConnectionFactory;
+import fi.eis.applications.chatapp.controller.ChatEnterHandler;
 import fi.eis.applications.chatapp.login.actions.LoginHandler;
-import fi.eis.applications.chatapp.login.actions.impl.DefaultEnterChatHandler;
-import fi.eis.applications.chatapp.login.actions.impl.Suomi24LoginHandler;
-import fi.eis.applications.chatapp.login.actions.impl.XMLBasedRoomsProvider;
+import fi.eis.applications.chatapp.login.actions.RoomsProvider;
 import fi.eis.applications.chatapp.login.ui.LoginUI;
 import org.jboss.weld.environment.se.events.ContainerInitialized;
 
@@ -14,9 +14,18 @@ import javax.swing.*;
 public class App
 {
     @Inject
-    LoginHandler loginHandler;
+    private LoginHandler loginHandler;
+    
+    @Inject
+    private ChatEnterHandler enterChatHandler;
 
-    public void main(@Observes ContainerInitialized event )
+    @Inject
+    private RoomsProvider roomsProvider;
+    
+    @Inject
+    private ChattingConnectionFactory chatConnectionFactory;
+    
+    public void main(@SuppressWarnings("unused") @Observes ContainerInitialized event )
     {
         System.out.println( "Hello World!" );
 
@@ -28,12 +37,12 @@ public class App
                 // Turn off metal's use of bold fonts
                 UIManager.put("swing.boldMetal", Boolean.FALSE);
 
-                //LoginHandler loginHandler = new Suomi24LoginHandler();
                 loginHandler.setDebug(false);
                 final LoginUI loginUI = LoginUI.createGUI(
                         loginHandler,
-                        new DefaultEnterChatHandler(),
-                        new XMLBasedRoomsProvider()
+                        enterChatHandler,
+                        roomsProvider,
+                        chatConnectionFactory
                     );
 
                 loginUI.display();

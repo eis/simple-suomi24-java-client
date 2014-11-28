@@ -23,7 +23,7 @@ public class DefaultHTTPConnectionImpl extends AbstractHTTPConnection {
         return readResponseContent(con);
     }
 
-    private HttpURLConnection getHttpURLConnection(String url) {
+    private static HttpURLConnection getHttpURLConnection(String url) {
         try {
             URL myurl = new URL(url);
             HttpURLConnection con = (HttpURLConnection)myurl.openConnection();
@@ -40,15 +40,15 @@ public class DefaultHTTPConnectionImpl extends AbstractHTTPConnection {
     @Override
     public String getHTMLFromURLWithCookie(String url, String allCookiesAsString) {
         HttpURLConnection con = getHttpURLConnection(url);
-        String cookieValuesAsAcceptedString = formatAsJavaNetAcceptableCookieString(allCookiesAsString, "ISO-8859-1");
+        String cookieValuesAsAcceptedString = formatAsJavaNetAcceptableCookieString(allCookiesAsString);
         con.setRequestProperty("Cookie", cookieValuesAsAcceptedString);
         return readResponseContent(con);
     }
 
-    protected String formatAsJavaNetAcceptableCookieString(final String allCookiesAsString, final String encoding) {
+    protected String formatAsJavaNetAcceptableCookieString(final String allCookiesAsString) {
         String[] cookieValues = allCookiesAsString.split("\\r?\\n");
             System.out.println(String.format("Data now: %s (len %d)",
-                    Arrays.asList(cookieValues), cookieValues.length));
+                    Arrays.asList(cookieValues), Integer.valueOf(cookieValues.length)));
             for (int i = 0; i < cookieValues.length; i++) {
                 if (cookieValues[i].contains("; ")) {
                     cookieValues[i] = cookieValues[i].substring(0, cookieValues[i].indexOf("; "));

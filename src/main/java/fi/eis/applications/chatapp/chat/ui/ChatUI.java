@@ -2,8 +2,8 @@ package fi.eis.applications.chatapp.chat.ui;
 
 import javax.swing.*;
 
-import fi.eis.applications.chatapp.chat.actions.impl.ChattingConnection;
-import fi.eis.applications.chatapp.chat.actions.impl.MessageUpdater;
+import fi.eis.applications.chatapp.chat.actions.ChattingConnection;
+import fi.eis.applications.chatapp.chat.actions.impl.MessageUpdaterImpl;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -40,7 +40,7 @@ public class ChatUI extends JFrame {
 
         JMenuBar menuBar = createMenu();
 
-        conn.setUpdater(new MessageUpdater(this.messagesPanel));
+        conn.setUpdater(new MessageUpdaterImpl(this.messagesPanel));
 
         
         // Put everything on a panel.

@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * User: eis
  * Creation Date: 8.11.2014
- * Creatuin Time: 14:56
+ * Creation Time: 14:56
  */
 public class Suomi24LoginHandler implements LoginHandler {
 
@@ -92,7 +92,7 @@ public class Suomi24LoginHandler implements LoginHandler {
         }
     }
     private void printDebug(final String message, String... params) {
-        printDebug(String.format(message, params));
+        printDebug(String.format(message, (Object[])params));
     }
 
     private static String concatWithLineBreak(List<String> list) {

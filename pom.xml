@@ -9,6 +9,7 @@
 
   <name>chatapp</name>
   <url>http://maven.apache.org</url>
+  <!-- run with mvn exec:exec -->
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -73,7 +74,6 @@
         </configuration>
       </plugin>
       <!-- execution -->
-      <!-- run with mvn exec:exec -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>

@@ -1,12 +1,14 @@
 package fi.eis.applications.chatapp.chat.actions.impl;
 
 
+import fi.eis.applications.chatapp.chat.actions.ChattingConnection;
 import fi.eis.applications.chatapp.chat.actions.HTTPConnectionHandler;
+import fi.eis.applications.chatapp.chat.actions.MessageUpdater;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ChattingConnection {
+public class Suomi24ChattingConnection implements ChattingConnection {
     
     private final int selectedRoomId;
     private final String sessionId;
@@ -47,23 +49,36 @@ public class ChattingConnection {
         return new ConnectionParameters(whoParam, nickParam, userIdParam);
     }
 
-    public ChattingConnection(int selectedRoomIdInput, String sessionIdInput, HTTPConnectionHandler httpHandlerInput) {
+    public Suomi24ChattingConnection(int selectedRoomIdInput, String sessionIdInput,
+            HTTPConnectionHandler httpHandlerInput) {
         this.selectedRoomId = selectedRoomIdInput;
         this.sessionId = sessionIdInput;
         this.httpHandler = httpHandlerInput;
     }
-    final static Pattern firstPattern = Pattern.compile(".*name=\"nick\" value=\"(.+?)\".*name=\"name\" value=\"(.+?)\".*name=\"who\" value=\"([a-f0-9]+?)\".*", Pattern.DOTALL);
+    final static Pattern firstPattern = Pattern.compile(
+            ".*name=\"nick\" value=\"(.+?)\".*name=\"name\" value=\"(.+?)\".*name=\"who\" value=\"([a-f0-9]+?)\".*",
+            Pattern.DOTALL);
+
     protected ConnectionParameters params = null;
+
+    /* (non-Javadoc)
+     * @see fi.eis.applications.chatapp.chat.actions.impl.ChattingConnection#getConnectionParameters()
+     */
+    @Override
     public ConnectionParameters getConnectionParameters() {
         return this.params;
     }
 
+    /* (non-Javadoc)
+     * @see fi.eis.applications.chatapp.chat.actions.impl.ChattingConnection#connect()
+     */
+    @Override
     public void connect() {
         final String whoParam;
         final String nickParam;
         final String userId;
 
-        String url = String.format("http://chat.suomi24.fi/login.cgi?cid=%d", selectedRoomId);
+        String url = String.format("http://chat.suomi24.fi/login.cgi?cid=%d", Integer.valueOf(selectedRoomId));
         String HTML = httpHandler.getHTMLFromURLWithCookie(url, sessionId);
         debugPrint("Got HTML " + HTML);
         Matcher matcher  = firstPattern.matcher(HTML);
@@ -78,7 +93,7 @@ public class ChattingConnection {
                     String.format("Didn't get HTML containing the proper values (using url %s, cookie %s)",
                             url, sessionId));
         }
-        debugPrint("Got params " + params);
+        System.out.println("Got params " + params);
     }
 
     private void debugPrint(String string) {
@@ -87,6 +102,10 @@ public class ChattingConnection {
         }
     }
 
+    /* (non-Javadoc)
+     * @see fi.eis.applications.chatapp.chat.actions.impl.ChattingConnection#setUpdater(fi.eis.applications.chatapp.chat.actions.impl.MessageUpdater)
+     */
+    @Override
     public void setUpdater(MessageUpdater messageUpdater) {
         // TODO Auto-generated method stub
         

@@ -4,9 +4,10 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import fi.eis.applications.chatapp.chat.actions.ChattingConnection;
 import fi.eis.applications.chatapp.chat.actions.HTTPConnectionHandler;
-import fi.eis.applications.chatapp.chat.actions.impl.ChattingConnection;
-import fi.eis.applications.chatapp.chat.actions.impl.ChattingConnection.ConnectionParameters;
+import fi.eis.applications.chatapp.chat.actions.impl.Suomi24ChattingConnection;
+import fi.eis.applications.chatapp.chat.actions.impl.Suomi24ChattingConnection.ConnectionParameters;
 import fi.eis.applications.chatapp.chat.actions.impl.DefaultHTTPConnectionImpl;
 import fi.eis.applications.chatapp.login.actions.impl.Suomi24LoginHandler;
 
@@ -27,7 +28,7 @@ public class LoginIT {
         
         HTTPConnectionHandler httpHandlerInput = new DefaultHTTPConnectionImpl();
         
-        ChattingConnection cn = new ChattingConnection(123, sessionCookie, httpHandlerInput);
+        ChattingConnection cn = new Suomi24ChattingConnection(123, sessionCookie, httpHandlerInput);
         cn.connect();
         ConnectionParameters params = cn.getConnectionParameters();
 
