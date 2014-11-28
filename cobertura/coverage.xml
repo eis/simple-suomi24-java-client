@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.20253164556962025" branch-rate="0.2857142857142857" lines-covered="80" lines-valid="395" branches-covered="16" branches-valid="56" complexity="1.75" version="2.0.3" timestamp="1417184960844">
+<coverage line-rate="0.20304568527918782" branch-rate="0.2857142857142857" lines-covered="80" lines-valid="394" branches-covered="16" branches-valid="56" complexity="1.75" version="2.0.3" timestamp="1417185313815">
 	<sources>
 		<source>--source</source>
 		<source>/home/travis/build/eis/simple-suomi24-java-client/target/generated-sources/annotations</source>
@@ -14,50 +14,48 @@
 					<methods>
 						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="11" hits="0" branch="false"/>
+								<line number="14" hits="0" branch="false"/>
 							</lines>
 						</method>
-						<method name="main" signature="([Ljava/lang/String;)V" line-rate="0.0" branch-rate="1.0">
+						<method name="main" signature="(Lorg/jboss/weld/environment/se/events/ContainerInitialized;)V" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="15" hits="0" branch="false"/>
-								<line number="20" hits="0" branch="false"/>
-								<line number="37" hits="0" branch="false"/>
+								<line number="21" hits="0" branch="false"/>
+								<line number="26" hits="0" branch="false"/>
+								<line number="43" hits="0" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="11" hits="0" branch="false"/>
-						<line number="15" hits="0" branch="false"/>
-						<line number="20" hits="0" branch="false"/>
-						<line number="37" hits="0" branch="false"/>
+						<line number="14" hits="0" branch="false"/>
+						<line number="21" hits="0" branch="false"/>
+						<line number="26" hits="0" branch="false"/>
+						<line number="43" hits="0" branch="false"/>
 					</lines>
 				</class>
 				<class name="fi.eis.applications.chatapp.App$1" filename="fi/eis/applications/chatapp/App.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
 					<methods>
-						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
+						<method name="&lt;init&gt;" signature="(Lfi/eis/applications/chatapp/App;)V" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="20" hits="0" branch="false"/>
+								<line number="26" hits="0" branch="false"/>
 							</lines>
 						</method>
 						<method name="run" signature="()V" line-rate="0.0" branch-rate="1.0">
 							<lines>
-								<line number="23" hits="0" branch="false"/>
-								<line number="25" hits="0" branch="false"/>
-								<line number="26" hits="0" branch="false"/>
-								<line number="27" hits="0" branch="false"/>
+								<line number="29" hits="0" branch="false"/>
+								<line number="32" hits="0" branch="false"/>
 								<line number="33" hits="0" branch="false"/>
-								<line number="34" hits="0" branch="false"/>
+								<line number="39" hits="0" branch="false"/>
+								<line number="40" hits="0" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="20" hits="0" branch="false"/>
-						<line number="23" hits="0" branch="false"/>
-						<line number="25" hits="0" branch="false"/>
 						<line number="26" hits="0" branch="false"/>
-						<line number="27" hits="0" branch="false"/>
+						<line number="29" hits="0" branch="false"/>
+						<line number="32" hits="0" branch="false"/>
 						<line number="33" hits="0" branch="false"/>
-						<line number="34" hits="0" branch="false"/>
+						<line number="39" hits="0" branch="false"/>
+						<line number="40" hits="0" branch="false"/>
 					</lines>
 				</class>
 			</classes>
