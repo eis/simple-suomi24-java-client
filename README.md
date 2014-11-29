@@ -37,11 +37,10 @@ Nice to have
  - unit test coverage of 80% for business methods
  - mutation test report
  - encrypt + decrypt password
- - uber jar
+ - ~~uber jar~~
  - installer
  - .exe
  - update mechanism
  - support for nick search
  - login in a background thread
  - custom DI implementation
- 
