@@ -37,6 +37,7 @@ Nice to have
  - unit test coverage of 80% for business methods
  - mutation test report
  - encrypt + decrypt password
+ - uber jar
  - installer
  - .exe
  - update mechanism
