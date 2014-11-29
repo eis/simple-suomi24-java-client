@@ -42,3 +42,5 @@ Nice to have
  - update mechanism
  - support for nick search
  - login in a background thread
+ - custom DI implementation
+ 
