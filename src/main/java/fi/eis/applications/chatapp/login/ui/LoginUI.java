@@ -54,20 +54,25 @@ public class LoginUI extends JFrame {
 
     }
 
-    private LoginUI(LoginHandler loginHandler, ChatEnterHandler ChatEnterHandler,
+    private LoginUI(LoginHandler loginHandler, ChatEnterHandler chatEnterHandler,
                     RoomsProvider roomFetchHandler, ChattingConnectionFactory chatConnectionFactory) {
         this.loginHandler = loginHandler;
-        this.chatEnterHandler = ChatEnterHandler;
+        this.chatEnterHandler = chatEnterHandler;
         this.roomFetchHandler = roomFetchHandler;
         this.chatConnectionFactory = chatConnectionFactory;
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setTitle(LOGINWINDOW_TITLE);
     }
 
-    public static LoginUI createGUI(LoginHandler loginHandler, ChatEnterHandler ChatEnterHandler,
-                                    RoomsProvider roomFetchHandler, ChattingConnectionFactory connectionFactory) {
-        LoginUI frame = new LoginUI(loginHandler, ChatEnterHandler,
-                roomFetchHandler, connectionFactory);
+    public static LoginUI createGUI(LoginHandler loginHandler, ChatEnterHandler chatEnterHandler,
+                                    RoomsProvider roomFetchHandler, ChattingConnectionFactory chatConnectionFactory) {
+        if ((loginHandler == null) || (chatEnterHandler == null) ||
+                (roomFetchHandler == null) || (chatConnectionFactory == null)) {
+            throw new IllegalStateException(String.format("initialization has failed [%s,%s,%s,%s]",
+                loginHandler, chatEnterHandler , roomFetchHandler , chatConnectionFactory));
+        }
+        LoginUI frame = new LoginUI(loginHandler, chatEnterHandler,
+                roomFetchHandler, chatConnectionFactory);
 
         frame.add(frame.createLoginPanel());
 

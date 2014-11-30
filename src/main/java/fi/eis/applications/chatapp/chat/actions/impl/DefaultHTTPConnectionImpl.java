@@ -1,5 +1,7 @@
 package fi.eis.applications.chatapp.chat.actions.impl;
 
+import fi.eis.applications.chatapp.chat.actions.HTTPConnectionHandler;
+
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -12,7 +14,7 @@ import java.util.Arrays;
  *
  * @author eis
  */
-public class DefaultHTTPConnectionImpl extends AbstractHTTPConnection {
+public class DefaultHTTPConnectionImpl extends AbstractHTTPConnection implements HTTPConnectionHandler {
 
     private static final String CHATAPP_USER_AGENT =  "Mozilla/5.0 (compatible; java-chatapp)";
 
