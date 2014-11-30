@@ -13,6 +13,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <mainClass>org.jboss.weld.environment.se.StartMain</mainClass>
   </properties>
 
   <dependencies>
@@ -68,7 +69,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>org.jboss.weld.environment.se.StartMain</mainClass>
+              <mainClass>${mainClass}</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -90,7 +91,7 @@
             <arguments>
                 <argument>-classpath</argument>
                 <classpath />
-                <argument>org.jboss.weld.environment.se.StartMain</argument>
+                <argument>${mainClass}</argument>
             </arguments>
             <workingDirectory>${project.build.outputDirectory}/..</workingDirectory>
         </configuration>
@@ -127,6 +128,15 @@
                   <goals>
                       <goal>integration-test</goal>
                   </goals>
+              </execution>
+              <!-- separate verify phase is needed, otherwise build is success even if tests fail -->
+              <!-- details: http://stackoverflow.com/questions/16797601/maven-failsafe-plugin-errors-and-build-success-->
+              <execution>
+                <id>verify</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>verify</goal>
+                </goals>
               </execution>
           </executions>
       </plugin>
