@@ -85,6 +85,8 @@ public class ClassScanningContext extends Context {
         public void addClass(String className) {
             try {
                 Class targetClass = Class.forName(className);
+                // we want instantiable classes, so don't add interfaces or
+                // abstract classes
                 if (targetClass.isInterface() || Modifier.isAbstract(targetClass.getModifiers())) {
                     return;
                 }
