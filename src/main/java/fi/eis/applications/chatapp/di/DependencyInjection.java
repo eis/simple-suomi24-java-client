@@ -2,6 +2,7 @@ package fi.eis.applications.chatapp.di;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * Creation Date: 30.11.2014
@@ -10,17 +11,17 @@ import java.util.List;
  * @author eis
  */
 public class DependencyInjection {
-    public static Module suppliers(Class... providers) {
-        return new Module(providers);
-    }
     public static Module classes(Class... classes) {
-        List<Class> providers = new ArrayList<>();
-        for(Class clazz: classes) {
-            providers.add(clazz);
-        }
-        return suppliers(providers.toArray(new Class[providers.size()]));
+        return new Module(classes);
+    }
+    public static Module classes(List<Class> classes) {
+        return new Module(classes);
     }
     public static Context context(Module... modules) {
         return new Context(modules);
+    }
+
+    public static Context classScanningContext(Class sourceClass) {
+        return new ClassScanningContext(sourceClass);
     }
 }

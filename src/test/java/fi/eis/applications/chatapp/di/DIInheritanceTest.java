@@ -44,11 +44,11 @@ abstract class AbstractParentForDependency implements DependencyInterface {
 
 class AnotherDependency extends AbstractParentForDependency {}
 
-public class MyDITest {
+public class DIInheritanceTest {
 
     @Test
     public void testDi() {
-        Module mSuppliers = DependencyInjection.suppliers(
+        Module mSuppliers = DependencyInjection.classes(
             Dependency.class
         );
         Module mClasses = DependencyInjection.classes(ClassToInit.class);
@@ -59,7 +59,7 @@ public class MyDITest {
 
     @Test
     public void testDiWithInheritance() {
-        Module mSuppliers = DependencyInjection.suppliers(
+        Module mSuppliers = DependencyInjection.classes(
             AnotherDependency.class
         );
         Module mClasses = DependencyInjection.classes(ClassToInit.class);

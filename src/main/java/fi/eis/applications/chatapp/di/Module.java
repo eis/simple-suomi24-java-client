@@ -1,6 +1,7 @@
 package fi.eis.applications.chatapp.di;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,6 +14,11 @@ public class Module {
     private static final Object NO_INSTANCE = new Object();
     private Map<Class, Object> providers = new HashMap<>();
     public Module(Class... providers) {
+        for (Class clazz: providers) {
+            this.providers.put(clazz, NO_INSTANCE );
+        }
+    }
+    public Module(List<Class> providers) {
         for (Class clazz: providers) {
             this.providers.put(clazz, NO_INSTANCE );
         }

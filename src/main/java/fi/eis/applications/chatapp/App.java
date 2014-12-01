@@ -48,7 +48,8 @@ public class App implements Runnable
     }
 
     public static App createInjectedApp() {
-        Module mSuppliers = DependencyInjection.suppliers(
+        /*
+        Module mSuppliers = DependencyInjection.classes(
             DefaultHTTPConnectionImpl.class,
             Suomi24LoginHandler.class,
             XMLBasedRoomsProvider.class,
@@ -58,6 +59,8 @@ public class App implements Runnable
         );
         Module mClasses = DependencyInjection.classes(App.class);
         Context diContext = DependencyInjection.context(mClasses, mSuppliers);
+        */
+        Context diContext = DependencyInjection.classScanningContext(App.class);
         return diContext.get(App.class);
     }
 
