@@ -13,17 +13,29 @@ import java.util.List;
  * @author eis
  */
 public class Context extends Module {
+    private static final boolean debug = false;
+    public void debugPrint(String message) {
+        if (debug) {
+            System.out.println(message);
+        }
+    }
+    public void debugPrint(String message, Object... parameters) {
+        if (debug) {
+            System.out.printf(message, parameters);
+        }
+    }
+
     final List<Module> modules = new ArrayList<Module>();
     public Context(Module... modules) {
         Collections.addAll(this.modules, modules);
     }
     public <T> T get(Class<T> type) {
-        System.out.println("context.get=" + type);
+        debugPrint("context.get=" + type);
         T object = null;
         for (Module module : modules) {
 
             if (module.has(type)) {
-                System.out.println("has type " + type);
+                debugPrint("has type " + type);
                 object = module.get(type);
                 break;
             }
@@ -36,8 +48,10 @@ public class Context extends Module {
     }
 
     private <T> void resolveProperties(T object) {
-        System.out.println("resolveProperties=" + object);
-        System.out.println("class=" + object.getClass());
+        debugPrint("resolveProperties=" + object);
+        debugPrint("class=" + object.getClass());
+
+        // @Injected fields
         Field[] allFields = object.getClass().getDeclaredFields();
 
         for (Field field : allFields) {

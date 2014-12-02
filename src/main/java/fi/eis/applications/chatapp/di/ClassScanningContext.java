@@ -19,25 +19,14 @@ import java.util.zip.ZipFile;
  * Creation Date: 1.12.2014
  * Creation Time: 21:55
  *
- * @author eis
- */
-
-/*
- * FileSystemBeanArchiveHandler:
- * JBoss, Home of Professional Open Source
- * Copyright 2014, Red Hat, Inc. and/or its affiliates, and individual
- * contributors by the @authors tag. See the copyright.txt in the
- * distribution for a full listing of individual contributors.
+ * This class borrows heavily from JBoss Weld class FileSystemBeanArchiveHandler.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * FileSystemBeanArchiveHandler has been licensed under Apache License,
+ * Version 2.0. It permits releasing under different license.
+ *
+ * (http://en.wikipedia.org/wiki/Comparison_of_free_and_open-source_software_licenses)
+ *
+ * @author eis
  */
 public class ClassScanningContext extends Context {
     boolean firstTime = true;
@@ -201,7 +190,8 @@ public class ClassScanningContext extends Context {
         }
 
         private String filenameToClassname(String filename) {
-            return filename.substring(0, filename.lastIndexOf(CLASS_FILE_EXTENSION)).replace('/', '.').replace('\\', '.');
+            return filename.substring(0, filename.lastIndexOf(CLASS_FILE_EXTENSION))
+                    .replace('/', '.').replace('\\', '.');
         }
 
         /**
@@ -279,54 +269,4 @@ public class ClassScanningContext extends Context {
 
         }
 
-
-    /*
-    private void initClassList() {
-        ClassLoader myCL = Thread.currentThread().getContextClassLoader();
-        List<Class> classesList = new ArrayList<>();
-        while (myCL != null) {
-            System.out.println("ClassLoader: " + myCL);
-            try {
-                Vector<Class<?>> classVector = list(myCL);
-                System.out.println("Found: " + classVector);
-
-                // Point of loop below is that we want to skip interfaces and abstract
-                // classes, as we can't instantiate them anyway to fulfill any dependencies
-                // trying will cause a NPE
-
-                Iterator<Class<?>> iterator = classVector.iterator();
-                while(iterator.hasNext()) {
-                    Class clazz = iterator.next();
-
-
-                    if (clazz.isInterface()) {
-                        continue;
-                    }
-                    if ( Modifier.isAbstract(clazz.getModifiers())) {
-                        continue;
-                    }
-                    classesList.add(clazz);
-                }
-            } catch (NoSuchFieldException | IllegalAccessException e) {
-                throw new IllegalStateException(e);
-            }
-            myCL = myCL.getParent();
-        }
-
-        Class[] foundClasses = classesList.toArray(new Class[classesList.size()]);
-        super.modules.add(DependencyInjection.classes(foundClasses));
-    }
-    private static Vector<Class<?>> list(ClassLoader classLoaderParam)
-            throws NoSuchFieldException, SecurityException,
-            IllegalArgumentException, IllegalAccessException {
-        Class classLoaderClass = classLoaderParam.getClass();
-        while (classLoaderClass != java.lang.ClassLoader.class) {
-            classLoaderClass = classLoaderClass.getSuperclass();
-        }
-        java.lang.reflect.Field classLoaderClassesField = classLoaderClass
-                .getDeclaredField("classes");
-        classLoaderClassesField.setAccessible(true);
-        return (Vector<Class<?>>)classLoaderClassesField.get(classLoaderParam);
-    }
-    */
 }

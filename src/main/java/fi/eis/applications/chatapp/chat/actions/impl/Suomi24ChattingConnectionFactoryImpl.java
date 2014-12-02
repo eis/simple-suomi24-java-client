@@ -7,19 +7,16 @@ import fi.eis.applications.chatapp.di.Inject;
 
 public class Suomi24ChattingConnectionFactoryImpl implements ChattingConnectionFactory {
 
-    @Inject
     private HTTPConnectionHandler httpHandler;
 
-    // TODO work with constructor
-    /*
+    @Inject
     public Suomi24ChattingConnectionFactoryImpl(HTTPConnectionHandler httpHandler) {
         if (httpHandler == null) {
             throw new IllegalStateException("httpHandler should be initialized");
         }
         this.httpHandler = httpHandler;
     }
-    */
-    
+
     @Override
     public ChattingConnection get(int selectedRoomId, String sessionCookie) {
         return new Suomi24ChattingConnection(selectedRoomId, sessionCookie, httpHandler);

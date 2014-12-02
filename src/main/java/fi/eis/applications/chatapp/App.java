@@ -5,7 +5,6 @@ import fi.eis.applications.chatapp.controller.ChatEnterHandler;
 import fi.eis.applications.chatapp.di.Context;
 import fi.eis.applications.chatapp.di.DependencyInjection;
 import fi.eis.applications.chatapp.di.Inject;
-import fi.eis.applications.chatapp.di.Module;
 import fi.eis.applications.chatapp.login.actions.LoginHandler;
 import fi.eis.applications.chatapp.login.actions.RoomsProvider;
 import fi.eis.applications.chatapp.login.ui.LoginUI;
@@ -14,17 +13,21 @@ import javax.swing.*;
 
 public class App implements Runnable
 {
-    @Inject
     private LoginHandler loginHandler;
-
-    @Inject
     private ChatEnterHandler enterChatHandler;
+    private RoomsProvider roomsProvider;
+    private ChattingConnectionFactory chatConnectionFactory;
 
     @Inject
-    private RoomsProvider roomsProvider;
-    
-    @Inject
-    private ChattingConnectionFactory chatConnectionFactory;
+    public App(LoginHandler loginHandler,
+               ChatEnterHandler enterChatHandler,
+               RoomsProvider roomsProvider,
+               ChattingConnectionFactory chatConnectionFactory) {
+        this.loginHandler = loginHandler;
+        this.enterChatHandler = enterChatHandler;
+        this.roomsProvider = roomsProvider;
+        this.chatConnectionFactory = chatConnectionFactory;
+    }
 
     @Override
     public String toString() {
@@ -43,18 +46,6 @@ public class App implements Runnable
     }
 
     public static App createInjectedApp() {
-        /*
-        Module mSuppliers = DependencyInjection.classes(
-            DefaultHTTPConnectionImpl.class,
-            Suomi24LoginHandler.class,
-            XMLBasedRoomsProvider.class,
-            Suomi24ChattingConnectionFactoryImpl.class,
-            MessageUpdaterImpl.class,
-            ChatEnterHandler.class
-        );
-        Module mClasses = DependencyInjection.classes(App.class);
-        Context diContext = DependencyInjection.context(mClasses, mSuppliers);
-        */
         Context diContext = DependencyInjection.classScanningContext(App.class);
         return diContext.get(App.class);
     }
@@ -62,13 +53,12 @@ public class App implements Runnable
     @Override
     public void run() {
         System.out.println( "Hello World!" );
-        System.out.println( "[1] this=" + this );
+        System.out.println( "this=" + this );
 
         // Schedule a job for the event dispatching thread:
         // creating and showing this application's GUI.
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                System.out.println( "[2] this=" + this );
 
                 // Turn off metal's use of bold fonts
                 UIManager.put("swing.boldMetal", Boolean.FALSE);

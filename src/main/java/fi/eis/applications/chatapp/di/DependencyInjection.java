@@ -18,7 +18,13 @@ public class DependencyInjection {
         return new Module(classes);
     }
     public static Context context(Module... modules) {
-        return new Context(modules);
+        // add all other modules to combined one
+        Module combinedModule = new Module();
+        for (Module module: modules) {
+            combinedModule.add(module);
+        }
+        // create a new module based on combined one
+        return new Context(combinedModule);
     }
 
     public static Context classScanningContext(Class sourceClass) {
