@@ -28,11 +28,11 @@ import java.util.zip.ZipFile;
  *
  * @author eis
  */
-public class ClassScanningContext extends Context {
+public class DeploymentUnitContext extends Context {
     boolean firstTime = true;
     private final Class sourceClass;
 
-    public ClassScanningContext(Class sourceClass) {
+    public DeploymentUnitContext(Class sourceClass) {
         super();
         this.sourceClass = sourceClass;
     }

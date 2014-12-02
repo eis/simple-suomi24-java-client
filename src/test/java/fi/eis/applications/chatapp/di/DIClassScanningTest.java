@@ -14,7 +14,7 @@ public class DIClassScanningTest {
 
     @Test
     public void testDi() {
-        Context diContext = DependencyInjection.classScanningContext(this.getClass());
+        Context diContext = DependencyInjection.deploymentUnitContext(this.getClass());
         MockClassInNeedOfDependency instance = diContext.get(MockClassInNeedOfDependency.class);
         Assert.assertNotNull("was not initialized: " + instance, instance.dependency);
     }

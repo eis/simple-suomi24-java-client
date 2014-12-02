@@ -1,8 +1,6 @@
 package fi.eis.applications.chatapp.di;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 /**
  * Creation Date: 30.11.2014
@@ -27,7 +25,7 @@ public class DependencyInjection {
         return new Context(combinedModule);
     }
 
-    public static Context classScanningContext(Class sourceClass) {
-        return new ClassScanningContext(sourceClass);
+    public static Context deploymentUnitContext(Class sourceClass) {
+        return new DeploymentUnitContext(sourceClass);
     }
 }

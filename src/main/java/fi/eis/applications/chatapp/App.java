@@ -46,7 +46,7 @@ public class App implements Runnable
     }
 
     public static App createInjectedApp() {
-        Context diContext = DependencyInjection.classScanningContext(App.class);
+        Context diContext = DependencyInjection.deploymentUnitContext(App.class);
         return diContext.get(App.class);
     }
 
