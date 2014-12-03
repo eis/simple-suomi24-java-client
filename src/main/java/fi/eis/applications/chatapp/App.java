@@ -2,12 +2,12 @@ package fi.eis.applications.chatapp;
 
 import fi.eis.applications.chatapp.chat.actions.ChattingConnectionFactory;
 import fi.eis.applications.chatapp.controller.ChatEnterHandler;
-import fi.eis.applications.chatapp.di.Context;
-import fi.eis.applications.chatapp.di.DependencyInjection;
-import fi.eis.applications.chatapp.di.Inject;
 import fi.eis.applications.chatapp.login.actions.LoginHandler;
 import fi.eis.applications.chatapp.login.actions.RoomsProvider;
 import fi.eis.applications.chatapp.login.ui.LoginUI;
+import fi.eis.libraries.di.Context;
+import fi.eis.libraries.di.DependencyInjection;
+import fi.eis.libraries.di.Inject;
 
 import javax.swing.*;
 

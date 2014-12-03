@@ -3,7 +3,7 @@ package fi.eis.applications.chatapp.chat.actions.impl;
 import fi.eis.applications.chatapp.chat.actions.ChattingConnection;
 import fi.eis.applications.chatapp.chat.actions.ChattingConnectionFactory;
 import fi.eis.applications.chatapp.chat.actions.HTTPConnectionHandler;
-import fi.eis.applications.chatapp.di.Inject;
+import fi.eis.libraries.di.Inject;
 
 public class Suomi24ChattingConnectionFactoryImpl implements ChattingConnectionFactory {
 
