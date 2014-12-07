@@ -21,7 +21,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>fi.eis.libraries</groupId>
+      <groupId>com.github.eis.libraries</groupId>
       <artifactId>minimal-di</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
