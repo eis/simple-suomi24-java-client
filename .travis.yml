@@ -10,24 +10,9 @@ install: mvn clean site -DbuildNumber=${TRAVIS_BUILD_NUMBER}
 script:
   - export PROJECT_NAME="`sed -n 's|.*<name>\(.*\)</name>.*|\1|p' pom.xml | awk '{ print $1; exit }'`" && echo Project name is $PROJECT_NAME
   - export PROJECT_VERSION="`sed -n 's|.*<version>\(.*\)</version>.*|\1|p' pom.xml | awk '{ print $1; exit }'`" && echo Project version is $PROJECT_VERSION
-  - echo -n $id_rsa_{00..30} >> ~/.ssh/id_rsa_base64
-  - base64 --decode --ignore-garbage ~/.ssh/id_rsa_base64 > ~/.ssh/id_rsa
-  - chmod 600 ~/.ssh/id_rsa
-  - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-  - git clone -b gh-pages --single-branch git@github.com:eis/simple-suomi24-java-client.git chatapp-push.docs
-  - cd chatapp-push.docs
-  - git config user.email "eis+travis-pusher@iki.fi"
-  - git config user.name "eis-travis-pusher"
-  - git config push.default matching
-  - rm -f *.html
-  - rm -rf cobertura
-  - rm -rf css
-  - rm -rf images
-  - cp -R ../target/site/* .
-  - git add -u .
-  - git add .
-  - git commit -m "'mvn site' for ${PROJECT_NAME} ${PROJECT_VERSION}, build ${TRAVIS_BUILD_NUMBER}"
-  - git push
+
+after_success:
+  - "[[ $TRAVIS_BRANCH == \"master\" ]] && { ./src/main/scripts/travis-publish-chatapp-site.sh; };"
 
 env:
   global:

@@ -32,7 +32,7 @@ Nice to have
  - ~~[DI system as software internal dependency mechanism](https://github.com/eis/simple-suomi24-java-client/issues/11)~~
  - translate ui to finnish and allow user to switch between english and finnish ui
  - work properly with non-admin users
- - separation of Travis script into a separate file
+ - ~~[separation of Travis script into a separate file](https://github.com/eis/simple-suomi24-java-client/issues/12)~~
  - ~~integration tests~~
  - unit test coverage of 80% for business methods
  - mutation test report
