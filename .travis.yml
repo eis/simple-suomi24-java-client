@@ -7,12 +7,10 @@ jdk:
 
 install: mvn clean site -DbuildNumber=${TRAVIS_BUILD_NUMBER}
 
-script:
-  - export PROJECT_NAME="`sed -n 's|.*<name>\(.*\)</name>.*|\1|p' pom.xml | awk '{ print $1; exit }'`" && echo Project name is $PROJECT_NAME
-  - export PROJECT_VERSION="`sed -n 's|.*<version>\(.*\)</version>.*|\1|p' pom.xml | awk '{ print $1; exit }'`" && echo Project version is $PROJECT_VERSION
-
 after_success:
-  - "[[ $TRAVIS_BRANCH == \"master\" ]] && { ./src/main/scripts/travis-publish-chatapp-site.sh; };"
+  - export PROJECT_NAME="`sed -n 's|.*<name>\(.*\)</name>.*|\1|p' pom.xml | head -1`" && echo Project name is $PROJECT_NAME
+  - export PROJECT_VERSION="`sed -n 's|.*<version>\(.*\)</version>.*|\1|p' pom.xml | head -1`" && echo Project version is $PROJECT_VERSION
+  - ./src/main/scripts/travis-publish-chatapp-site.sh
 
 env:
   global:
