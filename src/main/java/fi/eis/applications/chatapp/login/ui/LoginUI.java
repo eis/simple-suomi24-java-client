@@ -1,12 +1,14 @@
 package fi.eis.applications.chatapp.login.ui;
 
-import fi.eis.applications.chatapp.chat.actions.ChattingConnection;
-import fi.eis.applications.chatapp.chat.actions.ChattingConnectionFactory;
-import fi.eis.applications.chatapp.controller.ChatEnterHandler;
-import fi.eis.applications.chatapp.login.actions.LoginFailedException;
-import fi.eis.applications.chatapp.login.actions.LoginHandler;
-import fi.eis.applications.chatapp.login.actions.RoomsProvider;
-import fi.eis.applications.chatapp.login.types.ChatRoom;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
@@ -22,39 +24,44 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Collections;
-import java.util.List;
+import javax.swing.SwingWorker;
+
+import fi.eis.applications.chatapp.chat.actions.ChattingConnection;
+import fi.eis.applications.chatapp.chat.actions.ChattingConnectionFactory;
+import fi.eis.applications.chatapp.controller.ChatEnterHandler;
+import fi.eis.applications.chatapp.login.actions.LoginHandler;
+import fi.eis.applications.chatapp.login.actions.RoomsProvider;
+import fi.eis.applications.chatapp.login.types.ChatRoom;
+import fi.eis.libraries.di.SimpleLogger;
+import fi.eis.libraries.di.SimpleLogger.LogLevel;
 
 /**
- * User: eis
  * Date: 4.11.2014
  * Time: 20:16
+ * @author eis
  */
 public class LoginUI extends JFrame {
 
-    private static final String LOGINWINDOW_TITLE = "";
+    protected static final String LOGINWINDOW_TITLE = "";
 
-    private LoginHandler loginHandler;
-    private ChatEnterHandler chatEnterHandler;
-    private RoomsProvider roomFetchHandler;
-    private ChattingConnectionFactory chatConnectionFactory;
+    protected final SimpleLogger logger = new SimpleLogger(this.getClass());
 
-    private String sessionCookie;
-    private JList<ChatRoom> chatRoomList;
+    protected LoginHandler loginHandler;
+    protected ChatEnterHandler chatEnterHandler;
+    protected RoomsProvider roomFetchHandler;
+    protected ChattingConnectionFactory chatConnectionFactory;
+
+    protected String sessionCookie;
+    protected JList<ChatRoom> chatRoomList;
+    protected JList<String> userList;
     
-    private JButton enterChatButton;
+    protected JButton enterChatButton;
 
-    private LoginUI() {
+    protected LoginUI() {
 
     }
 
-    private LoginUI(LoginHandler loginHandler, ChatEnterHandler chatEnterHandler,
+    protected LoginUI(LoginHandler loginHandler, ChatEnterHandler chatEnterHandler,
                     RoomsProvider roomFetchHandler, ChattingConnectionFactory chatConnectionFactory) {
         this.loginHandler = loginHandler;
         this.chatEnterHandler = chatEnterHandler;
@@ -79,6 +86,14 @@ public class LoginUI extends JFrame {
         return frame;
     }
 
+    public static LoginUI createGUI(LoginHandler loginHandler,
+            ChatEnterHandler chatEnterHandler, RoomsProvider roomFetchHandler,
+            ChattingConnectionFactory chatConnectionFactory, LogLevel logLevel) {
+        LoginUI frame = createGUI(loginHandler, chatEnterHandler, roomFetchHandler, chatConnectionFactory);
+        frame.logger.setLogLevel(logLevel);
+        return frame;
+    }
+
     public void display() {
         // pack makes size correspond to content
         pack();
@@ -88,7 +103,7 @@ public class LoginUI extends JFrame {
         setVisible(true);
     }
 
-    private JPanel createLoginPanel() {
+    protected JPanel createLoginPanel() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(createLoginHeader(), BorderLayout.NORTH);
         panel.add(createRoomSelector(), BorderLayout.CENTER);
@@ -97,7 +112,7 @@ public class LoginUI extends JFrame {
         return panel;
     }
 
-    private JPanel createLoginFooter() {
+    protected JPanel createLoginFooter() {
         JPanel panel = new JPanel(new BorderLayout());
         this.enterChatButton = new JButton("Chat!");
         this.enterChatButton.setEnabled(false);
@@ -156,14 +171,14 @@ public class LoginUI extends JFrame {
 
         JScrollPane roomMemberListScrollPane;
         {
-            DefaultListModel listModel = new DefaultListModel();
+            DefaultListModel<String> listModel = new DefaultListModel<>();
             listModel.addElement("user1");
             listModel.addElement("user2");
             listModel.addElement("user3");
 
-            JList list = new JList(listModel);
-            list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-            roomMemberListScrollPane = new JScrollPane(list);
+            this.userList = new JList<>(listModel);
+            userList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            roomMemberListScrollPane = new JScrollPane(userList);
         }
 
         // Create a split pane with the two scroll panes in it.
@@ -184,52 +199,28 @@ public class LoginUI extends JFrame {
     }
 
 
+    private JTextField userNameTextField;
+    private JLabel passwordLabel;
+    private JPasswordField passwordField;
+    private JButton loginButton;
+
     private JPanel createLoginHeader() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panel.add(new JLabel("Username: ", JLabel.CENTER));
-        final JTextField userNameTextField = new JTextField(15);
+        userNameTextField = new JTextField(15);
         panel.add(userNameTextField);
-        final JLabel passwordLabel = new JLabel("Password: ", JLabel.CENTER);
+        passwordLabel = new JLabel("Password: ", JLabel.CENTER);
         panel.add(passwordLabel);
-        final JPasswordField passwordField = new JPasswordField(15);
+        passwordField = new JPasswordField(15);
         panel.add(passwordField);
-        final JButton loginButton = new JButton("Login");
+        loginButton = new JButton("Login");
         loginButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                boolean userWantsToLogIn = !enterChatButton.isEnabled();
-                try {
-                    if (userWantsToLogIn) {
-                        // trying to log in
-                        sessionCookie = loginHandler.tryLogin(userNameTextField.getText(), passwordField.getPassword());
-                        // disabling login controls while logged in
-                        userNameTextField.setEnabled(false);
-                        passwordLabel.setVisible(false);
-                        passwordField.setVisible(false);
-                        loginButton.setText("Logout");
-                        enterChatButton.setEnabled(true);
-                    } else {
-                        // user wants to log out, resetting session cookie
-                        sessionCookie = null;
-                        // enabling login controls
-                        userNameTextField.setEnabled(true);
-                        passwordLabel.setVisible(true);
-                        passwordField.setVisible(true);
-                        loginButton.setText("Login");
-                        enterChatButton.setEnabled(false);
-                    }
-                    System.out.println("LoginUI Session cookie: " + sessionCookie);
-                    LoginUI.this.setTitle(LOGINWINDOW_TITLE);
-                } catch (LoginFailedException ex) {
-                    LoginUI.this.setTitle(
-                            (LOGINWINDOW_TITLE.length() > 0)
-                                ? String.format("%s - %s", LOGINWINDOW_TITLE, ex.getMessage())
-                                : ex.getMessage()
-                        );
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    loginButtonPressed();
                 }
             }
-        });
+        );
         panel.add(loginButton);
         panel.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
 
@@ -238,4 +229,81 @@ public class LoginUI extends JFrame {
 
         return containerPanel;
     }
+
+    void loginButtonPressed() {
+        boolean userWantsToLogIn = !enterChatButton.isEnabled();
+        if (userWantsToLogIn) {
+            setLoadingStateWithText("Logging in...");
+            // trying to log in
+            SwingWorker<String, Void> worker = new SwingWorker<String, Void>() {
+
+                @Override
+                protected String doInBackground() throws Exception {
+                    logger.debug("doInBackGround");
+                    return loginHandler.tryLogin(
+                            userNameTextField.getText(),
+                            passwordField.getPassword());
+                }
+                @Override
+                public void done() {
+                    logger.debug("done");
+                    try {
+                        sessionCookie = get();
+                        loginButton.setText("Logout");
+                        loginButton.setEnabled(true);
+                        enterChatButton.setEnabled(true);
+                        // exceptions should be passed though doInBackground() and handled here
+                        // http://stackoverflow.com/questions/6523623/gracefull-exception-handling-in-swing-worker
+                    } catch (InterruptedException e) {
+                        handleException(e);
+                    } catch (ExecutionException e) {
+                        handleException(e.getCause());
+                    }
+                }
+                
+            };
+            worker.execute();
+
+        } else {
+            resetLoginStatus();
+        }
+        logger.debug("LoginUI Session cookie: " + sessionCookie);
+        LoginUI.this.setTitle(LOGINWINDOW_TITLE);
+    }
+
+    protected void setLoadingStateWithText(String msg) {
+        userNameTextField.setEnabled(false);
+        passwordLabel.setVisible(false);
+        passwordField.setVisible(false);
+        loginButton.setText(msg);
+        loginButton.setEnabled(false);
+        userList.setEnabled(false);
+        chatRoomList.setEnabled(false);
+    }
+
+    protected void handleException(Throwable t) {
+        logger.debug("Handling exception for " + t);
+        this.setTitle(
+                (LOGINWINDOW_TITLE.length() > 0)
+                    ? String.format("%s - %s", LOGINWINDOW_TITLE, t.getMessage())
+                    : t.getMessage()
+            );
+        logger.debug("this.getTitle " + this.getTitle());
+        resetLoginStatus();
+    }
+
+    protected void resetLoginStatus() {
+        // user wants to log out, resetting session cookie
+        sessionCookie = null;
+        // enabling login controls
+        userNameTextField.setEnabled(true);
+        passwordLabel.setVisible(true);
+        passwordField.setVisible(true);
+        loginButton.setText("Login");
+        enterChatButton.setEnabled(false);
+        loginButton.setEnabled(true);
+        userList.setEnabled(true);
+        chatRoomList.setEnabled(true);
+    }
+
 }

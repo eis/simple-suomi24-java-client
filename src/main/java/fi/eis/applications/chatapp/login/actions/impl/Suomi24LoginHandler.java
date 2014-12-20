@@ -4,6 +4,8 @@ import fi.eis.applications.chatapp.login.actions.LoginFailedException;
 import fi.eis.applications.chatapp.login.actions.LoginHandler;
 
 import javax.net.ssl.HttpsURLConnection;
+import javax.swing.SwingWorker;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.URL;
@@ -13,9 +15,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * User: eis
  * Creation Date: 8.11.2014
  * Creation Time: 14:56
+ * @author eis
  */
 public class Suomi24LoginHandler implements LoginHandler {
 
@@ -32,6 +34,8 @@ public class Suomi24LoginHandler implements LoginHandler {
 
     @Override
     public String tryLogin(String userName, char[] password) throws LoginFailedException {
+        
+        
         try {
 
             String postBody = String.format("name=%s&pass=%s&form_build_id=form-16ac2b653fc2d785719c402adfc5800d&form_id=user_login&op=Kirjaudu+sis%%C3%%A4%%C3%%A4n",
