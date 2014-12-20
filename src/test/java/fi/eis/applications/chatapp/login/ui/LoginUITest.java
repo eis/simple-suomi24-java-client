@@ -44,7 +44,7 @@ public class LoginUITest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         GraphicsEnvironment.getLocalGraphicsEnvironment();
-        logger.setLogLevel(LogLevel.DEBUG);
+        logger.setLogLevel(LogLevel.NONE);
     }
 
     @Test
@@ -55,7 +55,7 @@ public class LoginUITest {
         }
         LoginUI loginUI = LoginUI.createGUI(loginHandler, chatEnterHandler,
                 roomFetchHandler, chatConnectionFactory,
-                LogLevel.DEBUG);
+                LogLevel.NONE);
         when(loginHandler.tryLogin(anyString(), any(char[].class)))
             .thenThrow(new LoginFailedException("some issue"));
         loginUI.loginButtonPressed();
@@ -99,7 +99,7 @@ public class LoginUITest {
         TestableLoginUI loginUI = 
                 TestableLoginUI.createGUI(loginHandler, chatEnterHandler,
                 roomFetchHandler, chatConnectionFactory,
-                LogLevel.DEBUG);
+                LogLevel.NONE);
         when(loginHandler.tryLogin(anyString(), any(char[].class)))
             .then(createDelayAnswer());
         loginUI.loginButtonPressed();

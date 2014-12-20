@@ -1,22 +1,26 @@
 package fi.eis.applications.chatapp.login.actions.impl;
 
 import java.io.File;
-import org.w3c.dom.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.FactoryConfigurationError;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 import fi.eis.applications.chatapp.login.actions.RoomsProvider;
 import fi.eis.applications.chatapp.login.types.ChatRoom;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import fi.eis.libraries.di.SimpleLogger;
+import fi.eis.libraries.di.SimpleLogger.LogLevel;
 
 /**
  * Creation Date: 8.11.2014
@@ -24,19 +28,28 @@ import java.util.List;
  *
  * Class retrieves the room list from an XML file.
  *
- * Two constructors are offered: one with default "rooms.xml" and another with
+ * Alternative constructors are offered: log levels, one with default "rooms.xml" and another with
  * user-specified file name (that can contain a path with it).
  *
  * @author eis
  */
 public class XMLBasedRoomsProvider implements RoomsProvider {
     private final String ROOM_CONFIG_FILE;
-    private static final boolean debug = false;
+    private final SimpleLogger logger;
 
     public XMLBasedRoomsProvider() {
-        this.ROOM_CONFIG_FILE = "rooms.xml";
+        this(LogLevel.ERROR);
+    }
+    public XMLBasedRoomsProvider(LogLevel logLevel) {
+        this("rooms.xml", logLevel);
     }
     public XMLBasedRoomsProvider(final String fileName) {
+        this(fileName, LogLevel.ERROR);
+    }
+
+    public XMLBasedRoomsProvider(final String fileName, LogLevel logLevel) {
+        this.logger = new SimpleLogger(this.getClass());
+        this.logger.setLogLevel(logLevel);
         this.ROOM_CONFIG_FILE = fileName;
     }
 
@@ -67,13 +80,13 @@ public class XMLBasedRoomsProvider implements RoomsProvider {
 
             // normalize text representation
             doc.getDocumentElement ().normalize ();
-            printDebug("Root element of the doc is " +
+            logger.debug("Root element of the doc is " +
                     doc.getDocumentElement().getNodeName());
 
 
             NodeList listOfRooms = doc.getElementsByTagName("room");
             int totalRooms = listOfRooms.getLength();
-            printDebug("Total no of items: " + totalRooms);
+            logger.debug("Total no of items: " + totalRooms);
 
             for(int s=0; s<listOfRooms.getLength() ; s++){
 
@@ -109,18 +122,13 @@ public class XMLBasedRoomsProvider implements RoomsProvider {
 
 
         } catch (SAXParseException err) {
-            System.err.println ("** Parsing error" + ", line "
+            logger.error("** Parsing error" + ", line "
                     + err.getLineNumber () + ", uri " + err.getSystemId ());
-            System.err.println(" " + err.getMessage ());
+            logger.error(" " + err.getMessage ());
             throw new IllegalStateException(err);
         } catch (SAXException | ParserConfigurationException | IOException | FactoryConfigurationError | ClassCastException e) {
             throw new IllegalStateException(e);
         }
     }
 
-    private static void printDebug(String message) {
-        if (debug) {
-            System.out.println(message);
-        }
-    }
 }

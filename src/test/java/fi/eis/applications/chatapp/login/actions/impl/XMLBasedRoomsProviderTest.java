@@ -1,23 +1,23 @@
 package fi.eis.applications.chatapp.login.actions.impl;
 
-import fi.eis.applications.chatapp.login.actions.RoomsProvider;
-import fi.eis.applications.chatapp.login.actions.impl.XMLBasedRoomsProvider;
-import fi.eis.applications.chatapp.login.actions.impl.testhelpers.IOExceptionThrowingDocumentBuilderFactory;
-import fi.eis.applications.chatapp.login.actions.impl.testhelpers.MisconfiguredDocumentBuilderFactory;
-import fi.eis.applications.chatapp.login.types.ChatRoom;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.io.File;
-import java.util.List;
-
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
+
+import java.io.File;
+import java.util.List;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import fi.eis.applications.chatapp.login.actions.RoomsProvider;
+import fi.eis.applications.chatapp.login.actions.impl.testhelpers.IOExceptionThrowingDocumentBuilderFactory;
+import fi.eis.applications.chatapp.login.actions.impl.testhelpers.MisconfiguredDocumentBuilderFactory;
+import fi.eis.applications.chatapp.login.types.ChatRoom;
+import fi.eis.libraries.di.SimpleLogger.LogLevel;
 
 /**
  * Creation Date: 9.11.2014
@@ -30,7 +30,7 @@ public class XMLBasedRoomsProviderTest {
     @Test
     public void testWithMissingFile() {
         String targetFile = "target/test-classes/fi/eis/applications/chatapp/login/actions/impl/rooms-file-that-does-not-exist.xml";
-        RoomsProvider sut = new XMLBasedRoomsProvider(targetFile);
+        RoomsProvider sut = new XMLBasedRoomsProvider(targetFile, LogLevel.NONE);
         try {
             sut.getRooms();
             fail("Line should not be reached");
@@ -43,7 +43,7 @@ public class XMLBasedRoomsProviderTest {
     @Test
     public void testWithBrokenFile() {
         String targetFile = "target/test-classes/fi/eis/applications/chatapp/login/actions/impl/rooms-file-that-is-broken.xml";
-        RoomsProvider sut = new XMLBasedRoomsProvider(targetFile);
+        RoomsProvider sut = new XMLBasedRoomsProvider(targetFile, LogLevel.NONE);
         try {
             sut.getRooms();
             fail("Line should not be reached");
@@ -56,16 +56,16 @@ public class XMLBasedRoomsProviderTest {
     @Test
     public void testWithWorkingFile() {
         String targetFile = "target/test-classes/fi/eis/applications/chatapp/login/actions/impl/rooms-file-that-works.xml";
-        RoomsProvider sut = new XMLBasedRoomsProvider(targetFile);
+        RoomsProvider sut = new XMLBasedRoomsProvider(targetFile, LogLevel.NONE);
         List<ChatRoom> rooms = sut.getRooms();
-        assertThat(rooms.size(), greaterThan(5));
+        assertThat(Integer.valueOf(rooms.size()), greaterThan(Integer.valueOf(5)));
     }
 
     @Test
     public void testUncastableDocumentBuilderConfiguration() {
         System.setProperty(DOC_BUILDER_PROPERTY_NAME, this.getClass().getCanonicalName());
         String targetFile = "target/test-classes/fi/eis/applications/chatapp/login/actions/impl/rooms-file-that-works.xml";
-        RoomsProvider sut = new XMLBasedRoomsProvider(targetFile);
+        RoomsProvider sut = new XMLBasedRoomsProvider(targetFile, LogLevel.NONE);
         try {
             sut.getRooms();
             fail("Line should not be reached");
@@ -77,7 +77,7 @@ public class XMLBasedRoomsProviderTest {
     public void testUnfindableDocumentBuilderConfiguration() {
         System.setProperty(DOC_BUILDER_PROPERTY_NAME, "does/not/exist.class");
         String targetFile = "target/test-classes/fi/eis/applications/chatapp/login/actions/impl/rooms-file-that-works.xml";
-        RoomsProvider sut = new XMLBasedRoomsProvider(targetFile);
+        RoomsProvider sut = new XMLBasedRoomsProvider(targetFile, LogLevel.NONE);
         try {
             sut.getRooms();
             fail("Line should not be reached");
@@ -112,7 +112,7 @@ public class XMLBasedRoomsProviderTest {
     public void testParserConfigurationProblem() {
         System.setProperty(DOC_BUILDER_PROPERTY_NAME, MisconfiguredDocumentBuilderFactory.class.getCanonicalName());
         String targetFile = "target/test-classes/fi/eis/applications/chatapp/login/actions/impl/rooms-file-that-works.xml";
-        RoomsProvider sut = new XMLBasedRoomsProvider(targetFile);
+        RoomsProvider sut = new XMLBasedRoomsProvider(targetFile, LogLevel.NONE);
         try {
             sut.getRooms();
             fail("Line should not be reached");
@@ -124,7 +124,7 @@ public class XMLBasedRoomsProviderTest {
     public void testParserIOProblem() {
         System.setProperty(DOC_BUILDER_PROPERTY_NAME, IOExceptionThrowingDocumentBuilderFactory.class.getCanonicalName());
         String targetFile = "target/test-classes/fi/eis/applications/chatapp/login/actions/impl/rooms-file-that-works.xml";
-        RoomsProvider sut = new XMLBasedRoomsProvider(targetFile);
+        RoomsProvider sut = new XMLBasedRoomsProvider(targetFile, LogLevel.NONE);
         try {
             sut.getRooms();
             fail("Line should not be reached");

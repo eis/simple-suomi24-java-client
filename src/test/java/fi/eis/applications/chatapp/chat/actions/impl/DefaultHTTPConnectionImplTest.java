@@ -1,10 +1,11 @@
 package fi.eis.applications.chatapp.chat.actions.impl;
 
 import static org.hamcrest.CoreMatchers.is;
+
 import org.junit.Assert;
 import org.junit.Test;
 
-import fi.eis.applications.chatapp.chat.actions.impl.DefaultHTTPConnectionImpl;
+import fi.eis.libraries.di.SimpleLogger.LogLevel;
 
 /**
  * Creation Date: 23.11.2014
@@ -40,7 +41,7 @@ public class DefaultHTTPConnectionImplTest {
                 "cacheControlDisabled=0; " +
                 "cacheControlSessionHash=cccccccccccccccccccccccccccccccccccccccc; " +
                 "cacheControlAuthenticated=0");
-        DefaultHTTPConnectionImpl impl = new DefaultHTTPConnectionImpl();
+        DefaultHTTPConnectionImpl impl = new DefaultHTTPConnectionImpl(LogLevel.NONE);
         String result = impl.formatAsJavaNetAcceptableCookieString(cookieTestValue);
         Assert.assertThat(result, is(expected));
     }
