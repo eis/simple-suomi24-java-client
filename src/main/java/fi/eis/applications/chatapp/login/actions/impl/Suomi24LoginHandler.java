@@ -1,11 +1,5 @@
 package fi.eis.applications.chatapp.login.actions.impl;
 
-import fi.eis.applications.chatapp.login.actions.LoginFailedException;
-import fi.eis.applications.chatapp.login.actions.LoginHandler;
-
-import javax.net.ssl.HttpsURLConnection;
-import javax.swing.SwingWorker;
-
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.URL;
@@ -13,6 +7,11 @@ import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import javax.net.ssl.HttpsURLConnection;
+
+import fi.eis.applications.chatapp.login.actions.LoginFailedException;
+import fi.eis.applications.chatapp.login.actions.LoginHandler;
 
 /**
  * Creation Date: 8.11.2014

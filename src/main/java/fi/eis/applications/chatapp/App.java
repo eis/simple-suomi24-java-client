@@ -1,5 +1,8 @@
 package fi.eis.applications.chatapp;
 
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+
 import fi.eis.applications.chatapp.chat.actions.ChattingConnectionFactory;
 import fi.eis.applications.chatapp.controller.ChatEnterHandler;
 import fi.eis.applications.chatapp.login.actions.LoginHandler;
@@ -8,8 +11,6 @@ import fi.eis.applications.chatapp.login.ui.LoginUI;
 import fi.eis.libraries.di.Context;
 import fi.eis.libraries.di.DependencyInjection;
 import fi.eis.libraries.di.Inject;
-
-import javax.swing.*;
 
 public class App implements Runnable
 {
@@ -58,6 +59,7 @@ public class App implements Runnable
         // Schedule a job for the event dispatching thread:
         // creating and showing this application's GUI.
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
 
                 // Turn off metal's use of bold fonts

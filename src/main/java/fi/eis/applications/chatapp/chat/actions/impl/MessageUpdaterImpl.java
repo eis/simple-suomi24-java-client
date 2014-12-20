@@ -6,8 +6,8 @@ import fi.eis.applications.chatapp.chat.actions.MessageUpdater;
 
 public class MessageUpdaterImpl implements MessageUpdater {
 
-    public MessageUpdaterImpl(JPanel messagesPanel) {
-        // TODO Auto-generated constructor stub
+    public MessageUpdaterImpl(@SuppressWarnings("unused") JPanel messagesPanel) {
+        throw new UnsupportedOperationException("not implemented yet");
     }
 
 }

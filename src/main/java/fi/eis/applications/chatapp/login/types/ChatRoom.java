@@ -23,6 +23,7 @@ public class ChatRoom {
         this.roomName = roomName;
     }
 
+    @Override
     public String toString() {
         return String.format("%s[roomId=%s, roomName=%s]",
                 this.getClass().getSimpleName(),
