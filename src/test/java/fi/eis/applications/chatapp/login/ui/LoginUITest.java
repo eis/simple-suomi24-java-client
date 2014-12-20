@@ -44,6 +44,7 @@ public class LoginUITest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         GraphicsEnvironment.getLocalGraphicsEnvironment();
+        logger.setLogLevel(LogLevel.DEBUG);
     }
 
     @Test
