@@ -67,8 +67,8 @@ public class LoginUITest {
     static class TestableLoginUI extends LoginUI {
 
         // the method we need for our tests
-        public boolean areAnyListsEnabled() {
-            return this.chatRoomList.isEnabled() ||
+        public boolean areListsEnabled() {
+            return this.chatRoomList.isEnabled() &&
                     this.userList.isEnabled();
         }
         // helpers to get class constructed
@@ -105,7 +105,7 @@ public class LoginUITest {
         loginUI.loginButtonPressed();
         loginUI.pack();
         loginUI.setVisible(true);
-        assertEquals(Boolean.FALSE, Boolean.valueOf(loginUI.areAnyListsEnabled()));
+        assertEquals(Boolean.TRUE, Boolean.valueOf(loginUI.areListsEnabled()));
     }
         
     private Answer<?> createDelayAnswer() {

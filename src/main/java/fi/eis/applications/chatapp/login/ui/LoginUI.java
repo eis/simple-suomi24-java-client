@@ -249,9 +249,7 @@ public class LoginUI extends JFrame {
                     logger.debug("done");
                     try {
                         sessionCookie = get();
-                        loginButton.setText("Logout");
-                        loginButton.setEnabled(true);
-                        enterChatButton.setEnabled(true);
+                        setLoggedInState();
                         // exceptions should be passed though doInBackground() and handled here
                         // http://stackoverflow.com/questions/6523623/gracefull-exception-handling-in-swing-worker
                     } catch (InterruptedException e) {
@@ -271,16 +269,6 @@ public class LoginUI extends JFrame {
         LoginUI.this.setTitle(LOGINWINDOW_TITLE);
     }
 
-    protected void setLoadingStateWithText(String msg) {
-        userNameTextField.setEnabled(false);
-        passwordLabel.setVisible(false);
-        passwordField.setVisible(false);
-        loginButton.setText(msg);
-        loginButton.setEnabled(false);
-        userList.setEnabled(false);
-        chatRoomList.setEnabled(false);
-    }
-
     protected void handleException(Throwable t) {
         logger.debug("Handling exception for " + t);
         this.setTitle(
@@ -293,8 +281,8 @@ public class LoginUI extends JFrame {
     }
 
     protected void resetLoginStatus() {
-        // user wants to log out, resetting session cookie
         sessionCookie = null;
+
         // enabling login controls
         userNameTextField.setEnabled(true);
         passwordLabel.setVisible(true);
@@ -302,8 +290,20 @@ public class LoginUI extends JFrame {
         loginButton.setText("Login");
         enterChatButton.setEnabled(false);
         loginButton.setEnabled(true);
-        userList.setEnabled(true);
-        chatRoomList.setEnabled(true);
+    }
+
+    protected void setLoadingStateWithText(String msg) {
+        userNameTextField.setEnabled(false);
+        passwordLabel.setVisible(false);
+        passwordField.setVisible(false);
+        loginButton.setText(msg);
+        loginButton.setEnabled(false);
+    }
+
+    private void setLoggedInState() {
+        loginButton.setText("Logout");
+        loginButton.setEnabled(true);
+        enterChatButton.setEnabled(true);
     }
 
 }
