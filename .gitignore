@@ -12,4 +12,5 @@ chatapp.iml
 
 # Some random others
 *.txt
+*.log
 travis/
