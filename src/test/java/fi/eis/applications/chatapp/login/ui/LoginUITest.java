@@ -7,6 +7,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
+import java.awt.GraphicsEnvironment;
 import java.util.concurrent.Semaphore;
 
 import javax.swing.JFrame;
@@ -24,6 +25,7 @@ import fi.eis.applications.chatapp.controller.ChatEnterHandler;
 import fi.eis.applications.chatapp.login.actions.LoginFailedException;
 import fi.eis.applications.chatapp.login.actions.LoginHandler;
 import fi.eis.applications.chatapp.login.actions.RoomsProvider;
+import fi.eis.libraries.di.SimpleLogger;
 import fi.eis.libraries.di.SimpleLogger.LogLevel;
 
 public class LoginUITest {
@@ -36,13 +38,20 @@ public class LoginUITest {
     @Mock
     private ChattingConnectionFactory chatConnectionFactory;
 
+    final SimpleLogger logger = new SimpleLogger(this.getClass());
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
+        GraphicsEnvironment.getLocalGraphicsEnvironment();
     }
 
     @Test
     public void testCannotConnect() throws Exception {
+        if (GraphicsEnvironment.isHeadless()) {
+            logger.error("can't perform UI tests due to headless environment, so skipping them");
+            return;
+        }
         LoginUI loginUI = LoginUI.createGUI(loginHandler, chatEnterHandler,
                 roomFetchHandler, chatConnectionFactory,
                 LogLevel.DEBUG);
@@ -82,7 +91,10 @@ public class LoginUITest {
     }
     @Test
     public void testLoadingState() throws Exception {
-        
+        if (GraphicsEnvironment.isHeadless()) {
+            logger.error("can't perform UI tests due to headless environment, so skipping them");
+            return;
+        }
         TestableLoginUI loginUI = 
                 TestableLoginUI.createGUI(loginHandler, chatEnterHandler,
                 roomFetchHandler, chatConnectionFactory,
