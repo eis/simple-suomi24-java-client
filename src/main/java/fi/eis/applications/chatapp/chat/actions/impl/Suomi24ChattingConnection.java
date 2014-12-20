@@ -1,19 +1,21 @@
 package fi.eis.applications.chatapp.chat.actions.impl;
 
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import fi.eis.applications.chatapp.chat.actions.ChattingConnection;
 import fi.eis.applications.chatapp.chat.actions.HTTPConnectionHandler;
 import fi.eis.applications.chatapp.chat.actions.MessageUpdater;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import fi.eis.libraries.di.SimpleLogger;
+import fi.eis.libraries.di.SimpleLogger.LogLevel;
 
 public class Suomi24ChattingConnection implements ChattingConnection {
     
     private final int selectedRoomId;
     private final String sessionId;
     private final HTTPConnectionHandler httpHandler;
-    private final boolean debug = false;
+    private final SimpleLogger logger = new SimpleLogger(this.getClass());
 
     public static class ConnectionParameters {
         private String whoParam;
@@ -51,9 +53,15 @@ public class Suomi24ChattingConnection implements ChattingConnection {
 
     public Suomi24ChattingConnection(int selectedRoomIdInput, String sessionIdInput,
             HTTPConnectionHandler httpHandlerInput) {
+        this(selectedRoomIdInput, sessionIdInput,
+            httpHandlerInput, LogLevel.ERROR);
+    }
+    public Suomi24ChattingConnection(int selectedRoomIdInput, String sessionIdInput,
+            HTTPConnectionHandler httpHandlerInput, LogLevel logLevel) {
         this.selectedRoomId = selectedRoomIdInput;
         this.sessionId = sessionIdInput;
         this.httpHandler = httpHandlerInput;
+        this.logger.setLogLevel(logLevel);
     }
     final static Pattern firstPattern = Pattern.compile(
             ".*name=\"nick\" value=\"(.+?)\".*name=\"name\" value=\"(.+?)\".*name=\"who\" value=\"([a-f0-9]+?)\".*",
@@ -80,7 +88,7 @@ public class Suomi24ChattingConnection implements ChattingConnection {
 
         String url = String.format("http://chat.suomi24.fi/login.cgi?cid=%d", Integer.valueOf(selectedRoomId));
         String HTML = httpHandler.getHTMLFromURLWithCookie(url, sessionId);
-        debugPrint("Got HTML " + HTML);
+        logger.debug("Got HTML " + HTML);
         Matcher matcher  = firstPattern.matcher(HTML);
 
         if (matcher.matches()) {
@@ -93,14 +101,9 @@ public class Suomi24ChattingConnection implements ChattingConnection {
                     String.format("Didn't get HTML containing the proper values (using url %s, cookie %s)",
                             url, sessionId));
         }
-        System.out.println("Got params " + params);
+        logger.error("Got params " + params);
     }
 
-    private void debugPrint(String string) {
-        if (debug) {
-            System.out.println(string);
-        }
-    }
 
     /* (non-Javadoc)
      * @see fi.eis.applications.chatapp.chat.actions.impl.ChattingConnection#setUpdater(fi.eis.applications.chatapp.chat.actions.impl.MessageUpdater)
