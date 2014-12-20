@@ -42,5 +42,5 @@ Nice to have
  - .exe
  - update mechanism
  - support for nick search
- - [login in a background thread](https://github.com/eis/simple-suomi24-java-client/issues/13)
+ - ~~[login in a background thread](https://github.com/eis/simple-suomi24-java-client/issues/13)~~
  - ~~custom DI implementation~~
