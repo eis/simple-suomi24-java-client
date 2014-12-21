@@ -1,46 +1,52 @@
 package fi.eis.applications.chatapp.chat.ui;
 
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
+
+import javax.swing.BorderFactory;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JEditorPane;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 import fi.eis.applications.chatapp.chat.actions.ChattingConnection;
 import fi.eis.applications.chatapp.chat.actions.impl.MessageUpdaterImpl;
 
-import java.awt.*;
-import java.awt.event.*;
-
 /**
  * Created with IntelliJ IDEA.
- * User: eis
  * Date: 3.11.2014
  * Time: 22:53
+ * 
+ * @author eis
  */
 public class ChatUI extends JFrame {
 
-    private JTextField inputField;
-    private JPanel userListPanel;
-    private JPanel messagesPanel;
-    private JPanel inputPanel;
+    private final JPanel userListPanel;
+    private final MessagesPanel messagesPanel;
+    private final InputPanel inputPanel;
 
-    private ChattingConnection conn;
-
-    private ChatUI()  {
-        // no-op
-    }
     private ChatUI(ChattingConnection conn) {
-        this.conn = conn;
 
         JPanel panel = new JPanel(new BorderLayout());
         panel.setPreferredSize(new Dimension(500, 500));
 
         this.userListPanel = createUserListPanel();
 
-        this.messagesPanel = createMessagesPanel();
+        this.messagesPanel = MessagesPanel.createMessagesPanel();
 
-        this.inputPanel = createInputPanel();
+        this.inputPanel = InputPanel.createInputPanel();
 
         JMenuBar menuBar = createMenu();
 
-        conn.setUpdater(new MessageUpdaterImpl(this.messagesPanel));
+        conn.setUpdater(new MessageUpdaterImpl(messagesPanel.getEditorPane()));
 
         
         // Put everything on a panel.
@@ -55,20 +61,6 @@ public class ChatUI extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setJMenuBar(menuBar);
         add(panel);
-    }
-
-    /**
-     * Returns an ImageIcon, or null if the path was invalid.
-     */
-    protected static ImageIcon createImageIcon(String path,
-                                               String description) {
-        java.net.URL imgURL = ChatUI.class.getResource(path);
-        if (imgURL != null) {
-            return new ImageIcon(imgURL, description);
-        } else {
-            System.err.println("Couldn't find file: " + path);
-            return null;
-        }
     }
 
     /**
@@ -89,7 +81,11 @@ public class ChatUI extends JFrame {
         // Set focus
         frame.focusOnInput();
         
+        // connect to chat
         conn.connect();
+        
+        // execute background connections
+        conn.execute();
 
         // Show
         frame.setVisible(true);
@@ -124,28 +120,7 @@ public class ChatUI extends JFrame {
     }
 
     private JTextField getInputField() {
-        return inputField;
-    }
-
-    private JPanel createInputPanel() {
-        inputField = new JTextField(10);
-
-        JPanel tempInputPanel = new JPanel(new GridBagLayout());
-
-        GridBagConstraints c = new GridBagConstraints();
-
-        JTextField[] textFields = {inputField};
-        addLabelTextRows(textFields, tempInputPanel);
-
-        c.gridwidth = GridBagConstraints.REMAINDER; //last
-        c.anchor = GridBagConstraints.WEST;
-        c.weightx = 1.0;
-
-        tempInputPanel.setBorder(
-                BorderFactory.createCompoundBorder(
-                        BorderFactory.createTitledBorder("Input"),
-                        BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-        return tempInputPanel;
+        return inputPanel.getInputField();
     }
 
     private static JPanel createUserListPanel() {
@@ -166,58 +141,9 @@ public class ChatUI extends JFrame {
                 BorderFactory.createEmptyBorder(5, 5, 5, 5)));
         return userListPanel;
     }
-
-    private static JPanel createMessagesPanel() {
-        JEditorPane editorPane = createEditorPane();
-        JScrollPane editorScrollPane = new JScrollPane(editorPane);
-        editorScrollPane.setVerticalScrollBarPolicy(
-                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        editorScrollPane.setHorizontalScrollBarPolicy(
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
-        );
-        editorScrollPane.setMinimumSize(new Dimension(10, 10));
-
-
-        JPanel chatPane = new JPanel(new GridLayout(1, 0));
-        chatPane.add(editorScrollPane);
-        chatPane.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createTitledBorder("Messages"),
-                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-        return chatPane;
-    }
-
-    private static void addLabelTextRows(JTextField[] textFields,
-                                  Container container) {
-        GridBagConstraints c = new GridBagConstraints();
-        c.anchor = GridBagConstraints.EAST;
-        int numLabels = textFields.length;
-
-        for (int i = 0; i < numLabels; i++) {
-            c.gridwidth = GridBagConstraints.REMAINDER;     //end row
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.weightx = 1.0;
-            container.add(textFields[i], c);
-        }
-    }
-
     private static JEditorPane createEditorPane() {
         JEditorPane editorPane = new JEditorPane();
         editorPane.setEditable(false);
-        /*
-        java.net.URL helpURL = this.getClass().getResource(
-                "TextSamplerDemoHelp.html");
-        if (helpURL != null) {
-            try {
-                editorPane.setPage(helpURL);
-            } catch (IOException e) {
-                System.err.println("Attempted to read a bad URL: " + helpURL);
-            }
-        } else {
-            System.err.println("Couldn't find file: TextSampleDemoHelp.html");
-        }
-        */
-
         return editorPane;
     }
-
 }

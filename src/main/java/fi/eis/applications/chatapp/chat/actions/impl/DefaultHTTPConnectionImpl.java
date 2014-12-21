@@ -22,7 +22,7 @@ public class DefaultHTTPConnectionImpl extends AbstractHTTPConnection implements
     private final SimpleLogger logger = new SimpleLogger(this.getClass());
 
     public DefaultHTTPConnectionImpl() {
-        this(LogLevel.DEBUG);
+        this(LogLevel.ERROR);
     }
     
     public DefaultHTTPConnectionImpl(LogLevel logLevel) {

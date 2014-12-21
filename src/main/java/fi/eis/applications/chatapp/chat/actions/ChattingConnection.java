@@ -10,4 +10,6 @@ public interface ChattingConnection {
 
     public abstract void setUpdater(MessageUpdater messageUpdater);
 
+    public abstract void execute();
+
 }

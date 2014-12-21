@@ -3,9 +3,10 @@ package fi.eis.applications.chatapp.login.types;
 import java.util.Comparator;
 
 /**
- * User: eis
  * Creation Date: 8.11.2014
  * Creation Time: 18:46
+ * 
+ * @author eis
  */
 public class ChatRoom {
     private final int roomId;

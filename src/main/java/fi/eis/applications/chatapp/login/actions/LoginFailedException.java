@@ -1,9 +1,10 @@
 package fi.eis.applications.chatapp.login.actions;
 
 /**
- * User: eis
  * Creation Date: 5.11.2014
- * Creatuin Time: 22:47
+ * Creation Time: 22:47
+ * 
+ * @author eis
  */
 public class LoginFailedException extends Exception {
     public LoginFailedException(Throwable t) {
