@@ -16,8 +16,8 @@ TODO
 
 Must have
 
- - [login to chat](https://github.com/eis/simple-suomi24-java-client/issues/1)
- - [able to view the messages while in chat](https://github.com/eis/simple-suomi24-java-client/issues/2)
+ - ~~[login to chat](https://github.com/eis/simple-suomi24-java-client/issues/1)~~
+ - ~~[able to view the messages while in chat](https://github.com/eis/simple-suomi24-java-client/issues/2~~)
  - [send messages to chat](https://github.com/eis/simple-suomi24-java-client/issues/3)
  - [generate and update user list](https://github.com/eis/simple-suomi24-java-client/issues/4)
 

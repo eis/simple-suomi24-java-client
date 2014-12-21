@@ -101,4 +101,26 @@ public class Suomi24ChattingConnectionTest {
         Assert.assertEquals("4598984022979187204",
                 m.group(2));
     }
+    @Test
+    public void testRegexp4() {
+        String testContent = 
+            "var channelId = 123;"+
+            "var userId = 413409;"+
+            "var userCs = '7803832308989846675';"+
+            "var userRegistered = true;"+
+            "var maxSelections = 5;"+
+            "var maxEmoticons = 3;"+
+            "var maxUsers = 90;"+
+            "var roomName = 'Seurahuone';"+
+            "var chatPageUrl = 'http://chat1.suomi24.fi:8080/tpl/';"+
+            "var chatBodyUrl = 'http://chat1.suomi24.fi:8080/body/';"+
+            "var chatBodyUrlBackup = '';"
+                ;
+        Matcher m = Suomi24ChattingConnection.fourthPattern.matcher(testContent);
+
+        Assert.assertTrue(Suomi24ChattingConnection.fourthPattern + " failed to match " + testContent,
+                m.matches());
+        Assert.assertEquals("http://chat1.suomi24.fi:8080/body/",
+                m.group(1));
+    }
 }

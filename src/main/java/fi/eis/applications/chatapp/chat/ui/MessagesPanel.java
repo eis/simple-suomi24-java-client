@@ -9,20 +9,25 @@ import javax.swing.BorderFactory;
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.text.html.HTMLDocument;
+import javax.swing.text.html.HTMLEditorKit;
 
 public class MessagesPanel extends JPanel {
     private MessagesPanel(LayoutManager layout) {
         super(layout);
-        messagesEditorPane = createEditorPane();
+        messagesEditorPane = createHTMLEditorPane();
     }
     private MessagesPanel(LayoutManager2 layout) {
         super(layout);
-        messagesEditorPane = createEditorPane();
+        messagesEditorPane = createHTMLEditorPane();
     }
     private JEditorPane messagesEditorPane;
-    
+
     public JEditorPane getEditorPane() {
-        return this.messagesEditorPane;
+        return messagesEditorPane;
+    }
+    public HTMLEditorKit getEditorKit() {
+        return (HTMLEditorKit)getEditorPane().getEditorKit();
     }
     
     static MessagesPanel createMessagesPanel() {
@@ -44,23 +49,16 @@ public class MessagesPanel extends JPanel {
     }
 
 
-    private static JEditorPane createEditorPane() {
+    private static JEditorPane createHTMLEditorPane() {
         JEditorPane editorPane = new JEditorPane();
         editorPane.setEditable(false);
-        /*
-        java.net.URL helpURL = this.getClass().getResource(
-                "TextSamplerDemoHelp.html");
-        if (helpURL != null) {
-            try {
-                editorPane.setPage(helpURL);
-            } catch (IOException e) {
-                System.err.println("Attempted to read a bad URL: " + helpURL);
-            }
-        } else {
-            System.err.println("Couldn't find file: TextSampleDemoHelp.html");
-        }
-        */
-
+        editorPane.setContentType("text/html");
+        HTMLEditorKit kit = new HTMLEditorKit();
+        HTMLDocument doc = new HTMLDocument();
+        // this is to avoid CharacterSetChangedException on new data
+        doc.putProperty("IgnoreCharsetDirective",new Boolean(true));
+        editorPane.setEditorKit(kit);
+        editorPane.setDocument(doc);
         return editorPane;
     }
 

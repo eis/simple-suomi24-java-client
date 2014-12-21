@@ -31,7 +31,7 @@ public class Suomi24ChattingConnection extends SwingWorker<Void,String> implemen
         private final String whoParam;
         private final String nickParam;
         private final String userIdParam;
-        private final String sessionString;
+        private final String cs;
         private final String uid;
 
         @Override
@@ -40,7 +40,7 @@ public class Suomi24ChattingConnection extends SwingWorker<Void,String> implemen
                     "whoParam='" + whoParam + '\'' +
                     ", nickParam='" + nickParam + '\'' +
                     ", userIdParam='" + userIdParam + '\'' +
-                    ", sessionString='" + sessionString + '\'' +
+                    ", sessionString='" + cs + '\'' +
                     ", uid='" + uid + '\'' +
                     '}';
         }
@@ -50,14 +50,14 @@ public class Suomi24ChattingConnection extends SwingWorker<Void,String> implemen
             this.whoParam = whoParam;
             this.nickParam = nickParam;
             this.userIdParam = userIdParam;
-            this.sessionString = null;
+            this.cs = null;
             this.uid = null;
         }
-        private ConnectionParameters(ConnectionParameters params, String uid, String sessionString) {
+        private ConnectionParameters(ConnectionParameters params, String uid, String cs) {
             this.whoParam       = params.whoParam;
             this.nickParam      = params.nickParam;
             this.userIdParam    = params.userIdParam;
-            this.sessionString  = sessionString;
+            this.cs             = cs;
             this.uid            = uid;
         }
         public String getNick() {
@@ -69,19 +69,23 @@ public class Suomi24ChattingConnection extends SwingWorker<Void,String> implemen
         public String getUserId() {
             return this.userIdParam;
         }
-        public String getSessionString() {
-            return this.sessionString;
+        public String getCs() {
+            return this.cs;
+        }
+        public String getUid() {
+            return this.uid;
+        }
+        static ConnectionParameters build(String whoParam, String nickParam, String userIdParam) {
+            return new ConnectionParameters(whoParam, nickParam, userIdParam);
+        }
+
+        static ConnectionParameters build(
+                ConnectionParameters params2, String uid, String cs) {
+            return new ConnectionParameters(params2, uid, cs);
         }
     }
 
-    protected static ConnectionParameters buildConnectionParameters(String whoParam, String nickParam, String userIdParam) {
-        return new ConnectionParameters(whoParam, nickParam, userIdParam);
-    }
 
-    protected static ConnectionParameters buildConnectionParameters(
-            ConnectionParameters params2, String uid, String cs) {
-        return new ConnectionParameters(params2, uid, cs);
-    }
     public Suomi24ChattingConnection(int selectedRoomIdInput, String sessionIdInput,
             HTTPConnectionHandler httpHandlerInput) {
         this(selectedRoomIdInput, sessionIdInput,
@@ -105,6 +109,7 @@ public class Suomi24ChattingConnection extends SwingWorker<Void,String> implemen
 
     @Override
     protected Void doInBackground() throws Exception {
+        final int AMOUNT_TO_READ_AT_A_TIME = 2048;
         URL url = new URL(chatConnectionUrl);
         HttpURLConnection connection = (HttpURLConnection) url
               .openConnection();
@@ -113,13 +118,14 @@ public class Suomi24ChattingConnection extends SwingWorker<Void,String> implemen
               connection.getInputStream())) {
            java.io.ByteArrayOutputStream bos = new java.io.ByteArrayOutputStream();
            try (java.io.BufferedOutputStream bout = new BufferedOutputStream(
-                 bos, 1024)) {
-              byte[] data = new byte[1024];
-              int i;
-              while ((i = in.read(data, 0, 1024)) >= 0) {
-                 totalDataRead = totalDataRead + i;
-                 bout.write(data, 0, i);
-                 publish(new String(data));
+                 bos, AMOUNT_TO_READ_AT_A_TIME)) {
+              byte[] data = new byte[AMOUNT_TO_READ_AT_A_TIME];
+              int amountOfBytesRead;
+              // read blocks until new data is available or end of stream reached (-1)
+              while ((amountOfBytesRead = in.read(data, 0, AMOUNT_TO_READ_AT_A_TIME)) >= 0) {
+                  totalDataRead = totalDataRead + amountOfBytesRead;
+                  bout.write(data, 0, amountOfBytesRead);
+                  publish(new String(data, 0, amountOfBytesRead, "ISO-8859-1"));
               }
            }
         }
@@ -128,6 +134,7 @@ public class Suomi24ChattingConnection extends SwingWorker<Void,String> implemen
     
     @Override
     protected void process(List<String> messages) {
+        logger.debug("Process! " + messages);
         for (String message: messages) {
             messageUpdater.publishMessage(message);
         }
@@ -149,14 +156,19 @@ public class Suomi24ChattingConnection extends SwingWorker<Void,String> implemen
             Pattern.DOTALL);
     final static Pattern thirdPattern = Pattern.compile(
             ".+/chat/\\?uid=([0-9]+?)&cid=[0-9]+&cs=([0-9]+)",
-            Pattern.DOTALL);    
+            Pattern.DOTALL);
+    final static Pattern fourthPattern = Pattern.compile(
+            ".*var chatBodyUrl = '(.+?)';.*",
+            Pattern.DOTALL);
     /* 
      * Implementation:
-     * Connects in three steps.
+     * Connects in four steps.
+     * 
      * <ul>
      *  <li>http://chat.suomi24.fi/login.cgi?cid=%d</li>
      *  <li>http://chat1.suomi24.fi:8080/login?cid=%d&nick=%s&name=%s&who=%s</li>
      *  <li>http://chat1.suomi24.fi:8080/chat/?uid=%d&cid=%d&cs=%d</li>
+     *  <li>http://chat1.suomi24.fi:8080/body/?uid=%d&cid=%d&cs=%d</li>
      * </ul>
      * 
      * The last one will be run in a background thread.
@@ -197,7 +209,7 @@ public class Suomi24ChattingConnection extends SwingWorker<Void,String> implemen
         }
         String url3 = matcher2.group(1);
         Matcher matcher3 = thirdPattern.matcher(url3);
-        logger.error("Got url " + url3);
+        logger.error("Got url (1): " + url3);
         if (!matcher3.matches()) {
             throw new IllegalStateException(
                     String.format("Failed to get proper content (using url %s, cookie %s)",
@@ -205,9 +217,26 @@ public class Suomi24ChattingConnection extends SwingWorker<Void,String> implemen
         }
         String uid = matcher3.group(1);
         String cs = matcher3.group(2);
-        params = buildConnectionParameters(params, uid, cs);
+        params = ConnectionParameters.build(params, uid, cs);
         logger.error("Got params (2): " + params);
-        chatConnectionUrl = url3;
+        
+        String HTML3 = httpHandler.getHTMLFromURLWithCookie(url3, sessionId);
+        Matcher matcher4 = fourthPattern.matcher(HTML3);
+        if (!matcher4.matches()) {
+            throw new IllegalStateException(
+                    String.format("Failed to get proper content (using url %s, cookie %s)",
+                            url3, sessionId));
+        }
+        
+        String url4 = matcher4.group(1);
+        logger.error("Got url (2): " + url4);
+        
+        chatConnectionUrl = String.format("%s?uid=%s&cid=%s&cs=%s",
+                url4,
+                params.getUid(),
+                Integer.valueOf(selectedRoomId),
+                params.getCs()
+                );
     }
 
     private ConnectionParameters buildConnectionParameters(Matcher matcher1) {
@@ -219,7 +248,7 @@ public class Suomi24ChattingConnection extends SwingWorker<Void,String> implemen
             nickParam = matcher1.group(1);
             userId = matcher1.group(2);
             whoParam = matcher1.group(3);
-            return buildConnectionParameters(whoParam, nickParam, userId);
+            return ConnectionParameters.build(whoParam, nickParam, userId);
         }
         
         throw new IllegalStateException("Didn't get HTML containing the proper values");
