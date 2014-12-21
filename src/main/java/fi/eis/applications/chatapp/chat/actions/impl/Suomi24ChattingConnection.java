@@ -259,5 +259,19 @@ public class Suomi24ChattingConnection extends SwingWorker<Void,String> implemen
         
         throw new IllegalStateException("Didn't get HTML containing the proper values");
     }
+    @Override
+    public void sendMessage(String text) {
+        String baseUrl = chatConnectionUrl.replace("body/", "tell");
+        String url = String.format("%s?uid=%s&cid=%s&cs=%s&ac=tell&who=kaikille&how=0&priv=false&baseTarget=empty&tl=%s&tell=%s",
+                baseUrl,
+                params.getUid(),
+                String.valueOf(selectedRoomId),
+                params.getCs(),
+                text,
+                text
+                );
+        logger.debug("Sending " + url);
+        httpHandler.getHTMLFromURLWithCookie(url, sessionId);
+    }
 
 }

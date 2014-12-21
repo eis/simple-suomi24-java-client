@@ -11,7 +11,6 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import fi.eis.applications.chatapp.chat.actions.ChattingConnection;
 import fi.eis.applications.chatapp.chat.actions.impl.MessageUpdaterImpl;
@@ -46,6 +45,8 @@ public class ChatUI extends JFrame {
                 messagesPanel.getEditorPane(),
                 userListPanel.getUserList()
                 ));
+        
+        this.inputPanel.setChattingConnection(conn);
 
         
         // Put everything on a panel.
@@ -91,7 +92,7 @@ public class ChatUI extends JFrame {
     }
 
     private void focusOnInput() {
-        getInputField().requestFocusInWindow();
+        inputPanel.focusOnInputField();
     }
 
     private JMenuBar createMenu() {
@@ -117,10 +118,5 @@ public class ChatUI extends JFrame {
 
         return menuBar;
     }
-
-    private JTextField getInputField() {
-        return inputPanel.getInputField();
-    }
-
 
 }

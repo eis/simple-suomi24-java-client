@@ -12,4 +12,6 @@ public interface ChattingConnection {
 
     public abstract void execute();
 
+    public abstract void sendMessage(String text);
+
 }
