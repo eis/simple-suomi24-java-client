@@ -2,19 +2,15 @@ package fi.eis.applications.chatapp.chat.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 
-import javax.swing.BorderFactory;
 import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import fi.eis.applications.chatapp.chat.actions.ChattingConnection;
@@ -29,7 +25,7 @@ import fi.eis.applications.chatapp.chat.actions.impl.MessageUpdaterImpl;
  */
 public class ChatUI extends JFrame {
 
-    private final JPanel userListPanel;
+    private final UserListPanel userListPanel;
     private final MessagesPanel messagesPanel;
     private final InputPanel inputPanel;
 
@@ -38,7 +34,7 @@ public class ChatUI extends JFrame {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setPreferredSize(new Dimension(500, 500));
 
-        this.userListPanel = createUserListPanel();
+        this.userListPanel = UserListPanel.createUserListPanel();
 
         this.messagesPanel = MessagesPanel.createMessagesPanel();
 
@@ -46,7 +42,10 @@ public class ChatUI extends JFrame {
 
         JMenuBar menuBar = createMenu();
 
-        conn.setUpdater(new MessageUpdaterImpl(messagesPanel.getEditorPane()));
+        conn.setUpdater(new MessageUpdaterImpl(
+                messagesPanel.getEditorPane(),
+                userListPanel.getUserList()
+                ));
 
         
         // Put everything on a panel.
@@ -123,27 +122,5 @@ public class ChatUI extends JFrame {
         return inputPanel.getInputField();
     }
 
-    private static JPanel createUserListPanel() {
-        JEditorPane userListPane = createEditorPane();
-        JScrollPane userListScrollPane = new JScrollPane(userListPane);
-        userListScrollPane.setVerticalScrollBarPolicy(
-                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        userListScrollPane.setHorizontalScrollBarPolicy(
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
-        );
-        userListScrollPane.setMinimumSize(new Dimension(10, 10));
 
-
-        JPanel userListPanel = new JPanel(new GridLayout(1, 0));
-        userListPanel.add(userListScrollPane);
-        userListPanel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createTitledBorder("User list"),
-                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-        return userListPanel;
-    }
-    private static JEditorPane createEditorPane() {
-        JEditorPane editorPane = new JEditorPane();
-        editorPane.setEditable(false);
-        return editorPane;
-    }
 }

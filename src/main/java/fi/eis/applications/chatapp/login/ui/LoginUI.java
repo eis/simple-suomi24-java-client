@@ -135,11 +135,15 @@ public class LoginUI extends JFrame {
         return this.chatRoomList.getSelectedValue().getRoomId();
     }
 
-    private class ChatRoomCellRenderer extends JLabel implements ListCellRenderer<ChatRoom> {
+    private static class ChatRoomCellRenderer extends JLabel implements ListCellRenderer<ChatRoom> {
 
         // default renderer should not be created within the method for performance reasons
         // source: http://www.java2s.com/Tutorial/Java/0240__Swing/AddyourownListCellRenderer.htm
-        protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
+        protected final DefaultListCellRenderer defaultRenderer;
+
+        public ChatRoomCellRenderer() {
+            defaultRenderer = new DefaultListCellRenderer();
+        }
 
         @Override
         public Component getListCellRendererComponent(JList<? extends ChatRoom> list, ChatRoom value, int index, boolean isSelected, boolean cellHasFocus) {

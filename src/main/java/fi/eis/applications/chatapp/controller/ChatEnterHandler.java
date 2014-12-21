@@ -11,6 +11,7 @@ public class ChatEnterHandler {
     public void enterChat(final ChattingConnection chattingConnection) {
         // Let's go!
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 ChatUI.createAndShowGUI(chattingConnection);
             }
