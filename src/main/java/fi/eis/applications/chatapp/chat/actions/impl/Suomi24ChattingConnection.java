@@ -134,12 +134,18 @@ public class Suomi24ChattingConnection extends SwingWorker<Void,String> implemen
     
     @Override
     protected void process(List<String> messages) {
-        logger.debug("Process! " + messages);
-        for (String message: messages) {
-            messageUpdater.publishMessage(message);
-        }
+        String message = concat(messages);
+        logger.debug("Process! " + message);
+        messageUpdater.publishMessage(message);
     }
 
+    private String concat(List<String> messages) {
+        StringBuilder builder = new StringBuilder();
+        for (String message: messages) {
+            builder.append(message);
+        }
+        return builder.toString();
+    }
     /* (non-Javadoc)
      * @see fi.eis.applications.chatapp.chat.actions.impl.ChattingConnection#getConnectionParameters()
      */
