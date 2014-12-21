@@ -1,9 +1,9 @@
 simple-suomi24-java-client
 ==========================
 
-Tries to be a simple java client, one day.
+Tries to be a simple java chat client.
 
-Doesn't do anything yet.
+Doesn't do that much yet.
 
 Some urls:
 
