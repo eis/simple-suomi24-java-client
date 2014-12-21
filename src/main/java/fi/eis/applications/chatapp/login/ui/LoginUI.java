@@ -208,10 +208,12 @@ public class LoginUI extends JFrame {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panel.add(new JLabel("Username: ", JLabel.CENTER));
         userNameTextField = new JTextField(15);
+        userNameTextField.setText("testityyppi");
         panel.add(userNameTextField);
         passwordLabel = new JLabel("Password: ", JLabel.CENTER);
         panel.add(passwordLabel);
         passwordField = new JPasswordField(15);
+        passwordField.setText("KJfsu4yFdY!d5&5@!tMq");
         panel.add(passwordField);
         loginButton = new JButton("Login");
         loginButton.addActionListener(new ActionListener() {
