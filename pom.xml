@@ -26,17 +26,6 @@
       <version>1.0</version>
     </dependency>
     <dependency>
-      <groupId>nz.net.ultraq.preferences</groupId>
-      <artifactId>preferences-xml</artifactId>
-      <version>1.2.2</version>
-      <exclusions>
-        <exclusion>  <!-- declare the exclusion here -->
-          <groupId>joda-time</groupId>
-          <artifactId>joda-time</artifactId>
-        </exclusion>
-      </exclusions> 
-    </dependency>
-    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.11</version>

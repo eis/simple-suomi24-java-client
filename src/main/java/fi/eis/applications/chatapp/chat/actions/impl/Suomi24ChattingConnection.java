@@ -16,7 +16,7 @@ import fi.eis.applications.chatapp.chat.actions.MessageUpdater;
 import fi.eis.libraries.di.SimpleLogger;
 import fi.eis.libraries.di.SimpleLogger.LogLevel;
 
-public class Suomi24ChattingConnection extends SwingWorker<Void,String> implements ChattingConnection{
+public class Suomi24ChattingConnection extends SwingWorker<Void,String> implements ChattingConnection {
     
     private final int selectedRoomId;
     private final String sessionId;
@@ -89,7 +89,7 @@ public class Suomi24ChattingConnection extends SwingWorker<Void,String> implemen
     public Suomi24ChattingConnection(int selectedRoomIdInput, String sessionIdInput,
             HTTPConnectionHandler httpHandlerInput) {
         this(selectedRoomIdInput, sessionIdInput,
-            httpHandlerInput, LogLevel.DEBUG);
+            httpHandlerInput, LogLevel.ERROR);
     }
     public Suomi24ChattingConnection(int selectedRoomIdInput, String sessionIdInput,
             HTTPConnectionHandler httpHandlerInput, LogLevel logLevel) {
@@ -177,7 +177,7 @@ public class Suomi24ChattingConnection extends SwingWorker<Void,String> implemen
      *  <li>http://chat1.suomi24.fi:8080/body/?uid=%d&cid=%d&cs=%d</li>
      * </ul>
      * 
-     * The last one will be run in a background thread.
+     * The last one will be run in a background thread by doInBackground()
      * 
      * @see fi.eis.applications.chatapp.chat.actions.impl.ChattingConnection#connect()
      */
@@ -217,6 +217,9 @@ public class Suomi24ChattingConnection extends SwingWorker<Void,String> implemen
         Matcher matcher3 = thirdPattern.matcher(url3);
         logger.error("Got url (1): " + url3);
         if (!matcher3.matches()) {
+            if (url3.contains("message=nickInUse")) {
+                throw new IllegalStateException("Nick already in use");
+            }
             throw new IllegalStateException(
                     String.format("Failed to get proper content (using url %s, cookie %s)",
                             url3, sessionId));

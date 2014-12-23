@@ -1,13 +1,10 @@
 package fi.eis.applications.chatapp;
 
-import java.util.prefs.Preferences;
-
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import net.infotrek.util.prefs.FilePreferencesFactory;
-
 import fi.eis.applications.chatapp.chat.actions.ChattingConnectionFactory;
+import fi.eis.applications.chatapp.configuration.Configuration;
 import fi.eis.applications.chatapp.controller.ChatEnterHandler;
 import fi.eis.applications.chatapp.login.actions.LoginHandler;
 import fi.eis.applications.chatapp.login.actions.RoomsProvider;
@@ -22,16 +19,19 @@ public class App implements Runnable
     private ChatEnterHandler enterChatHandler;
     private RoomsProvider roomsProvider;
     private ChattingConnectionFactory chatConnectionFactory;
+    private Configuration configuration;
 
     @Inject
     public App(LoginHandler loginHandler,
                ChatEnterHandler enterChatHandler,
                RoomsProvider roomsProvider,
-               ChattingConnectionFactory chatConnectionFactory) {
+               ChattingConnectionFactory chatConnectionFactory,
+               Configuration configuration) {
         this.loginHandler = loginHandler;
         this.enterChatHandler = enterChatHandler;
         this.roomsProvider = roomsProvider;
         this.chatConnectionFactory = chatConnectionFactory;
+        this.configuration = configuration;
     }
 
     @Override
@@ -80,5 +80,16 @@ public class App implements Runnable
                 loginUI.display();
             }
         });
+        
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    configuration.save();
+                } catch (IllegalStateException e) {
+                    e.printStackTrace(System.err);
+                }
+            }
+        }, "Shutdown-thread"));
     }
 }

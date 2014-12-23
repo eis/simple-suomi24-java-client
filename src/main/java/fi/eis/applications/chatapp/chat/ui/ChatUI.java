@@ -111,11 +111,15 @@ public class ChatUI extends JFrame {
 
         JCheckBoxMenuItem cbMenuItem = new JCheckBoxMenuItem("User list");
 
-        cbMenuItem.setState(true);
+        boolean showUserList = this.configuration.getShowUserList(true);
+        cbMenuItem.setState(showUserList);
+        userListPanel.setVisible(showUserList);
         cbMenuItem.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                userListPanel.setVisible(e.getStateChange() == ItemEvent.SELECTED);
+                boolean showUserList = (e.getStateChange() == ItemEvent.SELECTED);
+                userListPanel.setVisible(showUserList);
+                ChatUI.this.configuration.setShowUserList(showUserList);
             }
         });
 
