@@ -42,6 +42,8 @@ public class MessageUpdaterImpl implements MessageUpdater {
             throw new IllegalStateException(e);
         }
     }
+    //TODO handle exit: <script>parent.loadLoginpage('exit', 'currentnick',
+    //  '&cid=%sgid=%s&uid=%s&cs=%s');</script>
     final static Pattern userAddPattern = Pattern.compile(
             "parent.user_add\\(new parent.User\\('', '(.+?)', ([0-9]), '(.+?)', ., ., .\\)\\);",
             Pattern.DOTALL);

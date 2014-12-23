@@ -1,7 +1,11 @@
 package fi.eis.applications.chatapp;
 
+import java.util.prefs.Preferences;
+
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+
+import net.infotrek.util.prefs.FilePreferencesFactory;
 
 import fi.eis.applications.chatapp.chat.actions.ChattingConnectionFactory;
 import fi.eis.applications.chatapp.controller.ChatEnterHandler;
@@ -76,5 +80,5 @@ public class App implements Runnable
                 loginUI.display();
             }
         });
-   }
+    }
 }

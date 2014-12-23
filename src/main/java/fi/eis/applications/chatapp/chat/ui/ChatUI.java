@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import fi.eis.applications.chatapp.chat.actions.ChattingConnection;
 import fi.eis.applications.chatapp.chat.actions.impl.MessageUpdaterImpl;
+import fi.eis.applications.chatapp.configuration.Configuration;
 
 /**
  * Created with IntelliJ IDEA.
@@ -28,8 +29,12 @@ public class ChatUI extends JFrame {
     private final MessagesPanel messagesPanel;
     private final InputPanel inputPanel;
 
-    private ChatUI(ChattingConnection conn) {
+    private final Configuration configuration;
+    
+    private ChatUI(ChattingConnection conn, Configuration configuration) {
 
+        this.configuration = configuration;
+        
         JPanel panel = new JPanel(new BorderLayout());
         panel.setPreferredSize(new Dimension(500, 500));
 
@@ -70,9 +75,10 @@ public class ChatUI extends JFrame {
      * @param selectedRoomId
      * @param sessionId
      */
-    public static void createAndShowGUI(ChattingConnection conn) {
+    public static void createAndShowGUI(ChattingConnection conn, Configuration configuration) {
+
         //Create and set up the window.
-        ChatUI frame = new ChatUI(conn);
+        ChatUI frame = new ChatUI(conn, configuration);
 
         // pack makes size correspond to content
         frame.pack();
