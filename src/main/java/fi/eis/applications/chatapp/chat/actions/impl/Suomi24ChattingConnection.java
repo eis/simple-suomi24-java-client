@@ -276,5 +276,9 @@ public class Suomi24ChattingConnection extends SwingWorker<Void,String> implemen
         logger.debug("Sending " + url);
         httpHandler.getHTMLFromURLWithCookie(url, sessionId);
     }
+    @Override
+    public void cancel() {
+        this.cancel(true);
+    }
 
 }

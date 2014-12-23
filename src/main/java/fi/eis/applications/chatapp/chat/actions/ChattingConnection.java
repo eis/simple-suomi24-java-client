@@ -11,6 +11,7 @@ public interface ChattingConnection {
     public abstract void setUpdater(MessageUpdater messageUpdater);
 
     public abstract void execute();
+    public abstract void cancel();
 
     public abstract void sendMessage(String text);
 

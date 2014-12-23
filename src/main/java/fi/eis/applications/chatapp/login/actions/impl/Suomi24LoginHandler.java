@@ -4,7 +4,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +11,8 @@ import javax.net.ssl.HttpsURLConnection;
 
 import fi.eis.applications.chatapp.login.actions.LoginFailedException;
 import fi.eis.applications.chatapp.login.actions.LoginHandler;
+import fi.eis.libraries.di.SimpleLogger;
+import fi.eis.libraries.di.SimpleLogger.LogLevel;
 
 /**
  * Creation Date: 8.11.2014
@@ -24,16 +25,11 @@ public class Suomi24LoginHandler implements LoginHandler {
     private static final String HEADER_SET_COOKIE = "Set-Cookie";
     private static final String S24_COOKIE_NAME = "S24auth";
 
-    private boolean printDebug = false;
 
-    @Override
-    public void setDebug(boolean value) {
-        this.printDebug = value;
-    }
+    private final SimpleLogger log = new SimpleLogger(this.getClass());
 
     @Override
     public String tryLogin(String userName, char[] password) throws LoginFailedException {
-        
         
         try {
 
@@ -58,8 +54,8 @@ public class Suomi24LoginHandler implements LoginHandler {
 
             output.close();
 
-            printDebug("Resp Code:" + con.getResponseCode());
-            printDebug("Resp Message:" + con.getResponseMessage());
+            log.debug("Resp Code:" + con.getResponseCode());
+            log.debug("Resp Message:" + con.getResponseMessage());
 
             // these have to be iterated: getHeaderField() only gives the first, and we want all cookies
             final Map<String,List<String>> headerFields = con.getHeaderFields();
@@ -69,7 +65,7 @@ public class Suomi24LoginHandler implements LoginHandler {
             for (Map.Entry<String, List<String>> entry: headerFields.entrySet()) {
                 String headerName = entry.getKey();
                 String headerValue = concatWithLineBreak(entry.getValue());
-                printDebug("%s: %s%n", headerName, headerValue);
+                log.debug("%s: %s%n", headerName, headerValue);
                 if (HEADER_SET_COOKIE.equalsIgnoreCase(headerName)) {
                     cookieValue = headerValue;
                     if (headerValue.contains(S24_COOKIE_NAME)) {
@@ -77,7 +73,7 @@ public class Suomi24LoginHandler implements LoginHandler {
                     }
                 }
             }
-            printDebug("Resp Cookie:" + cookieValue);
+            log.debug("Resp Cookie:" + cookieValue);
 
             if (!loginSuccess) {
                 throw new LoginFailedException("login failed");
@@ -87,15 +83,6 @@ public class Suomi24LoginHandler implements LoginHandler {
         } catch (IOException e) {
             throw new LoginFailedException(e);
         }
-    }
-
-    private void printDebug(final String message) {
-        if (printDebug) {
-            System.out.printf("%s Suomi24LoginHandler: DEBUG %s%n", new Date(), message);
-        }
-    }
-    private void printDebug(final String message, String... params) {
-        printDebug(String.format(message, (Object[])params));
     }
 
     private static String concatWithLineBreak(List<String> list) {
@@ -117,5 +104,10 @@ public class Suomi24LoginHandler implements LoginHandler {
             }
             return sb.toString();
         }
+    }
+
+    @Override
+    public void setLogLevel(LogLevel logLevel) {
+        this.log.setLogLevel(logLevel);
     }
 }

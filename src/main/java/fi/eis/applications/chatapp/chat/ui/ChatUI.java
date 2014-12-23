@@ -12,6 +12,7 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import fi.eis.applications.chatapp.chat.actions.ChattingConnection;
@@ -32,10 +33,12 @@ public class ChatUI extends JFrame {
     private final InputPanel inputPanel;
 
     private final Configuration configuration;
+    private final ChattingConnection connection;
     
     private ChatUI(ChattingConnection conn, Configuration configuration) {
 
         this.configuration = configuration;
+        this.connection = conn;
         
         JPanel panel = new JPanel(new BorderLayout());
         panel.setPreferredSize(new Dimension(500, 500));
@@ -69,6 +72,7 @@ public class ChatUI extends JFrame {
         addWindowListener(new WindowAdapter(){
             @Override
             public void windowClosing(WindowEvent e){
+                ChatUI.this.connection.cancel();
                 ChatUI.this.configuration.save();
             }
         });
@@ -86,25 +90,31 @@ public class ChatUI extends JFrame {
      * @param sessionId
      */
     public static void createAndShowGUI(ChattingConnection conn, Configuration configuration) {
-
         //Create and set up the window.
         ChatUI frame = new ChatUI(conn, configuration);
 
-        // pack makes size correspond to content
-        frame.pack();
-        // Center the window
-        frame.setLocationRelativeTo(null);
-        // Set focus
-        frame.focusOnInput();
-        
-        // connect to chat
-        conn.connect();
-        
-        // execute background connections
-        conn.execute();
+        try {
 
-        // Show
-        frame.setVisible(true);
+            // pack makes size correspond to content
+            frame.pack();
+            // Center the window
+            frame.setLocationRelativeTo(null);
+            // Set focus
+            frame.focusOnInput();
+            
+            // connect to chat
+            conn.connect();
+            
+            // execute background connections
+            conn.execute();
+    
+            // Show
+            frame.setVisible(true);
+        } catch (RuntimeException ex) {
+            conn.cancel();
+            JOptionPane.showMessageDialog(frame, "Exception: " + ex.getMessage());
+            frame.dispose();
+        }
     }
 
     private void focusOnInput() {

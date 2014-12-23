@@ -69,7 +69,6 @@ public class App implements Runnable
                 // Turn off metal's use of bold fonts
                 UIManager.put("swing.boldMetal", Boolean.FALSE);
 
-                loginHandler.setDebug(false);
                 final LoginUI loginUI = LoginUI.createGUI(
                         loginHandler,
                         enterChatHandler,

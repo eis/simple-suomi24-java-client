@@ -1,5 +1,7 @@
 package fi.eis.applications.chatapp.login.actions;
 
+import fi.eis.libraries.di.SimpleLogger.LogLevel;
+
 
 /**
  * Creation Date: 5.11.2014
@@ -8,6 +10,6 @@ package fi.eis.applications.chatapp.login.actions;
  */
 public interface LoginHandler {
 
-    void setDebug(boolean value);
+    void setLogLevel(LogLevel logLevel);
     String tryLogin(String userName, char[] password) throws LoginFailedException;
 }
