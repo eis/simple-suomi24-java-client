@@ -17,6 +17,9 @@ import fi.eis.applications.chatapp.configuration.Configuration;
  * Implementation class is actually configured in
  * META-INF/services/java.util.prefs.PreferencesFactory
  * 
+ * Note that this implementation DOES NOT support subkeys (the ones with '.'
+ * in them). Tweak FilePreferences syncSpi to get subkeys as well.
+ * 
  * @author eis
  *
  */
@@ -26,7 +29,7 @@ public class PreferencesConfigurationImpl implements Configuration {
     private static final String DEFAULT_CONFIGURATION_FILE = "chatapp-prefs.properties";
 
     private final Preferences prefs;
-    public PreferencesConfigurationImpl() {
+    public PreferencesConfigurationImpl() throws BackingStoreException {
 
         /**
          * Tells to use our file
@@ -37,11 +40,12 @@ public class PreferencesConfigurationImpl implements Configuration {
          * We use our App.class to define the namespace for our application.
          */
         this.prefs = Preferences.userNodeForPackage(App.class);
+        this.prefs.sync();
     }
 
     // actual prefs beyond this point
 
-    private static final String SHOW_USER_LIST_PREFERENCE = "userlist.visible";
+    private static final String SHOW_USER_LIST_PREFERENCE = "userlist-visible";
     @Override
     public boolean getShowUserList(boolean showUserListDefaultValue) {
         return prefs.getBoolean(SHOW_USER_LIST_PREFERENCE, showUserListDefaultValue);

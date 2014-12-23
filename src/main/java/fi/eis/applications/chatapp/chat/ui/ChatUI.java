@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
@@ -63,6 +65,14 @@ public class ChatUI extends JFrame {
                 BorderLayout.PAGE_END);
 
         // JFrame operations
+        
+        addWindowListener(new WindowAdapter(){
+            @Override
+            public void windowClosing(WindowEvent e){
+                ChatUI.this.configuration.save();
+            }
+        });
+
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setJMenuBar(menuBar);
         add(panel);
