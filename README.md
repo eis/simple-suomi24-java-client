@@ -21,7 +21,7 @@ Must have
 
 Nice to have
 
- - [save and retrieve settings to/from .ini, .xml or similar](https://github.com/eis/simple-suomi24-java-client/issues/5)
+ - ~~[save and retrieve settings to/from .ini, .xml or similar](https://github.com/eis/simple-suomi24-java-client/issues/5)~~
  - [remember window sizes and positions](https://github.com/eis/simple-suomi24-java-client/issues/6)
  - [remember login credentials](https://github.com/eis/simple-suomi24-java-client/issues/7)
  - [retrieve room users in login UI](https://github.com/eis/simple-suomi24-java-client/issues/8)
