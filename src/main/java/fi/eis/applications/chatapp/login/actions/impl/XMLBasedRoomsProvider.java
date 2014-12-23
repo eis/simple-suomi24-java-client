@@ -70,7 +70,7 @@ public class XMLBasedRoomsProvider implements RoomsProvider {
             }
 
             if (!configurationFile.canRead()) {
-                throw new IllegalStateException(String.format("Configuration file '%s' cannot be read from path",
+                throw new IllegalStateException(String.format("Configuration file '%s' cannot be read from path '%s'",
                         this.ROOM_CONFIG_FILE, new File(".").getAbsolutePath()));
             }
 
