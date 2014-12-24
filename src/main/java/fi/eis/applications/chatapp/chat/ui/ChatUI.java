@@ -89,7 +89,7 @@ public class ChatUI extends JFrame {
      * @param selectedRoomId
      * @param sessionId
      */
-    public static void createAndShowGUI(ChattingConnection conn, Configuration configuration) {
+    public static ChatReturn createAndShowGUI(ChattingConnection conn, Configuration configuration) {
         //Create and set up the window.
         ChatUI frame = new ChatUI(conn, configuration);
 
@@ -110,11 +110,17 @@ public class ChatUI extends JFrame {
     
             // Show
             frame.setVisible(true);
+            return ChatReturn.NORMAL_EXIT;
         } catch (RuntimeException ex) {
             conn.cancel();
             JOptionPane.showMessageDialog(frame, "Exception: " + ex.getMessage());
             frame.dispose();
+            return ChatReturn.EXCEPTION;
         }
+    }
+    
+    public enum ChatReturn {
+        EXCEPTION, NORMAL_EXIT;
     }
 
     private void focusOnInput() {

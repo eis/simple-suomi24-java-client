@@ -1,9 +1,11 @@
 package fi.eis.applications.chatapp;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import fi.eis.applications.chatapp.chat.actions.ChattingConnectionFactory;
+import fi.eis.applications.chatapp.chat.ui.ChatUI.ChatReturn;
 import fi.eis.applications.chatapp.configuration.Configuration;
 import fi.eis.applications.chatapp.controller.ChatEnterHandler;
 import fi.eis.applications.chatapp.login.actions.LoginHandler;
@@ -76,7 +78,16 @@ public class App implements Runnable
                         chatConnectionFactory
                 );
 
-                loginUI.display();
+                ChatReturn returnValue = ChatReturn.NORMAL_EXIT;
+                do {
+                    int result = JOptionPane.showConfirmDialog(null, loginUI, null, JOptionPane.OK_CANCEL_OPTION);
+                    //ChattingConnection connection = loginUI.display();
+                    if (result == JOptionPane.OK_OPTION) {
+                        returnValue = enterChatHandler.enterChat(loginUI.getConnection());
+                    }
+                    System.out.println("returnValue: "+ returnValue);
+                } while (returnValue != ChatReturn.NORMAL_EXIT); 
+                
             }
         });
         
