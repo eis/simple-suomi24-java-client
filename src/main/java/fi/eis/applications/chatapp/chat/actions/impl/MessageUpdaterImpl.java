@@ -1,6 +1,12 @@
 package fi.eis.applications.chatapp.chat.actions.impl;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,7 +24,14 @@ public class MessageUpdaterImpl implements MessageUpdater {
 
     private final JEditorPane messagePane;
     private final DefaultListModel<User> userList;
-    public MessageUpdaterImpl(JEditorPane messagesTarget, DefaultListModel<User> defaultListModel) {
+    private final String roomName;
+    
+    private boolean logToFile = false;
+    private OutputStream logStream = null;
+    private String logFileName;
+    
+    public MessageUpdaterImpl(JEditorPane messagesTarget, DefaultListModel<User> defaultListModel,
+            String roomName) {
         if (messagesTarget == null) {
             throw new IllegalArgumentException("message target must be defined");
         }
@@ -27,6 +40,7 @@ public class MessageUpdaterImpl implements MessageUpdater {
         }
         this.messagePane = messagesTarget;
         this.userList = defaultListModel;
+        this.roomName = roomName;
     }
     
     // http://www.java2s.com/Code/JavaAPI/javax.swing.text/DocumentinsertStringintoffsetStringstrAttributeSeta.htm
@@ -38,7 +52,42 @@ public class MessageUpdaterImpl implements MessageUpdater {
         HTMLEditorKit kit = (HTMLEditorKit)messagePane.getEditorKit();
         try {
             kit.insertHTML(doc, doc.getLength(), message, 0, 0, null);
+            logToFile(message);
         } catch (BadLocationException | IOException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+    @Override
+    public void setLogToFile(boolean value) {
+        this.logToFile = value;
+    }
+
+    private void logToFile(String message) {
+        if (!logToFile) {
+            return;
+        }
+        try {
+            if (logStream == null) {
+                String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                
+                Files.createDirectories(Paths.get("logs")); // no exception if already exists
+
+                this.logFileName = String.format("logs/%s-%s.html",
+                        date, this.roomName);
+                Path file = Paths.get(this.logFileName);
+                // if log file name is already used, we start counting
+                // and use the first one available
+                int counter = 1;
+                while (Files.exists(file)) {
+                    this.logFileName = String.format("logs/%s-%s-%d.html",
+                            date, this.roomName, Integer.valueOf(++counter));
+                    file = Paths.get(this.logFileName);
+                }
+                Files.createFile(file);
+                logStream = Files.newOutputStream(file);
+            }
+            logStream.write(message.getBytes("UTF-8"));
+        } catch (IOException e) {
             throw new IllegalStateException(e);
         }
     }
@@ -71,6 +120,19 @@ public class MessageUpdaterImpl implements MessageUpdater {
             if (userNick.equals(user.getNick())) {
                 this.userList.removeElement(user);
                 return;
+            }
+        }
+    }
+
+    @Override
+    public void close() {
+        if (this.logStream != null) {
+            try {
+                this.logStream.flush();
+                this.logStream.close();
+                this.logStream = null;
+            } catch (IOException e) {
+                throw new IllegalStateException(e);
             }
         }
     }

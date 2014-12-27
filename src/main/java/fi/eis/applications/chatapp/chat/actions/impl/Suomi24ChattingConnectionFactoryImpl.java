@@ -18,8 +18,10 @@ public class Suomi24ChattingConnectionFactoryImpl implements ChattingConnectionF
     }
 
     @Override
-    public ChattingConnection get(int selectedRoomId, String sessionCookie) {
-        return new Suomi24ChattingConnection(selectedRoomId, sessionCookie, httpHandler);
+    public ChattingConnection get(String selectedRoomId, String sessionCookie,
+            String textualRoomIdentifier) {
+        return new Suomi24ChattingConnection(selectedRoomId, sessionCookie,
+                textualRoomIdentifier, httpHandler);
     }
 
     @Override

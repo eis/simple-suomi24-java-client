@@ -22,12 +22,11 @@ import fi.eis.applications.chatapp.configuration.Configuration;
  * @author eis
  *
  */
-public class PreferencesXMLConfigurationImpl implements Configuration {
+public class PreferencesXMLConfigurationImpl extends AbstractConfiguration implements Configuration {
 
 
     private static final String DEFAULT_CONFIGURATION_FILE = "chatapp-prefs.xml";
 
-    private final Preferences prefs;
     public PreferencesXMLConfigurationImpl() {
 
         /**
@@ -52,17 +51,6 @@ public class PreferencesXMLConfigurationImpl implements Configuration {
         
     }
 
-    // actual prefs beyond this point
-
-    private static final String SHOW_USER_LIST_PREFERENCE = "userlist-visible";
-    @Override
-    public boolean getShowUserList(boolean showUserListDefaultValue) {
-        return prefs.getBoolean(SHOW_USER_LIST_PREFERENCE, showUserListDefaultValue);
-    }
-    @Override
-    public void setShowUserList(boolean showUserList) {
-        prefs.putBoolean(SHOW_USER_LIST_PREFERENCE, showUserList);
-    }
     @Override
     public void save() {
         FileOutputStream fos;
@@ -74,4 +62,5 @@ public class PreferencesXMLConfigurationImpl implements Configuration {
             throw new IllegalArgumentException(e);
         }
     }
+
 }

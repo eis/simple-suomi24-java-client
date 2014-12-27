@@ -9,4 +9,8 @@ public interface Configuration {
 
     void save();
 
+    boolean getLogAutomatically();
+
+    void setLogAutomatically(boolean logAutomatically);
+
 }

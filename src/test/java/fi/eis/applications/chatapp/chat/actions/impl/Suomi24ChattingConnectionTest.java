@@ -39,7 +39,7 @@ public class Suomi24ChattingConnectionTest {
                 return getHTMLFromURL(url);
             }
         };
-        ChattingConnection sut = new Suomi24ChattingConnection(111, "foo", httpHandler);
+        ChattingConnection sut = new Suomi24ChattingConnection("111", "foosession", "fooroom", httpHandler);
         sut.connect();
     }
     

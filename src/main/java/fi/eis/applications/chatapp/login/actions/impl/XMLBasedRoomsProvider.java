@@ -3,7 +3,10 @@ package fi.eis.applications.chatapp.login.actions.impl;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -36,6 +39,7 @@ import fi.eis.libraries.di.SimpleLogger.LogLevel;
 public class XMLBasedRoomsProvider implements RoomsProvider {
     private final String ROOM_CONFIG_FILE;
     private final SimpleLogger logger;
+    private Map<String, ChatRoom> roomMap = null;
 
     public XMLBasedRoomsProvider() {
         this(LogLevel.ERROR);
@@ -52,14 +56,24 @@ public class XMLBasedRoomsProvider implements RoomsProvider {
         this.logger.setLogLevel(logLevel);
         this.ROOM_CONFIG_FILE = fileName;
     }
-
+    
     @Override
-    public List<ChatRoom> getRooms() {
-        return readRoomsFromXML();
+    public synchronized List<ChatRoom> getRooms() {
+        if (this.roomMap == null) {
+            this.roomMap = readRoomsFromXML();
+        }
+        List<ChatRoom> list = new ArrayList<>(this.roomMap.values());
+        Collections.sort(list, ChatRoom.ROOM_NAME_COMPARATOR);
+        return list;
+    }
+    
+    @Override
+    public synchronized ChatRoom getRoomById(String id) {
+        return this.roomMap.get(id);
     }
 
-    private List<ChatRoom> readRoomsFromXML() {
-        List<ChatRoom> chatRooms = new ArrayList<>();
+    private Map<String,ChatRoom> readRoomsFromXML() {
+        Map<String,ChatRoom> chatRooms = new HashMap<>();
         try {
 
             final File configurationFile = new File(this.ROOM_CONFIG_FILE);
@@ -111,7 +125,7 @@ public class XMLBasedRoomsProvider implements RoomsProvider {
                     NodeList textLNList = lastNameElement.getChildNodes();
                     String roomName = textLNList.item(0).getNodeValue().trim();
 
-                    chatRooms.add(new ChatRoom(Integer.parseInt(roomId), roomName));
+                    chatRooms.put(roomId, new ChatRoom(roomId, roomName));
 
                 }//end of if clause
 

@@ -8,15 +8,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
@@ -28,7 +29,6 @@ import javax.swing.SwingWorker;
 
 import fi.eis.applications.chatapp.chat.actions.ChattingConnection;
 import fi.eis.applications.chatapp.chat.actions.ChattingConnectionFactory;
-import fi.eis.applications.chatapp.controller.ChatEnterHandler;
 import fi.eis.applications.chatapp.login.actions.LoginHandler;
 import fi.eis.applications.chatapp.login.actions.RoomsProvider;
 import fi.eis.applications.chatapp.login.types.ChatRoom;
@@ -40,14 +40,13 @@ import fi.eis.libraries.di.SimpleLogger.LogLevel;
  * Time: 20:16
  * @author eis
  */
-public class LoginUI extends JFrame {
+public class LoginUI extends JPanel {
 
     protected static final String LOGINWINDOW_TITLE = "";
 
     protected final SimpleLogger logger = new SimpleLogger(this.getClass());
 
     protected LoginHandler loginHandler;
-    protected ChatEnterHandler chatEnterHandler;
     protected RoomsProvider roomFetchHandler;
     protected ChattingConnectionFactory chatConnectionFactory;
 
@@ -57,29 +56,31 @@ public class LoginUI extends JFrame {
     
     protected JButton enterChatButton;
 
+    protected ChattingConnection connection;
+
     protected LoginUI() {
 
     }
 
-    protected LoginUI(LoginHandler loginHandler, ChatEnterHandler chatEnterHandler,
-                    RoomsProvider roomFetchHandler, ChattingConnectionFactory chatConnectionFactory) {
+    protected LoginUI(LoginHandler loginHandler, 
+                    RoomsProvider roomFetchHandler,
+                    ChattingConnectionFactory chatConnectionFactory) {
         this.loginHandler = loginHandler;
-        this.chatEnterHandler = chatEnterHandler;
         this.roomFetchHandler = roomFetchHandler;
         this.chatConnectionFactory = chatConnectionFactory;
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setTitle(LOGINWINDOW_TITLE);
     }
 
-    public static LoginUI createGUI(LoginHandler loginHandler, ChatEnterHandler chatEnterHandler,
-                                    RoomsProvider roomFetchHandler, ChattingConnectionFactory chatConnectionFactory) {
-        if ((loginHandler == null) || (chatEnterHandler == null) ||
+    public static LoginUI createGUI(LoginHandler loginHandler,
+                                    RoomsProvider roomFetchHandler,
+                                    ChattingConnectionFactory chatConnectionFactory) {
+        if ((loginHandler == null) ||
                 (roomFetchHandler == null) || (chatConnectionFactory == null)) {
-            throw new IllegalStateException(String.format("initialization has failed [%s,%s,%s,%s]",
-                loginHandler, chatEnterHandler , roomFetchHandler , chatConnectionFactory));
+            throw new IllegalStateException(String.format("initialization has failed [%s,%s,%s]",
+                loginHandler, roomFetchHandler , chatConnectionFactory));
         }
-        LoginUI frame = new LoginUI(loginHandler, chatEnterHandler,
-                roomFetchHandler, chatConnectionFactory);
+        LoginUI frame = new LoginUI(loginHandler, 
+                                    roomFetchHandler,
+                                    chatConnectionFactory);
 
         frame.add(frame.createLoginPanel());
 
@@ -87,18 +88,25 @@ public class LoginUI extends JFrame {
     }
 
     public static LoginUI createGUI(LoginHandler loginHandler,
-            ChatEnterHandler chatEnterHandler, RoomsProvider roomFetchHandler,
-            ChattingConnectionFactory chatConnectionFactory, LogLevel logLevel) {
-        LoginUI frame = createGUI(loginHandler, chatEnterHandler, roomFetchHandler, chatConnectionFactory);
+            RoomsProvider roomFetchHandler,
+            ChattingConnectionFactory chatConnectionFactory,
+            LogLevel logLevel) {
+        LoginUI frame = createGUI(loginHandler, roomFetchHandler, chatConnectionFactory);
         frame.logger.setLogLevel(logLevel);
         return frame;
     }
 
+    public ChattingConnection getConnectionParameters() {
+        return this.connection;
+    }
+    
     public void display() {
+        /*
         // pack makes size correspond to content
         pack();
         // Center the window
         setLocationRelativeTo(null);
+        */
         // Show
         setVisible(true);
     }
@@ -117,21 +125,23 @@ public class LoginUI extends JFrame {
         this.enterChatButton = new JButton("Chat!");
         this.enterChatButton.setEnabled(false);
         this.enterChatButton.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
-                ChattingConnection connection = chatConnectionFactory.get(
+                String lowerCaseRoomName = LoginUI.this.roomFetchHandler.getRoomById(LoginUI.this.getSelectedRoomId())
+                        .getRoomName().toLowerCase(Locale.UK);
+                LoginUI.this.connection = chatConnectionFactory.get(
                         LoginUI.this.getSelectedRoomId(),
-                        LoginUI.this.sessionCookie
+                        LoginUI.this.sessionCookie,
+                        lowerCaseRoomName
                         );
-                LoginUI.this.chatEnterHandler.enterChat(connection);
             }
         });
         panel.add(this.enterChatButton);
         return panel;
     }
 
-    protected int getSelectedRoomId() {
+    protected String getSelectedRoomId() {
         return this.chatRoomList.getSelectedValue().getRoomId();
     }
 
@@ -272,17 +282,15 @@ public class LoginUI extends JFrame {
             resetLoginStatus();
         }
         logger.debug("LoginUI Session cookie: " + sessionCookie);
-        LoginUI.this.setTitle(LOGINWINDOW_TITLE);
     }
 
     protected void handleException(Throwable t) {
         logger.debug("Handling exception for " + t);
-        this.setTitle(
-                (LOGINWINDOW_TITLE.length() > 0)
-                    ? String.format("%s - %s", LOGINWINDOW_TITLE, t.getMessage())
-                    : t.getMessage()
-            );
-        logger.debug("this.getTitle " + this.getTitle());
+        String message = (LOGINWINDOW_TITLE.length() > 0) ? String.format(
+                "%s - %s", LOGINWINDOW_TITLE, t.getMessage()) : t.getMessage();
+        JOptionPane.showMessageDialog(this.getParent(), message, "Dialog",
+                JOptionPane.ERROR_MESSAGE);
+        logger.error(message);
         resetLoginStatus();
     }
 

@@ -23,12 +23,11 @@ import fi.eis.applications.chatapp.configuration.Configuration;
  * @author eis
  *
  */
-public class PreferencesPropertiesConfigurationImpl implements Configuration {
-
+public class PreferencesPropertiesConfigurationImpl extends AbstractConfiguration
+    implements Configuration {
 
     private static final String DEFAULT_CONFIGURATION_FILE = "chatapp-prefs.properties";
 
-    private final Preferences prefs;
     public PreferencesPropertiesConfigurationImpl() {
 
         /**
@@ -44,15 +43,6 @@ public class PreferencesPropertiesConfigurationImpl implements Configuration {
 
     // actual prefs beyond this point
 
-    private static final String SHOW_USER_LIST_PREFERENCE = "userlist-visible";
-    @Override
-    public boolean getShowUserList(boolean showUserListDefaultValue) {
-        return prefs.getBoolean(SHOW_USER_LIST_PREFERENCE, showUserListDefaultValue);
-    }
-    @Override
-    public void setShowUserList(boolean showUserList) {
-        prefs.putBoolean(SHOW_USER_LIST_PREFERENCE, showUserList);
-    }
     @Override
     public void save() {
         try {

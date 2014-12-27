@@ -9,7 +9,7 @@ import java.util.Comparator;
  * @author eis
  */
 public class ChatRoom {
-    private final int roomId;
+    private final String roomId;
     private final String roomName;
 
     public static final Comparator<? super ChatRoom> ROOM_NAME_COMPARATOR = new Comparator<ChatRoom>() {
@@ -19,7 +19,7 @@ public class ChatRoom {
         }
     };
 
-    public ChatRoom(int roomId, String roomName) {
+    public ChatRoom(String roomId, String roomName) {
         this.roomId = roomId;
         this.roomName = roomName;
     }
@@ -32,7 +32,7 @@ public class ChatRoom {
                 this.roomName);
     }
 
-    public int getRoomId() {
+    public String getRoomId() {
         return this.roomId;
     }
     public String getRoomName() {

@@ -18,8 +18,9 @@ import fi.eis.libraries.di.SimpleLogger.LogLevel;
 
 public class Suomi24ChattingConnection extends SwingWorker<Void,String> implements ChattingConnection {
     
-    private final int selectedRoomId;
+    private final String selectedRoomId;
     private final String sessionId;
+    private final String textualRoomIdentifier;
     private final HTTPConnectionHandler httpHandler;
     private final SimpleLogger logger = new SimpleLogger(this.getClass());
 
@@ -27,29 +28,41 @@ public class Suomi24ChattingConnection extends SwingWorker<Void,String> implemen
     protected String chatConnectionUrl = null;
     protected MessageUpdater messageUpdater = null;
 
+    @Override
+    public String toString() {
+        return "Suomi24ChattingConnection [selectedRoomId=" + selectedRoomId
+                + ", sessionId=" + sessionId + ", textualRoomIdentifier="
+                + textualRoomIdentifier + ", httpHandler=" + httpHandler
+                + ", params=" + params + ", chatConnectionUrl="
+                + chatConnectionUrl + ", messageUpdater=" + messageUpdater
+                + "]";
+    }
+
     public static class ConnectionParameters {
         private final String whoParam;
         private final String nickParam;
         private final String userIdParam;
         private final String cs;
         private final String uid;
+        private final String roomId;
+        private final String textualRoomIdentifier;
+
 
         @Override
         public String toString() {
-            return "ConnectionParameters{" +
-                    "whoParam='" + whoParam + '\'' +
-                    ", nickParam='" + nickParam + '\'' +
-                    ", userIdParam='" + userIdParam + '\'' +
-                    ", sessionString='" + cs + '\'' +
-                    ", uid='" + uid + '\'' +
-                    '}';
+            return "ConnectionParameters [whoParam=" + whoParam
+                    + ", nickParam=" + nickParam + ", userIdParam="
+                    + userIdParam + ", cs=" + cs + ", uid=" + uid + ", roomId="
+                    + roomId + "]";
         }
 
-
-        private ConnectionParameters(String whoParam, String userIdParam, String nickParam) {
+        private ConnectionParameters(String whoParam, String userIdParam, String nickParam, String roomId,
+                String textualRoomIdentifier) {
             this.whoParam = whoParam;
             this.nickParam = nickParam;
             this.userIdParam = userIdParam;
+            this.roomId = roomId;
+            this.textualRoomIdentifier = textualRoomIdentifier;
             this.cs = null;
             this.uid = null;
         }
@@ -57,6 +70,8 @@ public class Suomi24ChattingConnection extends SwingWorker<Void,String> implemen
             this.whoParam       = params.whoParam;
             this.nickParam      = params.nickParam;
             this.userIdParam    = params.userIdParam;
+            this.roomId         = params.roomId;
+            this.textualRoomIdentifier = params.textualRoomIdentifier;
             this.cs             = cs;
             this.uid            = uid;
         }
@@ -75,8 +90,13 @@ public class Suomi24ChattingConnection extends SwingWorker<Void,String> implemen
         public String getUid() {
             return this.uid;
         }
-        static ConnectionParameters build(String whoParam, String nickParam, String userIdParam) {
-            return new ConnectionParameters(whoParam, nickParam, userIdParam);
+        public String getRoomId() {
+            return this.roomId;
+        }
+        static ConnectionParameters build(String whoParam, String nickParam, String userIdParam,
+                String roomId, String textualRoomIdentifier) {
+            return new ConnectionParameters(whoParam, nickParam, userIdParam, roomId,
+                    textualRoomIdentifier);
         }
 
         static ConnectionParameters build(
@@ -86,15 +106,18 @@ public class Suomi24ChattingConnection extends SwingWorker<Void,String> implemen
     }
 
 
-    public Suomi24ChattingConnection(int selectedRoomIdInput, String sessionIdInput,
-            HTTPConnectionHandler httpHandlerInput) {
+    public Suomi24ChattingConnection(String selectedRoomIdInput, String sessionIdInput,
+            String textualRoomIdentifier, HTTPConnectionHandler httpHandlerInput) {
         this(selectedRoomIdInput, sessionIdInput,
+            textualRoomIdentifier,
             httpHandlerInput, LogLevel.ERROR);
     }
-    public Suomi24ChattingConnection(int selectedRoomIdInput, String sessionIdInput,
+    public Suomi24ChattingConnection(String selectedRoomIdInput, String sessionIdInput,
+            String textualRoomIdentifier,
             HTTPConnectionHandler httpHandlerInput, LogLevel logLevel) {
         this.selectedRoomId = selectedRoomIdInput;
         this.sessionId = sessionIdInput;
+        this.textualRoomIdentifier = textualRoomIdentifier;
         this.httpHandler = httpHandlerInput;
         this.logger.setLogLevel(logLevel);
     }
@@ -190,7 +213,7 @@ public class Suomi24ChattingConnection extends SwingWorker<Void,String> implemen
             String HTML1 = httpHandler.getHTMLFromURLWithCookie(url1, sessionId);
             logger.debug("Got HTML " + HTML1);
             Matcher matcher1 = firstPattern.matcher(HTML1);
-            params = buildConnectionParameters(matcher1);
+            params = buildConnectionParameters(matcher1, selectedRoomId, textualRoomIdentifier);
 
         } catch (IllegalStateException ex) {
             throw new IllegalStateException(
@@ -248,7 +271,8 @@ public class Suomi24ChattingConnection extends SwingWorker<Void,String> implemen
                 );
     }
 
-    private ConnectionParameters buildConnectionParameters(Matcher matcher1) {
+    private ConnectionParameters buildConnectionParameters(Matcher matcher1, String roomId,
+            String textualRoomIdentifier) {
         final String whoParam;
         final String nickParam;
         final String userId;
@@ -257,7 +281,7 @@ public class Suomi24ChattingConnection extends SwingWorker<Void,String> implemen
             nickParam = matcher1.group(1);
             userId = matcher1.group(2);
             whoParam = matcher1.group(3);
-            return ConnectionParameters.build(whoParam, nickParam, userId);
+            return ConnectionParameters.build(whoParam, nickParam, userId, roomId, textualRoomIdentifier);
         }
         
         throw new IllegalStateException("Didn't get HTML containing the proper values");

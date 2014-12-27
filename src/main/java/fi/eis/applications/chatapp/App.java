@@ -3,45 +3,30 @@ package fi.eis.applications.chatapp;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import fi.eis.applications.chatapp.chat.actions.ChattingConnectionFactory;
+import fi.eis.applications.chatapp.chat.ui.ChatUI;
 import fi.eis.applications.chatapp.configuration.Configuration;
-import fi.eis.applications.chatapp.controller.ChatEnterHandler;
-import fi.eis.applications.chatapp.login.actions.LoginHandler;
-import fi.eis.applications.chatapp.login.actions.RoomsProvider;
-import fi.eis.applications.chatapp.login.ui.LoginUI;
 import fi.eis.libraries.di.Context;
 import fi.eis.libraries.di.DependencyInjection;
 import fi.eis.libraries.di.Inject;
+import fi.eis.libraries.di.SimpleLogger.LogLevel;
 
 public class App implements Runnable
 {
-    private LoginHandler loginHandler;
-    private ChatEnterHandler enterChatHandler;
-    private RoomsProvider roomsProvider;
-    private ChattingConnectionFactory chatConnectionFactory;
-    private Configuration configuration;
+    private final ChatUI chatUI;
+    private final Configuration configuration;
 
     @Inject
-    public App(LoginHandler loginHandler,
-               ChatEnterHandler enterChatHandler,
-               RoomsProvider roomsProvider,
-               ChattingConnectionFactory chatConnectionFactory,
-               Configuration configuration) {
-        this.loginHandler = loginHandler;
-        this.enterChatHandler = enterChatHandler;
-        this.roomsProvider = roomsProvider;
-        this.chatConnectionFactory = chatConnectionFactory;
+    public App(ChatUI chatUI, Configuration configuration) {
+        this.chatUI = chatUI;
         this.configuration = configuration;
     }
 
+
+
     @Override
     public String toString() {
-        return "App{" +
-                "loginHandler=" + loginHandler +
-                ", enterChatHandler=" + enterChatHandler +
-                ", roomsProvider=" + roomsProvider +
-                ", chatConnectionFactory=" + chatConnectionFactory +
-                '}';
+        return "App [chatUI=" + chatUI + ", configuration=" + configuration
+                + "]";
     }
 
     public static void main(String args[] )
@@ -69,14 +54,8 @@ public class App implements Runnable
                 // Turn off metal's use of bold fonts
                 UIManager.put("swing.boldMetal", Boolean.FALSE);
 
-                final LoginUI loginUI = LoginUI.createGUI(
-                        loginHandler,
-                        enterChatHandler,
-                        roomsProvider,
-                        chatConnectionFactory
-                );
-
-                loginUI.display();
+                chatUI.setLogLevel(LogLevel.DEBUG);
+                chatUI.display();
             }
         });
         

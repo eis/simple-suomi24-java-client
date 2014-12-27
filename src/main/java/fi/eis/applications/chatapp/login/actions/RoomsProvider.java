@@ -12,4 +12,6 @@ import fi.eis.applications.chatapp.login.types.ChatRoom;
  */
 public interface RoomsProvider {
     List<ChatRoom> getRooms();
+
+    ChatRoom getRoomById(String id);
 }

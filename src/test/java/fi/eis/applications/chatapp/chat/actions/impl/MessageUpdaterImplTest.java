@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import fi.eis.applications.chatapp.chat.actions.MessageUpdater;
 import fi.eis.applications.chatapp.chat.types.User;
 
 public class MessageUpdaterImplTest {
@@ -27,7 +28,7 @@ public class MessageUpdaterImplTest {
     @Mock
     private HTMLEditorKit mockHTMLEditorKit;
     
-    private MessageUpdaterImpl sut;
+    private MessageUpdater sut;
 
     private static final String addOneUserString =
             "<script>parent.user_add(new parent.User('', 'eis', 2, 'http://mina.suomi24.fi/eis', 1, 0, 0));</script>";
@@ -51,7 +52,7 @@ public class MessageUpdaterImplTest {
         MockitoAnnotations.initMocks(this);
         Mockito.when(mockMessagePane.getEditorKit()).thenReturn(mockHTMLEditorKit);
         Mockito.when(mockMessagePane.getDocument()).thenReturn(mockHTMLDocument);
-        sut = new MessageUpdaterImpl(mockMessagePane, mockListModel);
+        sut = new MessageUpdaterImpl(mockMessagePane, mockListModel, "");
     }
     @Test
     public void testUserListUpdatedIfOneAdded() {
