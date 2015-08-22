@@ -42,3 +42,9 @@ Nice to have
  - support for nick search
  - ~~[login in a background thread](https://github.com/eis/simple-suomi24-java-client/issues/13)~~
  - ~~custom DI implementation~~
+
+Build status
+------------
+
+[![Build Status](https://api.travis-ci.org/eis/simple-suomi24-java-client.svg?branch=master)]
+(https://travis-ci.org/eis/simple-suomi24-java-client)
